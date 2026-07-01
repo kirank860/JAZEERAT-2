@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import {
   Factory, Wrench, Ruler, ShieldCheck, Flame, Boxes, Truck, PenTool, ArrowUpRight,
@@ -19,12 +20,14 @@ const services = [
     icon: PenTool,
     title: 'Design & Detailing',
     desc: 'Shop drawings, structural detailing and material takeoffs prepared in-house before a single plate is cut.',
+    category: 'design',
     spec: 'Detailing tolerance ±0.5mm',
   },
   {
     icon: Flame,
     title: 'CNC Plasma & Laser Cutting',
     desc: 'High-accuracy plate cutting for structural and architectural steel components at production scale.',
+    category: 'cutting',
     spec: 'Plate thickness up to 50mm',
   },
   {
@@ -37,12 +40,14 @@ const services = [
     icon: Wrench,
     title: 'Machine Workshop',
     desc: 'In-house CNC machining, drilling and boring for precision components and custom mechanical parts.',
+    category: 'machining',
     spec: 'Full workshop, one roof',
   },
   {
     icon: Boxes,
     title: 'Custom Fabrication',
     desc: 'Bespoke steelwork built directly to client specification — tanks, platforms, ducting and enclosures.',
+    category: 'fabrication',
     spec: 'Built to client drawing',
   },
   {
@@ -55,17 +60,21 @@ const services = [
     icon: Ruler,
     title: 'Surface Finishing',
     desc: 'Shot blasting, priming, painting and galvanizing prepared for MENA climate and site conditions.',
+    category: 'finishing',
     spec: 'Coating to spec or standard',
   },
   {
     icon: Truck,
     title: 'Delivery & Installation',
     desc: 'Coordinated transport and on-site installation support for contractors across the region.',
+    category: 'logistics',
     spec: 'Site-coordinated logistics',
   },
 ]
 
 export default function Services() {
+  const [filter, setFilter] = useState('all')
+  const categories = ['all', 'design', 'cutting', 'machining', 'fabrication', 'finishing', 'logistics']
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
 
@@ -97,8 +106,19 @@ export default function Services() {
 
       <section className="py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="flex flex-wrap gap-3 mb-6">
+            {categories.map((c) => (
+              <button
+                key={c}
+                onClick={() => setFilter(c)}
+                className={`text-sm px-3 py-2 rounded-full border ${filter === c ? 'bg-weld text-graphite border-weld' : 'border-panel-line text-steel'}`}
+              >
+                {c === 'all' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1)}
+              </button>
+            ))}
+          </div>
           <div className="grid sm:grid-cols-2 gap-px bg-panel-line border border-panel-line">
-            {services.map((s, i) => (
+            {services.filter(s => filter === 'all' ? true : s.category === filter).map((s, i) => (
               <motion.div
                 key={s.title}
                 initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }} custom={i % 4} variants={fadeUp}

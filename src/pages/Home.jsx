@@ -53,7 +53,7 @@ export default function Home() {
       <section className="py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} custom={0} variants={fadeUp}>
-            <SectionLabel index="§ 01">What We Do</SectionLabel>
+            <SectionLabel index="§ 02">Our Capabilities</SectionLabel>
             <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-xl">
               One workshop, full fabrication capability.
             </h2>
