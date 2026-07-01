@@ -1,0 +1,88 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@theme {
+  --color-graphite: #131519;
+  --color-graphite-light: #1a1d22;
+  --color-panel: #1e2126;
+  --color-panel-line: #2a2e34;
+  --color-steel: #8b929a;
+  --color-steel-light: #c7cdd3;
+  --color-weld: #ff5a1f;
+  --color-weld-dim: #c2441a;
+  --color-signal: #ffb020;
+
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-graphite);
+  color: var(--color-steel-light);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-weld);
+  color: #0c0d0f;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-graphite); }
+::-webkit-scrollbar-thumb { background: var(--color-panel-line); border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.bp-grid {
+  background-image:
+    linear-gradient(to right, rgba(139,146,154,0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139,146,154,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bp-grid-fine {
+  background-image:
+    linear-gradient(to right, rgba(139,146,154,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139,146,154,0.05) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+.bracket {
+  position: relative;
+}
+.bracket::before, .bracket::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--color-weld);
+  opacity: 0.7;
+}
+.bracket::before {
+  top: -1px; left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.bracket::after {
+  bottom: -1px; right: -1px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px var(--color-panel-line);
+  color: transparent;
+}
