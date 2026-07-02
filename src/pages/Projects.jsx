@@ -5,27 +5,29 @@ import { Layers, Home, Truck, ShieldCheck, Factory, ArrowUpRight } from 'lucide-
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 
+const CDN = 'https://res.cloudinary.com/dmb7nfmyj/image/upload/q_auto,f_auto/jazeerat'
+
 const projects = [
   {
     title: 'Industrial Fabrication',
     location: 'UAE',
     scope: 'Portal frames, columns and steel decks',
     icon: Factory,
-    image: '/assets/slides/slide-1.webp',
+    image: `${CDN}/slide-1`,
   },
   {
     title: 'Oil & Gas Structure',
     location: 'Oman',
     scope: 'Pipe racks, access platforms and bracing systems',
     icon: Home,
-    image: '/assets/slides/slide-2.webp',
+    image: `${CDN}/slide-2`,
   },
   {
     title: 'Logistics Hub',
     location: 'Qatar',
     scope: 'Warehouse steelwork and loading canopies',
     icon: Truck,
-    image: '/assets/slides/slide-3.webp',
+    image: `${CDN}/slide-3`,
   },
   {
     title: 'Compliance Works',

@@ -4,24 +4,26 @@ import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import { NavLink } from 'react-router-dom'
 
+const CDN = 'https://res.cloudinary.com/dmb7nfmyj/image/upload/q_auto,f_auto/jazeerat'
+
 const facilities = [
   {
     icon: Factory,
     title: 'CNC Plasma Cutting',
     desc: 'High-capacity plate cutting for structural steel profiles and architectural components.',
-    image: '/assets/slides/slide-1.webp',
+    image: `${CDN}/slide-1`,
   },
   {
     icon: Flame,
     title: 'CNC Laser & Fiber Cutting',
     desc: 'Fine-detail cutting for precision work, openings, and intricate fabrication pieces.',
-    image: '/assets/slides/slide-2.webp',
+    image: `${CDN}/slide-2`,
   },
   {
     icon: Wrench,
     title: 'CNC Machine Workshop',
     desc: 'Drilling, boring, and machining with digital tolerance control in one facility.',
-    image: '/assets/slides/slide-3.webp',
+    image: `${CDN}/slide-3`,
   },
   {
     icon: ShieldCheck,
@@ -37,7 +39,7 @@ const facilities = [
     icon: Truck,
     title: 'Logistics & Storage',
     desc: 'Site-ready staging, secure storage and coordinated transport from the workshop.',
-    image: '/assets/what-we-do.webp',
+    image: `${CDN}/what-we-do`,
   },
 ]
 

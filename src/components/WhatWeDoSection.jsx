@@ -40,7 +40,7 @@ export default function WhatWeDoSection() {
   return (
     <section ref={ref} className="relative overflow-hidden bg-black">
       <motion.div
-        style={{ y: bgY, backgroundImage: "url('/assets/what-we-do.webp')" }}
+        style={{ y: bgY, backgroundImage: "url('https://res.cloudinary.com/dmb7nfmyj/image/upload/q_auto,f_auto/jazeerat/what-we-do')" }}
         className="absolute inset-0 bg-cover bg-center opacity-80"
       />
       <div className="absolute inset-0 bg-black/70" />
