@@ -32,14 +32,15 @@ export default function WhatWeDoSection() {
     offset: ['start end', 'end start'],
   })
 
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 80])
-  const titleY = useTransform(scrollYProgress, [0, 1], [40, 0])
-  const cardX = useTransform(scrollYProgress, [0, 1], ['0%', '-18%'])
+  const bgY = useTransform(scrollYProgress, [0, 1], [-150, 150]) // Deep cinematic background parallax
+  const titleY = useTransform(scrollYProgress, [0, 1], [100, -50]) // Floating foreground text
+  const cardY = useTransform(scrollYProgress, [0, 1], [150, -100]) // Vertical float for cards
+  const cardX = useTransform(scrollYProgress, [0, 1], ['0%', '-10%'])
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-black">
       <motion.div
-        style={{ y: bgY, backgroundImage: "url('/assets/what-we-do.jpg')" }}
+        style={{ y: bgY, backgroundImage: "url('/assets/what-we-do.webp')" }}
         className="absolute inset-0 bg-cover bg-center opacity-80"
       />
       <div className="absolute inset-0 bg-black/70" />
@@ -55,7 +56,7 @@ export default function WhatWeDoSection() {
           </p>
         </motion.div>
 
-        <motion.div style={{ x: cardX }} className="mt-16 grid gap-6 lg:grid-cols-3">
+        <motion.div style={{ x: cardX, y: cardY }} className="mt-16 grid gap-6 lg:grid-cols-3">
           {cards.map((card) => {
             const Icon = card.icon
             return (

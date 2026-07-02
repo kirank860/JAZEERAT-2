@@ -9,9 +9,13 @@ import Facilities from './pages/Facilities'
 import Projects from './pages/Projects'
 import Contact from './pages/Contact'
 import ScrollToTop from './components/ScrollToTop'
+import { useLenis } from './hooks/useLenis'
 
 function App() {
   const location = useLocation()
+
+  // 🌊 Lenis smooth scroll — runs globally for all pages
+  useLenis()
 
   return (
     <div className="min-h-screen bg-graphite text-steel-light font-body">

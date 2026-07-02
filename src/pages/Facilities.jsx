@@ -9,19 +9,19 @@ const facilities = [
     icon: Factory,
     title: 'CNC Plasma Cutting',
     desc: 'High-capacity plate cutting for structural steel profiles and architectural components.',
-    image: '/assets/slides/slide-1.jpg',
+    image: '/assets/slides/slide-1.webp',
   },
   {
     icon: Flame,
     title: 'CNC Laser & Fiber Cutting',
     desc: 'Fine-detail cutting for precision work, openings, and intricate fabrication pieces.',
-    image: '/assets/slides/slide-2.jpg',
+    image: '/assets/slides/slide-2.webp',
   },
   {
     icon: Wrench,
     title: 'CNC Machine Workshop',
     desc: 'Drilling, boring, and machining with digital tolerance control in one facility.',
-    image: '/assets/slides/slide-3.jpg',
+    image: '/assets/slides/slide-3.webp',
   },
   {
     icon: ShieldCheck,
@@ -37,7 +37,7 @@ const facilities = [
     icon: Truck,
     title: 'Logistics & Storage',
     desc: 'Site-ready staging, secure storage and coordinated transport from the workshop.',
-    image: '/assets/what-we-do.jpg',
+    image: '/assets/what-we-do.webp',
   },
 ]
 
