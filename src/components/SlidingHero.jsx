@@ -4,23 +4,21 @@ import { NavLink } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronsDown } from 'lucide-react'
 import CoordinateTicker from './CoordinateTicker'
 
-const CDN = 'https://res.cloudinary.com/dmb7nfmyj/image/upload/q_auto,f_auto/jazeerat'
-
 const SLIDES = [
   {
-    src: `${CDN}/slide-3`,
+    src: '/assets/slides/slide-3.webp',
     caption: 'Leading Manufacturers of Versatile Steel Products',
     sub: 'Structural steel, CNC fabrication and precision machining for the MENA region.',
     tag: 'GCC Fabrication',
   },
   {
-    src: `${CDN}/slide-2`,
+    src: '/assets/slides/slide-2.webp',
     caption: 'Precision Fabrication. Reliable Delivery.',
     sub: 'Every weld certified, every deadline met — from first drawing to final installation.',
     tag: 'Machine Workshop',
   },
   {
-    src: `${CDN}/slide-1`,
+    src: '/assets/slides/slide-1.webp',
     caption: 'Engineering Steel Solutions Across The Region',
     sub: 'One integrated workshop. Full capability. On-time delivery to any GCC site.',
     tag: 'Structural Steel',

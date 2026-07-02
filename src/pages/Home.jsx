@@ -64,28 +64,26 @@ const services = [
   },
 ]
 
-const CDN = 'https://res.cloudinary.com/dmb7nfmyj/image/upload/q_auto,f_auto/jazeerat'
-
 const projects = [
   {
     title: 'Industrial Fabrication',
     location: 'UAE',
     scope: 'Portal frames, columns and steel decks for a major industrial facility.',
-    image: `${CDN}/slide-1`,
+    image: '/assets/slides/slide-1.webp',
     tag: 'Structural',
   },
   {
     title: 'Oil & Gas Structure',
     location: 'Oman',
     scope: 'Pipe racks, access platforms and bracing systems for upstream plant.',
-    image: `${CDN}/slide-2`,
+    image: '/assets/slides/slide-2.webp',
     tag: 'Industrial',
   },
   {
     title: 'Logistics Hub',
     location: 'Qatar',
     scope: 'Warehouse steelwork and loading canopy structures across a 12,000m² site.',
-    image: `${CDN}/slide-3`,
+    image: '/assets/slides/slide-3.webp',
     tag: 'Commercial',
   },
 ]

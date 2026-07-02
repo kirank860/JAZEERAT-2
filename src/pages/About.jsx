@@ -322,7 +322,7 @@ export default function About() {
         */}
         <video
           className="absolute inset-0 w-full h-full object-cover"
-          src="https://res.cloudinary.com/dmb7nfmyj/video/upload/q_auto/jazeerat/about-hero"
+          src="/assets/about-hero.mp4"
           autoPlay
           muted
           loop
@@ -493,7 +493,7 @@ export default function About() {
                   whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
                 >
                   <img
-                    src="https://res.cloudinary.com/dmb7nfmyj/image/upload/q_auto,f_auto/jazeerat/slide-1"
+                    src="/assets/slides/slide-1.webp"
                     alt="Jazeerat Al Hadeed workshop"
                     className="w-full h-72 md:h-96 object-cover"
                   />
