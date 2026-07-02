@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, ArrowUpRight, Check } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
-import VideoHero from '../components/VideoHero'
+import SEO from '../components/SEO'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -29,40 +29,26 @@ export default function Contact() {
 
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
+      <SEO
+        title="Contact Us | Get a Steel Fabrication Quote"
+        description="Get in touch with Jazeerat Al Hadeed for a steel fabrication quote. Send your drawings, spec or scope and our team will respond with a price and timeline — fast."
+        path="/contact"
+      />
 
-      <VideoHero videoSrc="/assets/about-hero.mp4">
-        <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
-          <SectionLabel index="CONTACT">Start a Project</SectionLabel>
-        </motion.div>
-        <motion.h1
-          initial="hidden" animate="visible" custom={1} variants={fadeUp}
-          className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-8xl leading-[0.9] text-steel-light drop-shadow-lg mt-2"
-        >
-          Tell us what
-          <br />you're <span className="text-weld">building.</span>
-        </motion.h1>
-        <motion.div
-          className="mt-5 h-[3px] bg-weld origin-left shadow-[0_0_12px_rgba(255,90,31,0.7)]"
-          initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
-          transition={{ duration: 1.1, delay: 0.5, ease: 'easeOut' }}
-          style={{ width: 120 }}
-        />
-        <motion.p
-          initial="hidden" animate="visible" custom={2} variants={fadeUp}
-          className="mt-8 max-w-xl text-steel-light/80 text-base leading-relaxed"
-        >
-          Send us your drawings, spec or scope. Our team will respond with a quote
-          and timeline — no back-and-forth, no delays.
-        </motion.p>
-        <motion.div initial="hidden" animate="visible" custom={3} variants={fadeUp} className="mt-10">
-          <a
-            href="#contact-form"
-            className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-7 py-4 hover:bg-signal transition-colors"
+      <section className="bp-grid pt-40 pb-20 lg:pt-48 lg:pb-24">
+        <div className="max-w-5xl mx-auto px-6 lg:px-10">
+          <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
+            <SectionLabel index="CONTACT">Start a Project</SectionLabel>
+          </motion.div>
+          <motion.h1
+            initial="hidden" animate="visible" custom={1} variants={fadeUp}
+            className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-steel-light"
           >
-            Get in Touch <ArrowUpRight size={18} />
-          </a>
-        </motion.div>
-      </VideoHero>
+            Tell us what
+            <br />you're <span className="text-weld">building.</span>
+          </motion.h1>
+        </div>
+      </section>
 
       <section id="contact-form" className="pb-28 lg:pb-36">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-5 gap-16">

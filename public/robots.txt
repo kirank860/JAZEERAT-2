@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap location — update domain when you move to custom domain
+Sitemap: https://jazeerat-2.vercel.app/sitemap.xml

@@ -5,6 +5,7 @@ import {
   ArrowUpRight, ArrowRight, Factory, Wrench,
   ShieldCheck, Flame, PenTool, Truck, MapPin, ExternalLink,
 } from 'lucide-react'
+import SEO from '../components/SEO'
 import SlidingHero from '../components/SlidingHero'
 import Cutline from '../components/Cutline'
 import SectionLabel from '../components/SectionLabel'
@@ -278,6 +279,11 @@ export default function Home() {
 
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
+      <SEO
+        title="Steel Fabrication & Machine Workshop UAE"
+        description="Jazeerat Al Hadeed — precision structural steel fabrication, CNC plasma & laser cutting and machine workshop delivering projects across UAE, Oman, Qatar and the wider GCC region."
+        path="/"
+      />
 
       {/* ── HERO — full-width sliding carousel */}
       <SlidingHero />

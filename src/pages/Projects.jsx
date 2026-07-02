@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Layers, Home, Truck, ShieldCheck, Factory, ArrowUpRight } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
-import VideoHero from '../components/VideoHero'
+import SEO from '../components/SEO'
 
 const projects = [
   {
@@ -60,45 +60,28 @@ export default function Projects() {
   const [active, setActive] = useState(null)
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
-      <VideoHero videoSrc="/assets/about-hero.mp4">
-        <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
+      <SEO
+        title="Steel Fabrication Projects | GCC Region"
+        description="Browse Jazeerat Al Hadeed's steel fabrication project gallery: industrial structures, oil & gas platforms, logistics hubs and architectural steelwork delivered across UAE, Oman, Qatar and Saudi Arabia."
+        path="/projects"
+        image="https://jazeerat-2.vercel.app/assets/slides/slide-2.webp"
+      />
+      <section className="relative overflow-hidden pt-40 pb-20 lg:pt-48 lg:pb-28 bg-black">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,90,31,0.12),transparent_28%),radial-gradient(circle_at_bottom,rgba(255,176,32,0.1),transparent_32%)]" />
+        <div className="relative max-w-5xl mx-auto px-6 lg:px-10">
           <SectionLabel index="PROJECTS">Project Gallery</SectionLabel>
-        </motion.div>
-        <motion.h1
-          initial="hidden" animate="visible" custom={1} variants={fadeUp}
-          className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-8xl leading-[0.9] text-steel-light drop-shadow-lg mt-2"
-        >
-          Delivered steel work
-          <br /><span className="text-weld">with clarity and control.</span>
-        </motion.h1>
-        <motion.div
-          className="mt-5 h-[3px] bg-weld origin-left shadow-[0_0_12px_rgba(255,90,31,0.7)]"
-          initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
-          transition={{ duration: 1.1, delay: 0.5, ease: 'easeOut' }}
-          style={{ width: 120 }}
-        />
-        <motion.p
-          initial="hidden" animate="visible" custom={2} variants={fadeUp}
-          className="mt-8 max-w-xl text-steel-light/80 text-base leading-relaxed"
-        >
-          A curated selection of our recent fabrication and erection projects across the Gulf,
-          with emphasis on structural quality and execution speed.
-        </motion.p>
-        <motion.div initial="hidden" animate="visible" custom={3} variants={fadeUp} className="mt-10 flex flex-wrap gap-4">
-          <NavLink
-            to="/contact"
-            className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-7 py-4 hover:bg-signal transition-colors"
+          <motion.h1 initial="hidden" animate="visible" custom={0} variants={fadeUp}
+            className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-steel-light"
           >
-            Start a Project <ArrowUpRight size={18} />
-          </NavLink>
-          <NavLink
-            to="/services"
-            className="inline-flex items-center gap-2 font-display uppercase tracking-wide text-steel-light border-b border-steel pb-1 hover:text-weld hover:border-weld transition-colors"
+            Delivered steel work with clarity and control.
+          </motion.h1>
+          <motion.p initial="hidden" animate="visible" custom={1} variants={fadeUp}
+            className="mt-8 max-w-2xl text-steel text-base leading-relaxed"
           >
-            Our Services
-          </NavLink>
-        </motion.div>
-      </VideoHero>
+            Browse a curated selection of our recent fabrication and erection projects across the Gulf, with emphasis on structural quality and execution speed.
+          </motion.p>
+        </div>
+      </section>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <Cutline label="Fig. 01 — Project Gallery" />

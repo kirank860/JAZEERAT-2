@@ -9,6 +9,7 @@ import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import CoordinateTicker from '../components/CoordinateTicker'
 import WeldingCanvas from '../components/WeldingCanvas'
+import SEO from '../components/SEO'
 
 /* ─── data ───────────────────────────────────────────────── */
 const timeline = [
@@ -53,7 +54,6 @@ const fadeUp = {
 const container = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
-}
 }
 
 /* ─── sub-components ─────────────────────────────────────── */
@@ -150,6 +150,11 @@ export default function About() {
 
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
+      <SEO
+        title="About Us | Steel Fabrication Company UAE"
+        description="Jazeerat Al Hadeed is an integrated machine workshop and steel fabrication company with 18+ years of experience delivering precision structural steel projects across the MENA region."
+        path="/about"
+      />
 
       {/* ── HERO — full-viewport with video/canvas background ── */}
       <section ref={heroRef} className="relative w-full min-h-screen flex flex-col justify-center overflow-hidden">
