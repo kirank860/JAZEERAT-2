@@ -3,6 +3,7 @@ import { Factory, Wrench, ShieldCheck, Truck, Boxes, Flame } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import { NavLink } from 'react-router-dom'
+import VideoHero from '../components/VideoHero'
 
 const facilities = [
   {
@@ -52,21 +53,45 @@ const fadeUp = {
 export default function Facilities() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
-      <section className="bp-grid pt-40 pb-20 lg:pt-48 lg:pb-28">
-        <div className="max-w-5xl mx-auto px-6 lg:px-10">
+      <VideoHero videoSrc="/assets/">
+        <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
           <SectionLabel index="FACILITIES">Our Facilities</SectionLabel>
-          <motion.h1 initial="hidden" animate="visible" custom={0} variants={fadeUp}
-            className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-steel-light"
+        </motion.div>
+        <motion.h1
+          initial="hidden" animate="visible" custom={1} variants={fadeUp}
+          className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-8xl leading-[0.9] text-steel-light drop-shadow-lg mt-2"
+        >
+          Built for precision,
+          <br /><span className="text-weld">capacity and speed.</span>
+        </motion.h1>
+        <motion.div
+          className="mt-5 h-[3px] bg-weld origin-left shadow-[0_0_12px_rgba(255,90,31,0.7)]"
+          initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
+          transition={{ duration: 1.1, delay: 0.5, ease: 'easeOut' }}
+          style={{ width: 120 }}
+        />
+        <motion.p
+          initial="hidden" animate="visible" custom={2} variants={fadeUp}
+          className="mt-8 max-w-xl text-steel-light/80 text-base leading-relaxed"
+        >
+          Our facility blends heavy fabrication with precision machining, coating and logistics
+          so steel work is prepared, inspected and dispatched from one workshop.
+        </motion.p>
+        <motion.div initial="hidden" animate="visible" custom={3} variants={fadeUp} className="mt-10 flex flex-wrap gap-4">
+          <NavLink
+            to="/contact"
+            className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-7 py-4 hover:bg-signal transition-colors"
           >
-            Built for precision, capacity and speed.
-          </motion.h1>
-          <motion.p initial="hidden" animate="visible" custom={1} variants={fadeUp}
-            className="mt-8 max-w-2xl text-steel text-base leading-relaxed"
+            Request a Quote
+          </NavLink>
+          <NavLink
+            to="/services"
+            className="inline-flex items-center gap-2 font-display uppercase tracking-wide text-steel-light border-b border-steel pb-1 hover:text-weld hover:border-weld transition-colors"
           >
-            Our facility blends heavy fabrication with precision machining, coating and logistics so steel work is prepared, inspected and dispatched from one workshop.
-          </motion.p>
-        </div>
-      </section>
+            Our Services
+          </NavLink>
+        </motion.div>
+      </VideoHero>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <Cutline label="Fig. 01 — Facility Highlights" />
