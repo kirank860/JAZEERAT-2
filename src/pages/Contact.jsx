@@ -124,8 +124,8 @@ export default function Contact() {
           >
             {[
               { icon: MapPin, label: 'Workshop', value: 'Industrial Area, Dubai, UAE', link: null },
-              { icon: MessageCircle, label: 'WhatsApp', value: '+971 54 771 4315', link: 'https://wa.me/971547714315' },
-              { icon: Phone, label: 'Phone', value: '+971 54 771 4315', link: 'tel:+971547714315' },
+              { icon: MessageCircle, label: 'WhatsApp', value: '+971 55 145 3288', link: 'https://wa.me/971551453288' },
+              { icon: Phone, label: 'Phone', value: '+971 55 145 3288', link: 'tel:+971551453288' },
               { icon: Mail, label: 'Email', value: 'info@jazeeratalhadeed.com', link: 'mailto:info@jazeeratalhadeed.com' },
               { icon: Clock, label: 'Hours', value: 'Sat – Thu, 07:00 – 18:00', link: null },
             ].map((c) => {
