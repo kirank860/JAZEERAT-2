@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
-import { Layers, Home, Truck, ShieldCheck, Factory, ArrowUpRight } from 'lucide-react'
+import { useState, useEffect, useCallback } from 'react'
+import { Layers, Home, Truck, ShieldCheck, Factory, ArrowUpRight, X, ArrowLeft, ArrowRight } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import SEO from '../components/SEO'
@@ -12,6 +12,7 @@ const projects = [
     title: 'Industrial Fabrication',
     location: 'UAE',
     scope: 'Portal frames, columns and steel decks',
+    desc: 'A massive 40,000 sqm industrial fabrication facility requiring over 2,500 tons of structural steel. Delivered exactly on schedule with zero lost-time incidents. Included full portal frames, mezzanine decks, and heavy gantry crane runway beams.',
     icon: Factory,
     image: '/assets/slides/slide-1.webp',
   },
@@ -19,6 +20,7 @@ const projects = [
     title: 'Oil & Gas Structure',
     location: 'Oman',
     scope: 'Pipe racks, access platforms and bracing systems',
+    desc: 'Precision fabrication for a mid-stream processing plant. Required stringent NDT testing and specialized offshore-grade protective coatings. We delivered modular pipe racks and access platforms built to handle extreme operating environments.',
     icon: Home,
     image: '/assets/slides/slide-2.webp',
   },
@@ -26,6 +28,7 @@ const projects = [
     title: 'Logistics Hub',
     location: 'Qatar',
     scope: 'Warehouse steelwork and loading canopies',
+    desc: 'A regional distribution center featuring wide-span steel trusses and extensive cantilevered loading canopies. Engineered for fast on-site bolted assembly, significantly reducing the main contractor\'s erection timeline.',
     icon: Truck,
     image: '/assets/slides/slide-3.webp',
   },
@@ -33,19 +36,25 @@ const projects = [
     title: 'Compliance Works',
     location: 'Saudi Arabia',
     scope: 'Inspection-ready welded assemblies and stair packs',
+    desc: 'High-compliance welded assemblies subjected to 100% ultrasonic testing. Included complex industrial stair towers and safety handrail packs designed for immediate drop-in installation at a sensitive petrochemical facility.',
     icon: ShieldCheck,
+    image: '/assets/project-4.jpg',
   },
   {
     title: 'Architectural Steel',
     location: 'Bahrain',
     scope: 'Custom balustrades, facades and structural trusses',
+    desc: 'A striking commercial high-rise where the structural steel is also the architectural finish. Featured intricate exposed trusses and custom-fabricated balustrades, all requiring AESS (Architecturally Exposed Structural Steel) finishing standards.',
     icon: Layers,
+    image: '/assets/project-5.jpg',
   },
   {
     title: 'Heavy Erection',
     location: 'UAE',
     scope: 'Pre-assembled modules and site erection support',
+    desc: 'Delivery and erection of pre-assembled heavy equipment modules weighing up to 60 tons each. Required complex lifting plans, tandem crane coordination, and precision alignment at height.',
     icon: Truck,
+    image: '/assets/project-6.jpg',
   },
 ]
 
@@ -57,8 +66,125 @@ const fadeUp = {
   }),
 }
 
+function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  const Icon = project.icon
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className="absolute inset-0 bg-graphite/90 backdrop-blur-md"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      />
+
+      <motion.div
+        className="relative z-10 w-full max-w-5xl bg-graphite-light border border-panel-line overflow-hidden flex flex-col md:flex-row h-[80vh] md:h-[600px]"
+        initial={{ scale: 0.95, opacity: 0, y: 30 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.95, opacity: 0, y: 30 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* LEFT — Image */}
+        <div className="relative w-full md:w-1/2 h-1/2 md:h-full bg-graphite overflow-hidden shrink-0">
+          <motion.img
+            key={project.title}
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+            initial={{ scale: 1.05, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-graphite/80 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-graphite-light/90" />
+          
+          <div className="absolute bottom-4 left-4 flex gap-2">
+            <button
+              onClick={onPrev}
+              className="w-10 h-10 border border-panel-line bg-graphite/80 flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors"
+            >
+              <ArrowLeft size={16} />
+            </button>
+            <button
+              onClick={onNext}
+              className="w-10 h-10 border border-panel-line bg-graphite/80 flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors"
+            >
+              <ArrowRight size={16} />
+            </button>
+          </div>
+          <span className="absolute bottom-6 right-6 font-mono text-[10px] text-steel-light tracking-widest bg-graphite/60 px-2 py-1 rounded backdrop-blur-sm border border-panel-line">
+            {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+          </span>
+        </div>
+
+        {/* RIGHT — Details */}
+        <div className="relative w-full md:w-1/2 p-6 md:p-10 flex flex-col h-1/2 md:h-full overflow-y-auto">
+          <button
+            onClick={onClose}
+            className="absolute top-6 right-6 w-9 h-9 border border-panel-line flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors bg-graphite z-20"
+          >
+            <X size={16} />
+          </button>
+
+          <motion.div
+            key={project.title + '-text'}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="my-auto"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <span className="flex h-8 w-8 items-center justify-center rounded bg-weld/10 text-weld border border-weld/20">
+                <Icon size={14} />
+              </span>
+              <span className="font-mono text-[10px] tracking-[0.25em] text-weld uppercase">
+                {project.location}
+              </span>
+            </div>
+
+            <h2 className="font-display font-extrabold uppercase text-3xl md:text-4xl text-steel-light leading-tight mb-4">
+              {project.title}
+            </h2>
+
+            <div className="h-[2px] bg-weld mb-6 w-12" />
+
+            <h3 className="font-mono text-xs uppercase tracking-widest text-steel-light mb-2">Scope of Work</h3>
+            <p className="text-steel text-sm leading-relaxed mb-6 border-l-2 border-panel-line pl-4">
+              {project.scope}
+            </p>
+
+            <h3 className="font-mono text-xs uppercase tracking-widest text-steel-light mb-2">Project Overview</h3>
+            <p className="text-steel text-sm leading-relaxed">
+              {project.desc}
+            </p>
+          </motion.div>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 export default function Projects() {
-  const [active, setActive] = useState(null)
+  const [activeIndex, setActiveIndex] = useState(null)
+
+  const openModal = useCallback((i) => setActiveIndex(i), [])
+  const closeModal = useCallback(() => setActiveIndex(null), [])
+  const nextProject = useCallback(() => setActiveIndex((i) => (i + 1) % projects.length), [])
+  const prevProject = useCallback(() => setActiveIndex((i) => (i - 1 + projects.length) % projects.length), [])
+
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
@@ -110,7 +236,7 @@ export default function Projects() {
                   </div>
                   <h3 className="font-display text-2xl uppercase text-steel-light mb-3 group-hover:text-weld transition-colors">{project.title}</h3>
                   <p className="text-steel text-sm leading-relaxed mb-6">{project.scope}</p>
-                  <button onClick={() => setActive(project)} className="inline-flex items-center gap-2 font-mono uppercase tracking-[0.2em] text-weld text-sm">
+                  <button onClick={() => openModal(i)} className="inline-flex items-center gap-2 font-mono uppercase tracking-[0.2em] text-weld text-sm">
                     View Details
                     <ArrowUpRight size={16} />
                   </button>
@@ -121,20 +247,18 @@ export default function Projects() {
         </div>
 
         {/* modal for project preview */}
-        {active && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-6">
-            <div className="max-w-4xl w-full bg-graphite rounded-2xl overflow-hidden">
-              <div className="h-72 bg-cover bg-center" style={{ backgroundImage: `url('${active.image}')` }} />
-              <div className="p-6">
-                <h3 className="font-display text-2xl text-steel-light">{active.title}</h3>
-                <p className="text-steel mt-2">{active.scope}</p>
-                <div className="mt-4 flex justify-end">
-                  <button onClick={() => setActive(null)} className="px-4 py-2 bg-weld text-graphite rounded">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {activeIndex !== null && (
+            <ProjectModal
+              project={projects[activeIndex]}
+              index={activeIndex}
+              total={projects.length}
+              onClose={closeModal}
+              onPrev={prevProject}
+              onNext={nextProject}
+            />
+          )}
+        </AnimatePresence>
       </section>
 
       <section className="py-24 lg:py-32 bg-graphite-light">

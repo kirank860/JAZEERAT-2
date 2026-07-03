@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Phone, Mail, MapPin, Clock, ArrowUpRight, Check } from 'lucide-react'
+import { Phone, Mail, MapPin, Clock, ArrowUpRight, Check, MessageCircle } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import SEO from '../components/SEO'
 import VideoHero from '../components/VideoHero'
@@ -123,19 +123,38 @@ export default function Contact() {
             className="lg:col-span-2 space-y-6"
           >
             {[
-              { icon: MapPin, label: 'Workshop', value: 'Industrial Area, Dubai, UAE' },
-              { icon: Phone, label: 'Phone', value: '+971 4 XXX XXXX' },
-              { icon: Mail, label: 'Email', value: 'info@jazeeratalhadeed.com' },
-              { icon: Clock, label: 'Hours', value: 'Sat – Thu, 07:00 – 18:00' },
-            ].map((c) => (
-              <div key={c.label} className="border border-panel-line p-6 flex items-start gap-4 hover:border-weld/50 transition-colors">
-                <c.icon size={22} className="text-weld shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-steel">{c.label}</p>
-                  <p className="text-steel-light mt-1">{c.value}</p>
+              { icon: MapPin, label: 'Workshop', value: 'Industrial Area, Dubai, UAE', link: null },
+              { icon: MessageCircle, label: 'WhatsApp', value: '+971 54 771 4315', link: 'https://wa.me/971547714315' },
+              { icon: Phone, label: 'Phone', value: '+971 54 771 4315', link: 'tel:+971547714315' },
+              { icon: Mail, label: 'Email', value: 'info@jazeeratalhadeed.com', link: 'mailto:info@jazeeratalhadeed.com' },
+              { icon: Clock, label: 'Hours', value: 'Sat – Thu, 07:00 – 18:00', link: null },
+            ].map((c) => {
+              const content = (
+                <>
+                  <c.icon size={22} className="text-weld shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-steel">{c.label}</p>
+                    <p className="text-steel-light mt-1 group-hover:text-weld transition-colors">{c.value}</p>
+                  </div>
+                </>
+              )
+
+              return c.link ? (
+                <a
+                  key={c.label}
+                  href={c.link}
+                  target={c.link.startsWith('http') ? '_blank' : undefined}
+                  rel={c.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="group border border-panel-line p-6 flex items-start gap-4 hover:border-weld/50 transition-colors block cursor-pointer"
+                >
+                  {content}
+                </a>
+              ) : (
+                <div key={c.label} className="group border border-panel-line p-6 flex items-start gap-4 hover:border-weld/50 transition-colors">
+                  {content}
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </motion.div>
         </div>
       </section>

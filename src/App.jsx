@@ -11,6 +11,7 @@ import Contact from './pages/Contact'
 import Team from './pages/Team'
 import NotFound from './pages/NotFound'
 import ScrollToTop from './components/ScrollToTop'
+import WhatsAppWidget from './components/WhatsAppWidget'
 import { useLenis } from './hooks/useLenis'
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
+      <WhatsAppWidget />
       <Footer />
     </div>
   )
