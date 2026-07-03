@@ -13,9 +13,9 @@ const TEAM = [
     role: 'Founder & Managing Director',
     img: '/assets/team-ahmed.jpg',
     quote: 'Steel doesn\'t lie. Neither do we.',
-    years: '18 yrs',
+    years: '5+ yrs',
     location: 'Dubai, UAE',
-    bio: 'Ahmed founded Jazeerat Al Hadeed in 2007 with a single fabrication bay and a vision to set a new standard for structural steel in the MENA region. Under his leadership the company grew from 12 to 200+ staff and expanded operations across 6 countries.',
+    bio: 'Ahmed founded Jazeerat Al Hadeed in 2019 with a single fabrication bay and a vision to set a new standard for structural steel in the MENA region. Under his leadership the company grew rapidly and expanded operations across the region.',
     skills: ['Strategic Leadership', 'Client Relations', 'Business Development', 'UAE Construction Law'],
     email: 'ahmed@jazeerat.ae',
     rotate: -3,
@@ -332,7 +332,7 @@ export default function Team() {
     >
       <SEO
         title="Our Team | Jazeerat Al Hadeed"
-        description="Meet the engineers, fabricators and managers behind 18+ years of precision steel in the MENA region."
+        description="Meet the engineers, fabricators and managers behind our precision steel in the MENA region."
         path="/team"
       />
 
@@ -396,7 +396,7 @@ export default function Team() {
             />
 
             <p className="mt-8 text-steel text-lg leading-relaxed max-w-xl">
-              18 years of precision steel delivered by this team —
+              Over 5 years of precision steel delivered by this team —
               engineers, fabricators and managers who treat every
               project as their personal signature.
             </p>
@@ -411,7 +411,7 @@ export default function Team() {
           >
             {[
               { n: '200+', label: 'Workshop Staff' },
-              { n: '18 yrs', label: 'Average Tenure: Leadership' },
+              { n: '5+ yrs', label: 'Average Tenure: Leadership' },
               { n: '6', label: 'Countries Served' },
             ].map((s) => (
               <div key={s.label}>

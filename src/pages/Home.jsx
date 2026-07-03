@@ -98,7 +98,7 @@ const process = [
 ]
 
 const stats = [
-  { value: '18+', label: 'Years Fabricating' },
+  { value: '5+', label: 'Years Fabricating' },
   { value: '450+', label: 'Projects Delivered' },
   { value: '±0.5mm', label: 'Tolerance Standard' },
   { value: 'MENA', label: 'Region Served' },

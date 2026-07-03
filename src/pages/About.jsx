@@ -14,10 +14,10 @@ import SEO from '../components/SEO'
 
 /* ─── data ───────────────────────────────────────────────── */
 const timeline = [
-  { year: '2007', title: 'Workshop Founded', desc: 'Jazeerat Al Hadeed opens its first fabrication bay in the UAE.' },
-  { year: '2012', title: 'CNC Line Installed', desc: 'In-house CNC plasma and machining capability brought online.' },
-  { year: '2016', title: 'Regional Expansion', desc: 'Fabrication and delivery extended across GCC construction sites.' },
-  { year: '2021', title: 'ISO-Aligned QA', desc: 'Quality control processes aligned to international fabrication standards.' },
+  { year: '2019', title: 'Workshop Founded', desc: 'Jazeerat Al Hadeed Metallic Construction and Industrial Engineering opens its doors in Sharjah, UAE.' },
+  { year: '2020', title: 'CNC Line Installed', desc: 'In-house CNC plasma and machining capability brought online.' },
+  { year: '2022', title: 'Regional Expansion', desc: 'Fabrication and delivery extended across GCC construction sites.' },
+  { year: '2024', title: 'ISO-Aligned QA', desc: 'Quality control processes aligned to international fabrication standards.' },
   { year: 'Today', title: 'Full-Service Workshop', desc: 'A single integrated facility for design, cut, weld, finish and delivery.' },
 ]
 
@@ -37,7 +37,7 @@ const capabilities = [
 ]
 
 const stats = [
-  { icon: Award, value: 18, suffix: '+', label: 'Years Fabricating' },
+  { icon: Award, value: 5, suffix: '+', label: 'Years Fabricating' },
   { icon: Users, value: 450, suffix: '+', label: 'Projects Delivered' },
   { icon: Calendar, value: 6, suffix: '', label: 'Countries Served' },
   { icon: TrendingUp, value: 98, suffix: '%', label: 'On-Time Delivery' },
@@ -426,9 +426,8 @@ function MilestoneScroller({ timeline }) {
           </motion.div>
 
           {/* main heading — always visible */}
-          <h2 className="font-display font-extrabold uppercase text-5xl lg:text-7xl text-steel-light leading-[0.9] mt-4 mb-10">
-            Two decades of<br />
-            <span className="text-weld">steel craft.</span>
+          <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light mt-2 max-w-xl">
+            The foundation of <span className="text-weld">steel craft.</span>
           </h2>
 
           {/* milestone card — swaps per stage */}
@@ -573,7 +572,7 @@ export default function About() {
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
         title="About Us | Steel Fabrication Company UAE"
-        description="Jazeerat Al Hadeed is an integrated machine workshop and steel fabrication company with 18+ years of experience delivering precision structural steel projects across the MENA region."
+        description="Since 2019, Jazeerat Al Hadeed Metallic Construction and Industrial Engineering has become an essential part of the Sharjah community by promoting innovative ideas that enhance the future."
         path="/about"
       />
 
