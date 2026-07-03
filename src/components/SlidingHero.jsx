@@ -234,7 +234,7 @@ export default function SlidingHero({ slides }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.65, ease: 'easeOut' }}
-                  className="font-display font-extrabold uppercase text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.0] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)]"
+                  className="font-display font-extrabold uppercase text-[2.5rem] leading-[1.1] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.0] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)]"
                 >
                   {allSlides[index].caption}
                 </motion.h1>
@@ -249,7 +249,7 @@ export default function SlidingHero({ slides }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.55, delay: 0.15 }}
-                className="mt-6 ml-8 text-white/75 text-[15px] leading-relaxed max-w-md"
+                className="mt-6 ml-0 sm:ml-8 text-white/80 text-[15px] sm:text-base leading-relaxed max-w-md"
               >
                 {allSlides[index].sub}
               </motion.p>
@@ -260,23 +260,23 @@ export default function SlidingHero({ slides }) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-9 ml-8 flex flex-wrap items-center gap-3"
+              className="mt-8 sm:mt-9 ml-0 sm:ml-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto"
             >
               <NavLink
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-weld text-graphite font-display uppercase font-semibold tracking-wide px-6 py-3 text-sm hover:bg-signal transition-colors"
+                className="inline-flex justify-center items-center gap-2 bg-weld text-graphite font-display uppercase font-semibold tracking-wide px-6 py-4 sm:py-3 text-[15px] sm:text-sm hover:bg-signal transition-colors w-full sm:w-auto"
               >
-                Start a Project <ArrowUpRight size={16} />
+                Start a Project <ArrowUpRight size={18} className="sm:w-4 sm:h-4" />
               </NavLink>
               <NavLink
                 to="/services"
-                className="inline-flex items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-3 text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm"
+                className="inline-flex justify-center items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-4 sm:py-3 text-[15px] sm:text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm w-full sm:w-auto"
               >
                 Our Services
               </NavLink>
               <NavLink
                 to="/projects"
-                className="inline-flex items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-3 text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm"
+                className="inline-flex justify-center items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-4 sm:py-3 text-[15px] sm:text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm w-full sm:w-auto"
               >
                 View Projects
               </NavLink>

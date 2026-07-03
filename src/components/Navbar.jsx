@@ -80,46 +80,74 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-graphite/98 z-50 flex flex-col"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 bg-graphite/85 backdrop-blur-2xl z-50 flex flex-col"
           >
+            {/* Header */}
             <div className="flex items-center justify-between h-20 px-6">
               <span className="font-display font-extrabold text-2xl text-steel-light">JAZEERAT</span>
-              <button onClick={() => setOpen(false)} aria-label="Close menu" className="text-steel-light">
-                <X size={28} />
+              <button 
+                onClick={() => setOpen(false)} 
+                aria-label="Close menu" 
+                className="w-12 h-12 flex items-center justify-center text-white hover:text-weld transition-colors bg-white/5 rounded-full"
+              >
+                <X size={24} />
               </button>
             </div>
-            <div className="flex flex-col gap-2 px-6 mt-6">
+
+            {/* Links Container */}
+            <div className="flex flex-col gap-1 px-6 mt-8">
               {links.map((l, i) => (
                 <motion.div
                   key={l.to}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06 }}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="overflow-hidden"
                 >
                   <NavLink
                     to={l.to}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
-                      `block font-display text-4xl uppercase py-3 border-b border-panel-line ${
-                        isActive ? 'text-weld' : 'text-steel-light'
+                      `group flex items-center justify-between font-display text-5xl sm:text-6xl uppercase py-4 border-b border-white/10 transition-colors ${
+                        isActive ? 'text-weld' : 'text-steel-light hover:text-white'
                       }`
                     }
                   >
-                    {l.label}
+                    {({ isActive }) => (
+                      <>
+                        <span>{l.label}</span>
+                        {isActive && <span className="w-3 h-3 rounded-full bg-weld" />}
+                      </>
+                    )}
                   </NavLink>
                 </motion.div>
               ))}
+            </div>
+
+            {/* Bottom Contact Footer */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="mt-auto mb-10 px-6 flex flex-col gap-6"
+            >
+              <div className="flex flex-col gap-1 text-sm font-mono text-steel">
+                <a href="mailto:info@jazeeratalhadeed.com" className="hover:text-weld transition-colors">INFO@JAZEERATALHADEED.COM</a>
+                <a href="tel:+971000000000" className="hover:text-weld transition-colors">+971 00 000 0000</a>
+              </div>
               <NavLink
                 to="/contact"
                 onClick={() => setOpen(false)}
-                className="mt-6 font-display uppercase tracking-wide text-center text-lg font-semibold bg-weld text-graphite px-5 py-4"
+                className="font-display uppercase tracking-wider text-center text-base font-semibold bg-weld text-graphite px-5 py-4 rounded-sm hover:bg-signal transition-colors"
               >
                 Request a Quote
               </NavLink>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
