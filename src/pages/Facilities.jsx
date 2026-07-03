@@ -4,6 +4,7 @@ import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import { NavLink } from 'react-router-dom'
 import SEO from '../components/SEO'
+import VideoHero from '../components/VideoHero'
 
 const facilities = [
   {
@@ -58,7 +59,12 @@ export default function Facilities() {
         description="Jazeerat Al Hadeed's integrated workshop facility: CNC plasma & laser cutting, machine workshop, welding bays, surface finishing and logistics — all under one roof in the UAE."
         path="/facilities"
       />
-      <section className="bp-grid pt-40 pb-20 lg:pt-48 lg:pb-28">
+      <VideoHero
+        videoSrc="/assets/about-hero.mp4"
+        poster="/assets/slides/slide-2.webp"
+        showSparks={false}
+        className="pt-40 pb-20 lg:pt-48 lg:pb-28"
+      >
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
           <SectionLabel index="FACILITIES">Our Facilities</SectionLabel>
           <motion.h1 initial="hidden" animate="visible" custom={0} variants={fadeUp}
@@ -72,7 +78,7 @@ export default function Facilities() {
             Our facility blends heavy fabrication with precision machining, coating and logistics so steel work is prepared, inspected and dispatched from one workshop.
           </motion.p>
         </div>
-      </section>
+      </VideoHero>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <Cutline label="Fig. 01 — Facility Highlights" />

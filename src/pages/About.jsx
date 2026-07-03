@@ -167,6 +167,7 @@ export default function About() {
         <video
           className="absolute inset-0 w-full h-full object-cover"
           src="/assets/about-hero.mp4"
+          poster="/assets/slides/slide-4.webp"
           autoPlay
           muted
           loop

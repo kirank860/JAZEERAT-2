@@ -5,6 +5,7 @@ import { Layers, Home, Truck, ShieldCheck, Factory, ArrowUpRight } from 'lucide-
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import SEO from '../components/SEO'
+import VideoHero from '../components/VideoHero'
 
 const projects = [
   {
@@ -66,8 +67,12 @@ export default function Projects() {
         path="/projects"
         image="https://jazeerat-2.vercel.app/assets/slides/slide-2.webp"
       />
-      <section className="relative overflow-hidden pt-40 pb-20 lg:pt-48 lg:pb-28 bg-black">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,90,31,0.12),transparent_28%),radial-gradient(circle_at_bottom,rgba(255,176,32,0.1),transparent_32%)]" />
+      <VideoHero
+        videoSrc="/assets/about-hero.mp4"
+        poster="/assets/slides/slide-3.webp"
+        showSparks={false}
+        className="pt-40 pb-20 lg:pt-48 lg:pb-28"
+      >
         <div className="relative max-w-5xl mx-auto px-6 lg:px-10">
           <SectionLabel index="PROJECTS">Project Gallery</SectionLabel>
           <motion.h1 initial="hidden" animate="visible" custom={0} variants={fadeUp}
@@ -81,7 +86,7 @@ export default function Projects() {
             Browse a curated selection of our recent fabrication and erection projects across the Gulf, with emphasis on structural quality and execution speed.
           </motion.p>
         </div>
-      </section>
+      </VideoHero>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <Cutline label="Fig. 01 — Project Gallery" />

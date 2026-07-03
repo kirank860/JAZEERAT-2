@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, ArrowUpRight, Check } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import SEO from '../components/SEO'
+import VideoHero from '../components/VideoHero'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -35,7 +36,12 @@ export default function Contact() {
         path="/contact"
       />
 
-      <section className="bp-grid pt-40 pb-20 lg:pt-48 lg:pb-24">
+      <VideoHero
+        videoSrc="/assets/about-hero.mp4"
+        poster="/assets/slides/slide-1.webp"
+        showSparks={false}
+        className="pt-40 pb-20 lg:pt-48 lg:pb-24"
+      >
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
           <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
             <SectionLabel index="CONTACT">Start a Project</SectionLabel>
@@ -48,7 +54,7 @@ export default function Contact() {
             <br />you're <span className="text-weld">building.</span>
           </motion.h1>
         </div>
-      </section>
+      </VideoHero>
 
       <section id="contact-form" className="pb-28 lg:pb-36">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-5 gap-16">

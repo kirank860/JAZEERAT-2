@@ -7,6 +7,7 @@ import {
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import SEO from '../components/SEO'
+import VideoHero from '../components/VideoHero'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -84,7 +85,12 @@ export default function Services() {
         path="/services"
       />
 
-      <section className="bp-grid pt-40 pb-20 lg:pt-48 lg:pb-28">
+      <VideoHero
+        videoSrc="/assets/about-hero.mp4"
+        poster="/assets/slides/slide-1.webp"
+        showSparks={false}
+        className="pt-40 pb-20 lg:pt-48 lg:pb-28"
+      >
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
           <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
             <SectionLabel index="SERVICES">Capabilities</SectionLabel>
@@ -98,13 +104,14 @@ export default function Services() {
           </motion.h1>
           <motion.p
             initial="hidden" animate="visible" custom={2} variants={fadeUp}
-            className="mt-8 max-w-2xl text-steel text-base leading-relaxed"
+            className="mt-6 text-lg text-steel max-w-2xl font-light leading-relaxed"
           >
-            From first drawing to site delivery, Jazeerat Al Hadeed keeps fabrication
-            under one roof — so tolerances hold and schedules don't slip between vendors.
+            From raw structural steel to precision-machined components. 
+            Jazeerat Al Hadeed provides a complete, in-house industrial fabrication cycle. 
+            No outsourcing, no delays.
           </motion.p>
         </div>
-      </section>
+      </VideoHero>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <Cutline label="Fig. 01 — Service Index" />
