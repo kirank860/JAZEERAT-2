@@ -28,8 +28,11 @@ export default function Navbar() {
         }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
-        <NavLink to="/" className="flex items-center group py-2">
-          <img src="/logo.png" alt="Jazeerat Al Hadeed Logo" className="h-10 md:h-12 w-auto object-contain" />
+        <NavLink to="/" className="flex flex-col leading-none group">
+          <span className="font-display font-extrabold text-2xl tracking-wide text-steel-light group-hover:text-weld transition-colors">
+            JAZEERAT
+          </span>
+          <span className="font-mono text-[10px] tracking-[0.3em] text-steel">AL HADEED · STEEL FABRICATION</span>
         </NavLink>
 
         <nav className="hidden md:flex items-center gap-10">
