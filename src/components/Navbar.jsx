@@ -24,9 +24,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-graphite/90 backdrop-blur-md border-b border-panel-line' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-graphite/90 backdrop-blur-md border-b border-panel-line' : 'bg-transparent'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
         <NavLink to="/" className="flex flex-col leading-none group">
@@ -42,8 +41,7 @@ export default function Navbar() {
               key={l.to}
               to={l.to}
               className={({ isActive }) =>
-                `relative font-display text-base tracking-wide uppercase pb-1 transition-colors ${
-                  isActive ? 'text-weld' : 'text-steel-light hover:text-weld'
+                `relative font-display text-base tracking-wide uppercase pb-1 transition-colors ${isActive ? 'text-weld' : 'text-steel-light hover:text-weld'
                 }`
               }
             >
@@ -89,9 +87,9 @@ export default function Navbar() {
             {/* Header */}
             <div className="flex items-center justify-between h-20 px-6">
               <span className="font-display font-extrabold text-2xl text-steel-light">JAZEERAT</span>
-              <button 
-                onClick={() => setOpen(false)} 
-                aria-label="Close menu" 
+              <button
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
                 className="w-12 h-12 flex items-center justify-center text-white hover:text-weld transition-colors bg-white/5 rounded-full"
               >
                 <X size={24} />
@@ -113,8 +111,7 @@ export default function Navbar() {
                     to={l.to}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
-                      `group flex items-center justify-between font-display text-5xl sm:text-6xl uppercase py-4 border-b border-white/10 transition-colors ${
-                        isActive ? 'text-weld' : 'text-steel-light hover:text-white'
+                      `group flex items-center justify-between font-display text-5xl sm:text-6xl uppercase py-4 border-b border-white/10 transition-colors ${isActive ? 'text-weld' : 'text-steel-light hover:text-white'
                       }`
                     }
                   >
@@ -137,7 +134,7 @@ export default function Navbar() {
               className="mt-auto mb-10 px-6 flex flex-col gap-6"
             >
               <div className="flex flex-col gap-1 text-sm font-mono text-steel">
-                <a href="mailto:info@jazeeratalhadeed.com" className="hover:text-weld transition-colors">INFO@JAZEERATALHADEED.COM</a>
+                <a href="mailto:info@jahsteel.ae" className="hover:text-weld transition-colors">info@jahsteel.ae</a>
                 <a href="tel:+971000000000" className="hover:text-weld transition-colors">+971 00 000 0000</a>
               </div>
               <NavLink

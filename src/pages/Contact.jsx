@@ -155,7 +155,7 @@ export default function Contact() {
               { icon: MapPin, label: 'Workshop', value: 'Industrial Area, Dubai, UAE', link: null },
               { icon: MessageCircle, label: 'WhatsApp', value: '+971 54 305 8357', link: 'https://wa.me/971543058357' },
               { icon: Phone, label: 'Phone', value: '+971 54 305 8357', link: 'tel:+971543058357' },
-              { icon: Mail, label: 'Email', value: 'info@jazeeratalhadeed.com', link: 'mailto:info@jazeeratalhadeed.com' },
+              { icon: Mail, label: 'Email', value: 'info@jahsteel.ae', link: 'mailto:info@jahsteel.ae' },
               { icon: Clock, label: 'Hours', value: 'Sat – Thu, 07:00 – 18:00', link: null },
             ].map((c) => {
               const content = (

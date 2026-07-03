@@ -15,7 +15,7 @@ const JSONLD_ORGANIZATION = {
   image: DEFAULT_IMAGE,
   // 🔁 Fill in real details when ready:
   telephone: '+971-XX-XXXXXXX',
-  email: 'info@jazeeratalhadeed.com',
+  email: 'info@jahsteel.ae',
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'AE',

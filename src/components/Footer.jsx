@@ -48,7 +48,7 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <Mail size={16} className="text-weld shrink-0" />
-              <span>info@jazeeratalhadeed.com</span>
+              <span>info@jahsteel.ae</span>
             </li>
           </ul>
         </div>
