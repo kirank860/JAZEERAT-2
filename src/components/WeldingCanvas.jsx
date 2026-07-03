@@ -59,7 +59,6 @@ export default function WeldingCanvas() {
     }
 
     // Pre-create the gradient to avoid doing it every frame
-    let arcGradient = null
     function getArcGradient(x, y) {
       // Recreate only if the center changes significantly, but since x,y move constantly,
       // creating it per frame is okay if we drop shadowBlur.

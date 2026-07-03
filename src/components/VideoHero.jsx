@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import WeldingCanvas from './WeldingCanvas'
 
 /**

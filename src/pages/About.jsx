@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
-import { motion, useScroll, useTransform, useInView, useSpring, AnimatePresence } from 'framer-motion'
+import { motion, useScroll, useTransform, useInView, useSpring } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
 import {
   Target, Eye, Handshake, Award, Users, Calendar, TrendingUp,
@@ -547,7 +547,6 @@ function MilestoneScroller({ timeline }) {
 export default function About() {
   const heroRef = useRef(null)
   const sectionRef = useRef(null)
-  const teamTrackRef = useRef(null)
 
   const { scrollYProgress: heroProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
   const canvasY = useTransform(heroProgress, [0, 1], [0, 250])

@@ -290,8 +290,8 @@ export default function SlidingHero({ slides }) {
           LAYER 4 — HUD chrome
       ═══════════════════════════════════════════ */}
 
-      {/* slide counter — top right */}
-      <div className="absolute top-6 right-8 z-40 flex items-center gap-2 font-mono text-xs text-white/50 tracking-widest">
+      {/* slide counter — top right (pushed down on mobile to clear navbar) */}
+      <div className="absolute top-[90px] lg:top-8 right-6 lg:right-10 z-40 flex items-center gap-2 font-mono text-xs text-white/50 tracking-widest">
         <AnimatePresence mode="wait">
           <motion.span
             key={index}
@@ -354,7 +354,7 @@ export default function SlidingHero({ slides }) {
           key={label}
           aria-label={label}
           onClick={() => { go(index + dir); setIsPaused(true); setTimeout(() => setIsPaused(false), 1200) }}
-          className={`absolute top-1/2 -translate-y-1/2 ${side} z-40 group`}
+          className={`absolute top-1/2 -translate-y-1/2 ${side} z-40 group hidden md:block`}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >

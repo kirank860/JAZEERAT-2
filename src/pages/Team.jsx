@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
-import { X, ArrowLeft, ArrowRight, Mail, ExternalLink, ArrowUpRight } from 'lucide-react'
+import { X, ArrowLeft, ArrowRight, Mail, ArrowUpRight } from 'lucide-react'
 import Lenis from 'lenis'
 import SEO from '../components/SEO'
 
@@ -90,16 +90,8 @@ const TEAM = [
 // scroll up → counter-clockwise
 const CARD_W = 280
 const CARD_H = 380
-const RADIUS = 520   // circle radius in px
 
-function getCardAngle(index, total) {
-  // spread cards evenly around the bottom half of a circle
-  const spread = 200  // degrees of arc used
-  const start = -spread / 2
-  return start + (index / (total - 1)) * spread
-}
-
-/* ─── Member Detail Modal ────────────────────────────────── */
+/* ─── TeamMemberCard ─────────────────────────────────────── */
 function MemberModal({ member, onClose, onPrev, onNext, total, index }) {
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') onClose() }
@@ -239,24 +231,6 @@ function MemberModal({ member, onClose, onPrev, onNext, total, index }) {
   )
 }
 
-/* ─── Globe Row — single scrolling row of cards ─────────── */
-function GlobeRow({ members, scrollY, direction = 1, baseSpeed = 1 }) {
-  const x = useTransform(scrollY, (v) => v * baseSpeed * direction * -0.4)
-  const smoothX = useSpring(x, { stiffness: 80, damping: 20 })
-
-  return (
-    <motion.div
-      className="flex gap-6 py-3 cursor-grab active:cursor-grabbing select-none"
-      style={{ x: smoothX }}
-    >
-      {/* duplicate for infinite feel */}
-      {[...members, ...members].map((m, i) => (
-        <GlobeCard key={`${m.id}-${i}`} member={m} />
-      ))}
-    </motion.div>
-  )
-}
-
 /* ─── Globe Card ─────────────────────────────────────────── */
 function GlobeCard({ member, onClick }) {
   return (
@@ -347,8 +321,6 @@ export default function Team() {
   const row1 = TEAM
   const row2 = [...TEAM].reverse()
   const row3 = TEAM
-
-  const scrollMotion = { get: () => scrollY }
 
   return (
     <motion.div
