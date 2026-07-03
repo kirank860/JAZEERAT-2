@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
 
 export default function WhatsAppWidget() {
-  const phoneNumber = '971551453288'
-  const message = 'Hello, I would like to inquire about your steel fabrication services.'
+  const phoneNumber = '971543058357'
+  const message = "Hello, I'm interested in your steel fabrication services. I'd like to discuss my project requirements and request a quotation. Please contact me at your earliest convenience. Thank you!"
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
 
   return (

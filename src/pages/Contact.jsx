@@ -22,10 +22,38 @@ export default function Contact() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Wire this up to your backend / form endpoint of choice.
-    setSent(true)
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/kirankrishnan889@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          _subject: "New Project Inquiry from Jazeerat Al Hadeed Website",
+          Name: form.name,
+          Email: form.email,
+          Company: form.company,
+          Message: form.message,
+        }),
+      })
+
+      if (response.ok) {
+        setSent(true)
+      } else {
+        alert("Something went wrong. Please try again.")
+      }
+    } catch (error) {
+      alert("Network error. Please check your connection and try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -109,10 +137,11 @@ export default function Contact() {
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors"
+                  disabled={isSubmitting}
+                  className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Request
-                  <ArrowUpRight size={18} />
+                  {isSubmitting ? 'Sending...' : 'Send Request'}
+                  {!isSubmitting && <ArrowUpRight size={18} />}
                 </button>
               </form>
             )}
@@ -124,8 +153,8 @@ export default function Contact() {
           >
             {[
               { icon: MapPin, label: 'Workshop', value: 'Industrial Area, Dubai, UAE', link: null },
-              { icon: MessageCircle, label: 'WhatsApp', value: '+971 55 145 3288', link: 'https://wa.me/971551453288' },
-              { icon: Phone, label: 'Phone', value: '+971 55 145 3288', link: 'tel:+971551453288' },
+              { icon: MessageCircle, label: 'WhatsApp', value: '+971 54 305 8357', link: 'https://wa.me/971543058357' },
+              { icon: Phone, label: 'Phone', value: '+971 54 305 8357', link: 'tel:+971543058357' },
               { icon: Mail, label: 'Email', value: 'info@jazeeratalhadeed.com', link: 'mailto:info@jazeeratalhadeed.com' },
               { icon: Clock, label: 'Hours', value: 'Sat – Thu, 07:00 – 18:00', link: null },
             ].map((c) => {
