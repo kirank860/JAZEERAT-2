@@ -9,13 +9,24 @@ const links = [
   { to: '/services', label: 'Services' },
   { to: '/facilities', label: 'Facilities' },
   { to: '/projects', label: 'Projects' },
-  { to: '/team', label: 'Team' },
+  // { to: '/team', label: 'Team' },
   { to: '/blogs', label: 'Insights' },
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -79,14 +90,14 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 bg-graphite/85 backdrop-blur-2xl z-50 flex flex-col"
+            initial={{ opacity: 0, clipPath: 'circle(0% at 100% 0%)' }}
+            animate={{ opacity: 1, clipPath: 'circle(150% at 100% 0%)' }}
+            exit={{ opacity: 0, clipPath: 'circle(0% at 100% 0%)' }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 h-[100dvh] bg-graphite/95 backdrop-blur-3xl z-50 flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between h-20 px-6">
+            <div className="flex items-center justify-between h-20 px-6 shrink-0">
               <span className="font-display font-extrabold text-2xl text-steel-light">JAZEERAT</span>
               <button
                 onClick={() => setOpen(false)}
@@ -98,29 +109,37 @@ export default function Navbar() {
             </div>
 
             {/* Links Container */}
-            <div className="flex flex-col gap-1 px-6 mt-8">
+            <div className="flex flex-col gap-6 px-8 mt-8 overflow-y-auto pb-8 flex-1 min-h-0">
               {links.map((l, i) => (
                 <motion.div
                   key={l.to}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  className="overflow-hidden"
+                  initial={{ opacity: 0, x: -30, rotate: 2 }}
+                  animate={{ opacity: 1, x: 0, rotate: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.5, delay: i * 0.06 + 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <NavLink
                     to={l.to}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
-                      `group flex items-center justify-between font-display text-5xl sm:text-6xl uppercase py-4 border-b border-white/10 transition-colors ${isActive ? 'text-weld' : 'text-steel-light hover:text-white'
-                      }`
+                      `group flex items-end gap-6 font-display uppercase transition-colors block w-full ${isActive ? 'text-weld' : 'text-steel-light hover:text-white'}`
                     }
                   >
                     {({ isActive }) => (
-                      <>
-                        <span>{l.label}</span>
-                        {isActive && <span className="w-3 h-3 rounded-full bg-weld" />}
-                      </>
+                      <motion.div
+                        className="flex items-end gap-4 w-full"
+                        whileHover={{ x: 10 }}
+                        whileTap={{ scale: 0.98 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <span className="font-mono text-sm tracking-widest text-steel/50 mb-2 shrink-0">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <span className="text-4xl sm:text-5xl tracking-tight truncate pb-1">
+                          {l.label}
+                        </span>
+                        {isActive && <span className="w-2 h-2 rounded-full bg-weld mb-4 ml-auto shrink-0" />}
+                      </motion.div>
                     )}
                   </NavLink>
                 </motion.div>
@@ -129,19 +148,25 @@ export default function Navbar() {
 
             {/* Bottom Contact Footer */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="mt-auto mb-10 px-6 flex flex-col gap-6"
+              className="mt-auto pt-6 pb-10 px-8 border-t border-white/5 shrink-0 bg-graphite"
             >
-              <div className="flex flex-col gap-1 text-sm font-mono text-steel">
-                <a href="mailto:info@jahsteel.ae" className="hover:text-weld transition-colors">info@jahsteel.ae</a>
-                <a href="tel:+971000000000" className="hover:text-weld transition-colors">+971 00 000 0000</a>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="flex flex-col gap-1 text-xs font-mono text-steel uppercase tracking-widest truncate">
+                  <span className="text-white/30 mb-1">Email</span>
+                  <a href="mailto:info@jahsteel.ae" className="hover:text-weld transition-colors truncate">info@jahsteel.ae</a>
+                </div>
+                <div className="flex flex-col gap-1 text-xs font-mono text-steel uppercase tracking-widest truncate">
+                  <span className="text-white/30 mb-1">Phone</span>
+                  <a href="tel:+971000000000" className="hover:text-weld transition-colors truncate">+971 00 000 0000</a>
+                </div>
               </div>
               <NavLink
                 to="/contact"
                 onClick={() => setOpen(false)}
-                className="font-display uppercase tracking-wider text-center text-base font-semibold bg-weld text-graphite px-5 py-4 rounded-sm hover:bg-signal transition-colors"
+                className="flex items-center justify-center w-full font-display uppercase tracking-wider text-sm font-semibold bg-weld text-graphite px-5 py-4 rounded-full hover:bg-signal transition-colors"
               >
                 Request a Quote
               </NavLink>

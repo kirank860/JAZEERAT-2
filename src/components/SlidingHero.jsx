@@ -234,7 +234,7 @@ export default function SlidingHero({ slides }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.65, ease: 'easeOut' }}
-                  className="font-display font-extrabold uppercase text-[2.5rem] leading-[1.1] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.0] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)]"
+                  className="font-display font-extrabold uppercase text-[2.1rem] leading-[1.05] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.0] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)]"
                 >
                   {allSlides[index].caption}
                 </motion.h1>
@@ -260,23 +260,23 @@ export default function SlidingHero({ slides }) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 sm:mt-9 ml-0 sm:ml-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto"
+              className="mt-8 sm:mt-9 ml-0 sm:ml-8 grid grid-cols-2 sm:flex sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto pr-6 sm:pr-0"
             >
               <NavLink
                 to="/contact"
-                className="inline-flex justify-center items-center gap-2 bg-weld text-graphite font-display uppercase font-semibold tracking-wide px-6 py-4 sm:py-3 text-[15px] sm:text-sm hover:bg-signal transition-colors w-full sm:w-auto"
+                className="col-span-2 inline-flex justify-center items-center gap-2 bg-weld text-graphite font-display uppercase font-semibold tracking-wide px-6 py-4 sm:py-3 text-[15px] sm:text-sm hover:bg-signal transition-colors w-full sm:w-auto shadow-[0_0_15px_rgba(255,90,31,0.4)] animate-[pulse_3s_ease-in-out_infinite]"
               >
                 Start a Project <ArrowUpRight size={18} className="sm:w-4 sm:h-4" />
               </NavLink>
               <NavLink
                 to="/services"
-                className="inline-flex justify-center items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-4 sm:py-3 text-[15px] sm:text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm w-full sm:w-auto"
+                className="col-span-1 inline-flex justify-center items-center gap-2 border border-white/30 text-white/90 font-display uppercase tracking-wide px-2 sm:px-6 py-3.5 sm:py-3 text-[12px] sm:text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm w-full sm:w-auto text-center"
               >
                 Our Services
               </NavLink>
               <NavLink
                 to="/projects"
-                className="inline-flex justify-center items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-4 sm:py-3 text-[15px] sm:text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm w-full sm:w-auto"
+                className="col-span-1 inline-flex justify-center items-center gap-2 border border-white/30 text-white/90 font-display uppercase tracking-wide px-2 sm:px-6 py-3.5 sm:py-3 text-[12px] sm:text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm w-full sm:w-auto text-center"
               >
                 View Projects
               </NavLink>
@@ -309,7 +309,7 @@ export default function SlidingHero({ slides }) {
       </div>
 
       {/* coordinate ticker — bottom left */}
-      <div className="absolute bottom-20 left-6 lg:left-10 z-40">
+      <div className="absolute bottom-20 left-6 lg:left-10 z-40 hidden sm:block">
         <CoordinateTicker />
       </div>
 
@@ -365,7 +365,7 @@ export default function SlidingHero({ slides }) {
       ))}
 
       {/* scroll cue — bottom center */}
-      <div className="absolute bottom-[6.5rem] left-0 right-0 z-40 flex flex-col items-center gap-1 text-white/50 text-[10px] uppercase tracking-[0.35em]">
+      <div className="absolute bottom-[6.5rem] left-0 right-0 z-40 hidden sm:flex flex-col items-center gap-1 text-white/50 text-[10px] uppercase tracking-[0.35em]">
         <span>Scroll</span>
         <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.4, repeat: Infinity }}>
           <ChevronsDown size={16} className="text-weld/70" />
