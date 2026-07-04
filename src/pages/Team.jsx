@@ -5,84 +5,7 @@ import { X, ArrowLeft, ArrowRight, Mail, ArrowUpRight } from 'lucide-react'
 import Lenis from 'lenis'
 import SEO from '../components/SEO'
 
-/* ─── team data ──────────────────────────────────────────── */
-const TEAM = [
-  {
-    id: 1,
-    name: 'Ahmed Al Mansoori',
-    role: 'Founder & Managing Director',
-    img: '/assets/team-ahmed.jpg',
-    quote: 'Steel doesn\'t lie. Neither do we.',
-    years: '5+ yrs',
-    location: 'Dubai, UAE',
-    bio: 'Ahmed founded Jazeerat Al Hadeed in 2019 with a single fabrication bay and a vision to set a new standard for structural steel in the MENA region. Under his leadership the company grew rapidly and expanded operations across the region.',
-    skills: ['Strategic Leadership', 'Client Relations', 'Business Development', 'UAE Construction Law'],
-    email: 'ahmed@jazeerat.ae',
-    rotate: -3,
-    offsetX: -60,
-    offsetY: 20,
-  },
-  {
-    id: 2,
-    name: 'Khalid Ibrahim',
-    role: 'Head of Fabrication',
-    img: '/assets/team-khalid.jpg',
-    quote: 'If the drawing says ±1 mm, we hit ±0.5.',
-    years: '14 yrs',
-    location: 'Sharjah, UAE',
-    bio: 'Khalid oversees all workshop operations — from raw material intake to finished dispatch. He introduced lean fabrication principles that reduced rework by 40% and brought average lead times down by two weeks.',
-    skills: ['Structural Fabrication', 'Lean Manufacturing', 'CNC Operations', 'Workshop Safety'],
-    email: 'khalid@jazeerat.ae',
-    rotate: 5,
-    offsetX: 80,
-    offsetY: -30,
-  },
-  {
-    id: 3,
-    name: 'Priya Nair',
-    role: 'QA & Compliance Lead',
-    img: '/assets/team-priya.jpg',
-    quote: 'Quality is in the record, not the promise.',
-    years: '9 yrs',
-    location: 'Abu Dhabi, UAE',
-    bio: 'Priya built Jazeerat\'s entire quality management framework from scratch, achieving alignment with international fabrication standards. She manages all third-party inspection relationships and client audit responses.',
-    skills: ['ISO Compliance', 'NDT Oversight', 'Inspection Management', 'Documentation Systems'],
-    email: 'priya@jazeerat.ae',
-    rotate: -6,
-    offsetX: -40,
-    offsetY: -50,
-  },
-  {
-    id: 4,
-    name: 'Rami Haddad',
-    role: 'Structural Design Engineer',
-    img: '/assets/team-rami.jpg',
-    quote: 'Every weld starts as a calculation.',
-    years: '11 yrs',
-    location: 'Dubai, UAE',
-    bio: 'Rami leads the design and detailing team, translating architect and structural engineer packages into fabrication-ready shop drawings. His work bridges the gap between office specification and workshop reality.',
-    skills: ['Structural Analysis', 'Shop Drawings', 'AutoCAD / Tekla', 'Connection Design'],
-    email: 'rami@jazeerat.ae',
-    rotate: 4,
-    offsetX: 60,
-    offsetY: 40,
-  },
-  {
-    id: 5,
-    name: 'James Okafor',
-    role: 'Project Delivery Manager',
-    img: '/assets/team-james.jpg',
-    quote: 'On-time is the only acceptable default.',
-    years: '7 yrs',
-    location: 'Dubai, UAE',
-    bio: 'James manages end-to-end project schedules for all active fabrication and site contracts. He implemented the digital delivery tracker that gives clients real-time visibility on fabrication and shipping milestones.',
-    skills: ['Project Scheduling', 'Logistics Coordination', 'Client Communication', 'Risk Management'],
-    email: 'james@jazeerat.ae',
-    rotate: -2,
-    offsetX: -20,
-    offsetY: 60,
-  },
-]
+import { supabase } from '../lib/supabase'
 
 /* ─── Globe rotation constants ───────────────────────────── */
 // Each card sits on a circle. As the user scrolls, the circle rotates.
@@ -288,6 +211,25 @@ export default function Team() {
   const containerRef = useRef(null)
   const [selectedIndex, setSelectedIndex] = useState(null)
   const [scrollY, setScrollY] = useState(0)
+  const [team, setTeam] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  // fetch data
+  useEffect(() => {
+    async function loadTeam() {
+      const { data, error } = await supabase.from('team').select('*').order('created_at', { ascending: true })
+      if (!error && data) {
+        setTeam(data.map(m => ({
+          ...m,
+          img: m.image_url,
+          offsetX: m.offset_x,
+          offsetY: m.offset_y
+        })))
+      }
+      setLoading(false)
+    }
+    loadTeam()
+  }, [])
 
   /* Lenis — page-level smooth scroll */
   useEffect(() => {
@@ -313,14 +255,14 @@ export default function Team() {
   const openMember = useCallback((i) => setSelectedIndex(i), [])
   const closeMember = useCallback(() => setSelectedIndex(null), [])
   const prevMember = useCallback(() =>
-    setSelectedIndex((i) => (i - 1 + TEAM.length) % TEAM.length), [])
+    setSelectedIndex((i) => (i - 1 + team.length) % team.length), [team.length])
   const nextMember = useCallback(() =>
-    setSelectedIndex((i) => (i + 1) % TEAM.length), [])
+    setSelectedIndex((i) => (i + 1) % team.length), [team.length])
 
   // split team into 3 rows for the globe parallax
-  const row1 = TEAM
-  const row2 = [...TEAM].reverse()
-  const row3 = TEAM
+  const row1 = team
+  const row2 = [...team].reverse()
+  const row3 = team
 
   return (
     <motion.div
@@ -512,7 +454,11 @@ export default function Team() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {TEAM.map((m, i) => (
+          {loading ? (
+            <div className="col-span-1 lg:col-span-3 py-10 font-mono text-steel uppercase tracking-widest text-sm">
+              Loading Team...
+            </div>
+          ) : team.map((m, i) => (
             <motion.button
               key={m.id}
               className="text-left border border-panel-line bg-graphite-light p-5 group hover:border-weld/50 transition-colors relative overflow-hidden"
@@ -570,9 +516,9 @@ export default function Team() {
       <AnimatePresence>
         {selectedIndex !== null && (
           <MemberModal
-            member={TEAM[selectedIndex]}
+            member={team[selectedIndex]}
             index={selectedIndex}
-            total={TEAM.length}
+            total={team.length}
             onClose={closeMember}
             onPrev={prevMember}
             onNext={nextMember}

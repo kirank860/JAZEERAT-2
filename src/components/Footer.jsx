@@ -24,6 +24,7 @@ export default function Footer() {
               ['Home', '/'],
               ['About', '/about'],
               ['Services', '/services'],
+              ['Insights', '/blogs'],
               ['Contact', '/contact'],
             ].map(([label, to]) => (
               <li key={to}>

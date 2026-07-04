@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
 import {
@@ -65,29 +65,7 @@ const services = [
   },
 ]
 
-const projects = [
-  {
-    title: 'Industrial Fabrication',
-    location: 'UAE',
-    scope: 'Portal frames, columns and steel decks for a major industrial facility.',
-    image: '/assets/slides/slide-1.webp',
-    tag: 'Structural',
-  },
-  {
-    title: 'Oil & Gas Structure',
-    location: 'Oman',
-    scope: 'Pipe racks, access platforms and bracing systems for upstream plant.',
-    image: '/assets/slides/slide-2.webp',
-    tag: 'Industrial',
-  },
-  {
-    title: 'Logistics Hub',
-    location: 'Qatar',
-    scope: 'Warehouse steelwork and loading canopy structures across a 12,000m² site.',
-    image: '/assets/slides/slide-3.webp',
-    tag: 'Commercial',
-  },
-]
+import { supabase } from '../lib/supabase'
 
 const process = [
   { n: '01', title: 'Design & Detailing', desc: 'Shop drawings and detailing engineered against your structural spec.' },
@@ -186,7 +164,7 @@ function ServiceCard({ svc, i }) {
 function ProjectCard({ proj, i }) {
   const [hovered, setHovered] = useState(false)
   const cardRef = useRef(null)
-  
+
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ['start end', 'end start'],
@@ -264,10 +242,29 @@ function ProjectCard({ proj, i }) {
 
 /* ─── Main Page ──────────────────────────────────────────── */
 export default function Home() {
+  const [projects, setProjects] = useState([])
+  const [loadingProjects, setLoadingProjects] = useState(true)
+
+  useEffect(() => {
+    async function loadProjects() {
+      const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: true }).limit(3)
+      if (!error && data) {
+        setProjects(data.map(p => ({
+          ...p,
+          image: p.image_url,
+          tag: 'Structural' // fallback tag
+        })))
+      }
+      setLoadingProjects(false)
+    }
+    loadProjects()
+  }, [])
+
+  const containerRef = useRef(null)
   const processRef = useRef(null)
   const servicesRef = useRef(null)
   const projectsRef = useRef(null)
-  
+
   const { scrollYProgress: processProgress } = useScroll({ target: processRef, offset: ['start end', 'end start'] })
   const lineH = useTransform(processProgress, [0.1, 0.9], ['0%', '100%'])
 
@@ -304,9 +301,9 @@ export default function Home() {
 
       <section ref={servicesRef} className="py-24 lg:py-32 relative overflow-hidden">
         {/* subtle ambient glow */}
-        <motion.div 
+        <motion.div
           style={{ y: glowY1 }}
-          className="absolute top-0 right-0 w-[500px] h-[400px] bg-weld/5 blur-3xl rounded-full pointer-events-none" 
+          className="absolute top-0 right-0 w-[500px] h-[400px] bg-weld/5 blur-3xl rounded-full pointer-events-none"
         />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -391,11 +388,11 @@ export default function Home() {
       <section ref={projectsRef} className="py-24 lg:py-32 bg-graphite-light relative overflow-hidden">
         {/* ambient dot pattern */}
         <div className="absolute inset-0 bp-grid-fine opacity-40 pointer-events-none" />
-        
+
         {/* floating ambient glow */}
-        <motion.div 
+        <motion.div
           style={{ y: glowY2 }}
-          className="absolute bottom-0 left-[-100px] w-[400px] h-[400px] bg-weld/5 blur-3xl rounded-full pointer-events-none" 
+          className="absolute bottom-0 left-[-100px] w-[400px] h-[400px] bg-weld/5 blur-3xl rounded-full pointer-events-none"
         />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -440,7 +437,11 @@ export default function Home() {
 
           {/* project cards grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((proj, i) => (
+            {loadingProjects ? (
+              <div className="md:col-span-3 flex items-center justify-center py-20 font-mono text-steel uppercase tracking-widest text-sm">
+                Loading Projects...
+              </div>
+            ) : projects.map((proj, i) => (
               <NavLink key={proj.title} to="/projects" className="block">
                 <ProjectCard proj={proj} i={i} />
               </NavLink>
@@ -548,86 +549,86 @@ export default function Home() {
           STATS STRIP
       ═══════════════════════════════════════════════════ */}
       <Reveal y={20} duration={0.8}>
-      <section className="py-20 bp-grid-fine border-y border-panel-line overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-2 lg:grid-cols-4 gap-px bg-panel-line border border-panel-line">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={i}
-              variants={fadeUp}
-              className="bg-graphite text-center lg:text-left p-10 group hover:bg-panel transition-colors relative overflow-hidden"
-              whileHover={{ y: -3, transition: { duration: 0.2 } }}
-            >
-              {/* corner bracket on hover */}
+        <section className="py-20 bp-grid-fine border-y border-panel-line overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-2 lg:grid-cols-4 gap-px bg-panel-line border border-panel-line">
+            {stats.map((s, i) => (
               <motion.div
-                className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-weld"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: i * 0.1 + 0.4 }}
-              />
-              <p className="font-display font-extrabold text-4xl lg:text-5xl text-weld">{s.value}</p>
-              <p className="font-mono text-xs tracking-[0.2em] uppercase text-steel mt-2">{s.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+                key={s.label}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                variants={fadeUp}
+                className="bg-graphite text-center lg:text-left p-10 group hover:bg-panel transition-colors relative overflow-hidden"
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              >
+                {/* corner bracket on hover */}
+                <motion.div
+                  className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-weld"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: i * 0.1 + 0.4 }}
+                />
+                <p className="font-display font-extrabold text-4xl lg:text-5xl text-weld">{s.value}</p>
+                <p className="font-mono text-xs tracking-[0.2em] uppercase text-steel mt-2">{s.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
       </Reveal>
 
       {/* ═══════════════════════════════════════════════════
           FINAL CTA BANNER
       ═══════════════════════════════════════════════════ */}
       <Reveal y={24} duration={0.9} delay={0.05}>
-      <section className="py-28 lg:py-36 relative overflow-hidden">
-        {/* weld glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,90,31,0.07),transparent_60%)] pointer-events-none" />
+        <section className="py-28 lg:py-36 relative overflow-hidden">
+          {/* weld glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,90,31,0.07),transparent_60%)] pointer-events-none" />
 
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }}
-            variants={stagger}
-          >
-            <motion.div variants={fadeUp} custom={0}>
-              <CoordinateTicker className="justify-center mb-6" />
-            </motion.div>
-
-            <motion.h2
-              variants={fadeUp} custom={1}
-              className="font-display font-extrabold uppercase text-4xl sm:text-5xl lg:text-6xl text-steel-light leading-tight"
-            >
-              Have a spec?{' '}
-              <span className="text-weld">Let's cut it.</span>
-            </motion.h2>
-
-            <motion.p
-              variants={fadeUp} custom={2}
-              className="mt-5 text-steel text-base max-w-xl mx-auto leading-relaxed"
-            >
-              Send us a drawing and we'll send back a quote — typically within 24 hours.
-            </motion.p>
-
+          <div className="max-w-4xl mx-auto px-6 text-center">
             <motion.div
-              variants={fadeUp} custom={3}
-              className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+              initial="hidden" whileInView="visible" viewport={{ once: true }}
+              variants={stagger}
             >
-              <NavLink
-                to="/contact"
-                className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors"
+              <motion.div variants={fadeUp} custom={0}>
+                <CoordinateTicker className="justify-center mb-6" />
+              </motion.div>
+
+              <motion.h2
+                variants={fadeUp} custom={1}
+                className="font-display font-extrabold uppercase text-4xl sm:text-5xl lg:text-6xl text-steel-light leading-tight"
               >
-                Start a Project <ArrowUpRight size={18} />
-              </NavLink>
-              <NavLink
-                to="/projects"
-                className="inline-flex items-center gap-2 font-display uppercase tracking-wide text-steel-light border-b border-steel pb-1 hover:text-weld hover:border-weld transition-colors"
+                Have a spec?{' '}
+                <span className="text-weld">Let's cut it.</span>
+              </motion.h2>
+
+              <motion.p
+                variants={fadeUp} custom={2}
+                className="mt-5 text-steel text-base max-w-xl mx-auto leading-relaxed"
               >
-                Browse Projects
-              </NavLink>
+                Send us a drawing and we'll send back a quote — typically within 24 hours.
+              </motion.p>
+
+              <motion.div
+                variants={fadeUp} custom={3}
+                className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+              >
+                <NavLink
+                  to="/contact"
+                  className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors"
+                >
+                  Start a Project <ArrowUpRight size={18} />
+                </NavLink>
+                <NavLink
+                  to="/projects"
+                  className="inline-flex items-center gap-2 font-display uppercase tracking-wide text-steel-light border-b border-steel pb-1 hover:text-weld hover:border-weld transition-colors"
+                >
+                  Browse Projects
+                </NavLink>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
       </Reveal>
 
     </motion.main>

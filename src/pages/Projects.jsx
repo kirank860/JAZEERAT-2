@@ -7,57 +7,11 @@ import Cutline from '../components/Cutline'
 import SEO from '../components/SEO'
 import VideoHero from '../components/VideoHero'
 
-const projects = [
-  {
-    title: 'Industrial Fabrication',
-    location: 'UAE',
-    scope: 'Portal frames, columns and steel decks',
-    desc: 'A massive 40,000 sqm industrial fabrication facility requiring over 2,500 tons of structural steel. Delivered exactly on schedule with zero lost-time incidents. Included full portal frames, mezzanine decks, and heavy gantry crane runway beams.',
-    icon: Factory,
-    image: '/assets/slides/slide-1.webp',
-  },
-  {
-    title: 'Oil & Gas Structure',
-    location: 'Oman',
-    scope: 'Pipe racks, access platforms and bracing systems',
-    desc: 'Precision fabrication for a mid-stream processing plant. Required stringent NDT testing and specialized offshore-grade protective coatings. We delivered modular pipe racks and access platforms built to handle extreme operating environments.',
-    icon: Home,
-    image: '/assets/slides/slide-2.webp',
-  },
-  {
-    title: 'Logistics Hub',
-    location: 'Qatar',
-    scope: 'Warehouse steelwork and loading canopies',
-    desc: 'A regional distribution center featuring wide-span steel trusses and extensive cantilevered loading canopies. Engineered for fast on-site bolted assembly, significantly reducing the main contractor\'s erection timeline.',
-    icon: Truck,
-    image: '/assets/slides/slide-3.webp',
-  },
-  {
-    title: 'Compliance Works',
-    location: 'Saudi Arabia',
-    scope: 'Inspection-ready welded assemblies and stair packs',
-    desc: 'High-compliance welded assemblies subjected to 100% ultrasonic testing. Included complex industrial stair towers and safety handrail packs designed for immediate drop-in installation at a sensitive petrochemical facility.',
-    icon: ShieldCheck,
-    image: '/assets/project-4.jpg',
-  },
-  {
-    title: 'Architectural Steel',
-    location: 'Bahrain',
-    scope: 'Custom balustrades, facades and structural trusses',
-    desc: 'A striking commercial high-rise where the structural steel is also the architectural finish. Featured intricate exposed trusses and custom-fabricated balustrades, all requiring AESS (Architecturally Exposed Structural Steel) finishing standards.',
-    icon: Layers,
-    image: '/assets/project-5.jpg',
-  },
-  {
-    title: 'Heavy Erection',
-    location: 'UAE',
-    scope: 'Pre-assembled modules and site erection support',
-    desc: 'Delivery and erection of pre-assembled heavy equipment modules weighing up to 60 tons each. Required complex lifting plans, tandem crane coordination, and precision alignment at height.',
-    icon: Truck,
-    image: '/assets/project-6.jpg',
-  },
-]
+import { supabase } from '../lib/supabase'
 
+const iconMap = {
+  Factory, Home, Truck, ShieldCheck, Layers
+}
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
   visible: (i = 0) => ({
@@ -178,12 +132,30 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
 }
 
 export default function Projects() {
+  const [projects, setProjects] = useState([])
+  const [loading, setLoading] = useState(true)
   const [activeIndex, setActiveIndex] = useState(null)
+
+  useEffect(() => {
+    async function loadProjects() {
+      const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: true })
+      if (!error && data) {
+        setProjects(data.map(p => ({
+          ...p,
+          icon: iconMap[p.icon] || Layers,
+          image: p.image_url,
+          desc: p.description
+        })))
+      }
+      setLoading(false)
+    }
+    loadProjects()
+  }, [])
 
   const openModal = useCallback((i) => setActiveIndex(i), [])
   const closeModal = useCallback(() => setActiveIndex(null), [])
-  const nextProject = useCallback(() => setActiveIndex((i) => (i + 1) % projects.length), [])
-  const prevProject = useCallback(() => setActiveIndex((i) => (i - 1 + projects.length) % projects.length), [])
+  const nextProject = useCallback(() => setActiveIndex((i) => (i + 1) % projects.length), [projects.length])
+  const prevProject = useCallback(() => setActiveIndex((i) => (i - 1 + projects.length) % projects.length), [projects.length])
 
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
@@ -220,7 +192,15 @@ export default function Projects() {
 
       <section className="py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid gap-6 lg:grid-cols-3">
-          {projects.map((project, i) => {
+          {loading ? (
+            <div className="col-span-1 lg:col-span-3 py-20 text-center font-mono text-steel uppercase tracking-widest text-sm">
+              Loading Projects...
+            </div>
+          ) : projects.length === 0 ? (
+            <div className="col-span-1 lg:col-span-3 py-20 text-center font-mono text-steel uppercase tracking-widest text-sm">
+              No projects found.
+            </div>
+          ) : projects.map((project, i) => {
             const Icon = project.icon
             return (
               <motion.div key={project.title} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }} custom={i} variants={fadeUp}

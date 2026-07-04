@@ -4,6 +4,7 @@ import { Phone, Mail, MapPin, Clock, ArrowUpRight, Check, MessageCircle } from '
 import SectionLabel from '../components/SectionLabel'
 import SEO from '../components/SEO'
 import VideoHero from '../components/VideoHero'
+import { supabase } from '../lib/supabase'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -29,27 +30,23 @@ export default function Contact() {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/info@jahsteel.ae", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          _subject: "New Project Inquiry from Jazeerat Al Hadeed Website",
-          Name: form.name,
-          Email: form.email,
-          Company: form.company,
-          Message: form.message,
-        }),
-      })
+      const { error } = await supabase.from('enquiries').insert([
+        {
+          name: form.name,
+          email: form.email,
+          company: form.company,
+          message: form.message
+        }
+      ])
 
-      if (response.ok) {
+      if (!error) {
         setSent(true)
       } else {
-        alert("Something went wrong. Please try again.")
+        console.error(error)
+        alert("Something went wrong saving to database. Please try again.")
       }
-    } catch {
+    } catch (err) {
+      console.error(err)
       alert("Network error. Please check your connection and try again.")
     } finally {
       setIsSubmitting(false)

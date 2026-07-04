@@ -9,6 +9,8 @@ import Facilities from './pages/Facilities'
 import Projects from './pages/Projects'
 import Contact from './pages/Contact'
 import Team from './pages/Team'
+import Blogs from './pages/Blogs'
+import BlogPost from './pages/BlogPost'
 import NotFound from './pages/NotFound'
 import ScrollToTop from './components/ScrollToTop'
 import WhatsAppWidget from './components/WhatsAppWidget'
@@ -33,6 +35,8 @@ function App() {
           <Route path="/facilities" element={<Facilities />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/team" element={<Team />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogs/:slug" element={<BlogPost />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
