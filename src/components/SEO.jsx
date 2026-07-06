@@ -36,7 +36,7 @@ const JSONLD_ORGANIZATION = {
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'CNC Plasma & Laser Cutting' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Structural Steel Fabrication' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'CNC Machine Workshop' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Welding & QA' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Welding & QC' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Surface Finishing & Coating' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Delivery & Installation' } },
     ],

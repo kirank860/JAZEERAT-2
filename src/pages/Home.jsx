@@ -12,6 +12,8 @@ import SectionLabel from '../components/SectionLabel'
 import WhatWeDoSection from '../components/WhatWeDoSection'
 import CoordinateTicker from '../components/CoordinateTicker'
 import Reveal from '../components/Reveal'
+import Magnetic from '../components/Magnetic'
+import MaskReveal from '../components/MaskReveal'
 
 /* ─── data ───────────────────────────────────────────────── */
 const services = [
@@ -50,8 +52,8 @@ const services = [
   {
     icon: ShieldCheck,
     num: '05',
-    title: 'Welding & QA',
-    short: 'Certified welders working to code — every joint logged against our QA record.',
+    title: 'Welding & QC',
+    short: 'Certified welders working to code — every joint logged against our QC record.',
     spec: 'Certified welders on shift',
     color: 'from-weld/10',
   },
@@ -244,20 +246,33 @@ function ProjectCard({ proj, i }) {
 export default function Home() {
   const [projects, setProjects] = useState([])
   const [loadingProjects, setLoadingProjects] = useState(true)
+  const [slides, setSlides] = useState(null) // null means it will use the fallback in SlidingHero initially
 
   useEffect(() => {
-    async function loadProjects() {
-      const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: true }).limit(3)
-      if (!error && data) {
-        setProjects(data.map(p => ({
+    async function loadData() {
+      // Load projects
+      const { data: projData, error: projError } = await supabase.from('projects').select('*').order('created_at', { ascending: true }).limit(3)
+      if (!projError && projData) {
+        setProjects(projData.map(p => ({
           ...p,
           image: p.image_url,
           tag: 'Structural' // fallback tag
         })))
       }
       setLoadingProjects(false)
+
+      // Load hero slides
+      const { data: slideData, error: slideError } = await supabase.from('hero_assets').select('*').eq('page_key', 'home').order('sort_order', { ascending: true })
+      if (!slideError && slideData && slideData.length > 0) {
+        setSlides(slideData.map(s => ({
+          src: s.asset_url,
+          caption: s.title,
+          sub: s.subtitle,
+          tag: s.tag || 'Slide',
+        })))
+      }
     }
-    loadProjects()
+    loadData()
   }, [])
 
   const containerRef = useRef(null)
@@ -283,7 +298,7 @@ export default function Home() {
       />
 
       {/* ── HERO — full-width sliding carousel */}
-      <SlidingHero />
+      <SlidingHero slides={slides} />
 
       {/* ── WHAT WE DO */}
       <Reveal>
@@ -316,13 +331,12 @@ export default function Home() {
               <motion.div variants={fadeUp} custom={0}>
                 <SectionLabel index="§ 01">What We Do</SectionLabel>
               </motion.div>
-              <motion.h2
-                variants={fadeUp} custom={1}
-                className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-lg mt-2"
-              >
-                Every stage,{' '}
-                <span className="text-weld">one workshop.</span>
-              </motion.h2>
+              <MaskReveal delay={0.1}>
+                <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-lg mt-2">
+                  Every stage,{' '}
+                  <span className="text-weld">one workshop.</span>
+                </h2>
+              </MaskReveal>
             </motion.div>
 
             <motion.div
@@ -405,13 +419,12 @@ export default function Home() {
               <motion.div variants={fadeUp} custom={0}>
                 <SectionLabel index="§ 02">Recent Projects</SectionLabel>
               </motion.div>
-              <motion.h2
-                variants={fadeUp} custom={1}
-                className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-lg mt-2"
-              >
-                Delivered with{' '}
-                <span className="text-weld">precision.</span>
-              </motion.h2>
+              <MaskReveal delay={0.1}>
+                <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-lg mt-2">
+                  Delivered with{' '}
+                  <span className="text-weld">precision.</span>
+                </h2>
+              </MaskReveal>
               <motion.p
                 variants={fadeUp} custom={2}
                 className="mt-3 text-steel text-sm max-w-md leading-relaxed"
@@ -497,10 +510,12 @@ export default function Home() {
             custom={0} variants={fadeUp}
           >
             <SectionLabel index="§ 03">From Drawing to Delivery</SectionLabel>
-            <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-xl mt-2">
-              A fabrication line,{' '}
-              <span className="text-weld">not a black box.</span>
-            </h2>
+            <MaskReveal delay={0.1}>
+              <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-xl mt-2">
+                A fabrication line,{' '}
+                <span className="text-weld">not a black box.</span>
+              </h2>
+            </MaskReveal>
           </motion.div>
 
           <div className="mt-16 relative">
@@ -613,12 +628,14 @@ export default function Home() {
                 variants={fadeUp} custom={3}
                 className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
               >
-                <NavLink
-                  to="/contact"
-                  className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors"
-                >
-                  Start a Project <ArrowUpRight size={18} />
-                </NavLink>
+                <Magnetic>
+                  <NavLink
+                    to="/contact"
+                    className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors"
+                  >
+                    Start a Project <ArrowUpRight size={18} />
+                  </NavLink>
+                </Magnetic>
                 <NavLink
                   to="/projects"
                   className="inline-flex items-center gap-2 font-display uppercase tracking-wide text-steel-light border-b border-steel pb-1 hover:text-weld hover:border-weld transition-colors"

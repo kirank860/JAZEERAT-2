@@ -14,6 +14,7 @@ import BlogPost from './pages/BlogPost'
 import NotFound from './pages/NotFound'
 import ScrollToTop from './components/ScrollToTop'
 import WhatsAppWidget from './components/WhatsAppWidget'
+import CustomCursor from './components/CustomCursor'
 import { useLenis } from './hooks/useLenis'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-graphite text-steel-light font-body">
+      <CustomCursor />
       <Navbar />
       <ScrollToTop />
       <AnimatePresence mode="wait">

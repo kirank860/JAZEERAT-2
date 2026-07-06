@@ -11,13 +11,16 @@ import Cutline from '../components/Cutline'
 import CoordinateTicker from '../components/CoordinateTicker'
 import WeldingCanvas from '../components/WeldingCanvas'
 import SEO from '../components/SEO'
+import VideoHero from '../components/VideoHero'
+import Magnetic from '../components/Magnetic'
+import MaskReveal from '../components/MaskReveal'
 
 /* ─── data ───────────────────────────────────────────────── */
 const timeline = [
   { year: '2019', title: 'Workshop Founded', desc: 'Jazeerat Al Hadeed Metallic Construction and Industrial Engineering opens its doors in Sharjah, UAE.' },
   { year: '2020', title: 'CNC Line Installed', desc: 'In-house CNC plasma and machining capability brought online.' },
   { year: '2022', title: 'Regional Expansion', desc: 'Fabrication and delivery extended across GCC construction sites.' },
-  { year: '2024', title: 'ISO-Aligned QA', desc: 'Quality control processes aligned to international fabrication standards.' },
+  { year: '2024', title: 'ISO-Aligned Qc', desc: 'Quality control processes aligned to international fabrication standards.' },
   { year: 'Today', title: 'Full-Service Workshop', desc: 'A single integrated facility for design, cut, weld, finish and delivery.' },
 ]
 
@@ -32,7 +35,7 @@ const capabilities = [
   { icon: Wrench, title: 'Machine Workshop', desc: 'CNC cutting, machining and precision finishing in-house.', side: 'left' },
   { icon: PenTool, title: 'Design & Detailing', desc: 'Shop drawings and detailing engineered to your structural spec.', side: 'left' },
   { icon: Boxes, title: 'Custom Fabrication', desc: 'Bespoke steelwork built to client drawings and tolerances.', side: 'right' },
-  { icon: ShieldCheck, title: 'QA & Compliance', desc: 'Every weld and cut logged against international standards.', side: 'right' },
+  { icon: ShieldCheck, title: 'QC & Compliance', desc: 'Every weld and cut logged against international standards.', side: 'right' },
   { icon: Ruler, title: 'Surface Finishing', desc: 'Shot blasting, priming and coating for MENA climates.', side: 'right' },
 ]
 
@@ -80,7 +83,7 @@ const team = [
   },
   {
     name: 'Priya Nair',
-    role: 'QA & Compliance Lead',
+    role: 'QC & Compliance Lead',
     quote: 'Quality is in the record, not the promise.',
     img: '/assets/team-priya.jpg',
     initials: 'PN',
@@ -340,7 +343,7 @@ const stageLabels = [
   'Workshop Founded',
   'CNC Line Installed',
   'Regional Expansion',
-  'ISO-Aligned QA',
+  'ISO-Aligned QC',
   'Full-Service Today',
 ]
 
@@ -576,28 +579,14 @@ export default function About() {
         path="/about"
       />
 
-      {/* ── HERO — full-viewport with video/canvas background ── */}
-      <section ref={heroRef} className="relative w-full min-h-screen flex flex-col justify-center overflow-hidden">
-
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          src="/assets/about-hero.mp4"
-          poster="/assets/slides/slide-4.webp"
-          autoPlay
-          muted
-          loop
-          playsInline
-          onError={(e) => { e.target.style.display = 'none' }}
-        />
-
-        <div className="absolute inset-0 bg-gradient-to-b from-graphite/60 via-graphite/40 to-graphite/85 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-graphite/55 via-transparent to-transparent pointer-events-none" />
-
-        <motion.div style={{ y: canvasY }} className="absolute inset-0 z-[1]">
-          <WeldingCanvas />
-        </motion.div>
-
-        <div className="absolute inset-0 bp-grid opacity-15 pointer-events-none z-[2]" />
+      {/* ── HERO — dynamic background fetched from Supabase ── */}
+      <VideoHero
+        ref={heroRef}
+        pageKey="about"
+        showSparks={true}
+        className="min-h-screen flex flex-col justify-center"
+      >
+        <motion.div style={{ y: canvasY }} className="absolute inset-0 z-[1] pointer-events-none" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-10 pt-32 pb-24">
           <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
@@ -605,15 +594,13 @@ export default function About() {
           </motion.div>
 
           <motion.div initial="hidden" animate="visible" variants={container} className="mt-2">
-            <motion.h1
-              variants={fadeUp}
-              custom={1}
-              className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-8xl leading-[0.9] text-steel-light drop-shadow-lg"
-            >
-              Built on the
-              <br />
-              <span className="text-weld">shop floor.</span>
-            </motion.h1>
+            <MaskReveal delay={0.2}>
+              <h1 className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-8xl leading-[0.9] text-steel-light drop-shadow-lg">
+                Built on the
+                <br />
+                <span className="text-weld">shop floor.</span>
+              </h1>
+            </MaskReveal>
 
             <motion.div
               className="mt-5 h-[3px] bg-weld origin-left shadow-[0_0_12px_rgba(255,90,31,0.7)]"
@@ -638,12 +625,14 @@ export default function About() {
               custom={3}
               className="mt-10 flex flex-wrap gap-4"
             >
-              <NavLink
-                to="/contact"
-                className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-7 py-4 hover:bg-signal transition-colors"
-              >
-                Request a Quote <ArrowRight size={18} />
-              </NavLink>
+              <Magnetic>
+                <NavLink
+                  to="/contact"
+                  className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-7 py-4 hover:bg-signal transition-colors"
+                >
+                  Request a Quote <ArrowRight size={18} />
+                </NavLink>
+              </Magnetic>
               <NavLink
                 to="/services"
                 className="inline-flex items-center gap-2 font-display uppercase tracking-wide text-steel-light border-b border-steel pb-1 hover:text-weld hover:border-weld transition-colors"
@@ -664,7 +653,7 @@ export default function About() {
             <ChevronsDown size={18} className="text-weld" />
           </motion.div>
         </div>
-      </section>
+      </VideoHero>
 
       {/* ── CUTLINE 01 ─────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10">

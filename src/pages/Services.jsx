@@ -54,8 +54,8 @@ const services = [
   },
   {
     icon: ShieldCheck,
-    title: 'Welding & QA',
-    desc: 'Certified welders working to code, with every joint logged against our internal QA record.',
+    title: 'Welding & QC',
+    desc: 'Certified welders working to code, with every joint logged against our internal QC record.',
     spec: 'Certified welders on shift',
   },
   {
@@ -81,12 +81,12 @@ export default function Services() {
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
         title="Steel Fabrication Services | UAE & GCC"
-        description="Comprehensive steel fabrication services: CNC plasma cutting, structural fabrication, machine workshop, welding & QA, surface finishing and delivery. One integrated workshop across the UAE."
+        description="Comprehensive steel fabrication services: CNC plasma cutting, structural fabrication, machine workshop, welding & QC, surface finishing and delivery. One integrated workshop across the UAE."
         path="/services"
       />
 
       <VideoHero
-        videoSrc="/assets/about-hero.mp4"
+        pageKey="services"
         poster="/assets/slides/slide-1.webp"
         showSparks={false}
         className="pt-40 pb-20 lg:pt-48 lg:pb-28"
@@ -106,8 +106,8 @@ export default function Services() {
             initial="hidden" animate="visible" custom={2} variants={fadeUp}
             className="mt-6 text-lg text-steel max-w-2xl font-light leading-relaxed"
           >
-            From raw structural steel to precision-machined components. 
-            Jazeerat Al Hadeed provides a complete, in-house industrial fabrication cycle. 
+            From raw structural steel to precision-machined components.
+            Jazeerat Al Hadeed provides a complete, in-house industrial fabrication cycle.
             No outsourcing, no delays.
           </motion.p>
         </div>

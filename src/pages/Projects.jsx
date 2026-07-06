@@ -166,7 +166,7 @@ export default function Projects() {
         image="https://jazeerat-2.vercel.app/assets/slides/slide-2.webp"
       />
       <VideoHero
-        videoSrc="/assets/about-hero.mp4"
+        pageKey="projects"
         poster="/assets/slides/slide-3.webp"
         showSparks={false}
         className="pt-40 pb-20 lg:pt-48 lg:pb-28"
