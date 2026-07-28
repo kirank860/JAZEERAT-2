@@ -8,7 +8,8 @@ import Services from './pages/Services'
 import Facilities from './pages/Facilities'
 import Projects from './pages/Projects'
 import Contact from './pages/Contact'
-import Team from './pages/Team'
+// import Team from './pages/Team'
+import ServiceDetail from './pages/ServiceDetail'
 import Blogs from './pages/Blogs'
 import BlogPost from './pages/BlogPost'
 import NotFound from './pages/NotFound'
@@ -33,10 +34,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/facilities" element={<Facilities />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/team" element={<Team />} />
+          {/* <Route path="/team" element={<Team />} /> */}
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:slug" element={<BlogPost />} />
           <Route path="*" element={<NotFound />} />

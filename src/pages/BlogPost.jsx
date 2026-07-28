@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useParams, NavLink, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import { ArrowLeft, Clock, User, Share2, ArrowRight } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import SEO from '../components/SEO'
 import TiltImage from '../components/TiltImage'
+import { LOCAL_BLOGS } from '../data/localBlogs'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -29,34 +30,69 @@ export default function BlogPost() {
   const [post, setPost] = useState(null)
   const [relatedPosts, setRelatedPosts] = useState([])
   const [loading, setLoading] = useState(true)
+  const [shared, setShared] = useState(false)
+
+  // Scroll Progress Bar Setup
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href)
+    setShared(true)
+    setTimeout(() => setShared(false), 2000)
+  }
 
   useEffect(() => {
     async function loadPost() {
-      // Fetch main post
-      const { data, error } = await supabase
-        .from('blogs')
-        .select('*')
-        .eq('slug', slug)
-        .single()
-      
-      if (error || !data) {
-        navigate('/not-found')
-        return
-      }
-      setPost(data)
-
-      // Fetch related posts (latest 3 excluding current)
-      const { data: relatedData } = await supabase
-        .from('blogs')
-        .select('*')
-        .neq('id', data.id)
-        .order('created_at', { ascending: false })
-        .limit(3)
+      try {
+        // Fetch main post
+        const { data, error } = await supabase
+          .from('blogs')
+          .select('*')
+          .eq('slug', slug)
+          .single()
         
-      if (relatedData) {
-        setRelatedPosts(relatedData)
+        if (!error && data) {
+          setPost(data)
+          
+          // Fetch related posts (latest 3 excluding current)
+          const { data: relatedData } = await supabase
+            .from('blogs')
+            .select('*')
+            .neq('id', data.id)
+            .order('created_at', { ascending: false })
+            .limit(3)
+            
+          if (relatedData && relatedData.length > 0) {
+            setRelatedPosts(relatedData)
+          } else {
+            setRelatedPosts(LOCAL_BLOGS.filter(b => b.slug !== slug).slice(0, 3))
+          }
+        } else {
+          // Fallback to local
+          const localPost = LOCAL_BLOGS.find(b => b.slug === slug)
+          if (localPost) {
+            setPost(localPost)
+            setRelatedPosts(LOCAL_BLOGS.filter(b => b.slug !== slug).slice(0, 3))
+          } else {
+            navigate('/not-found')
+            return
+          }
+        }
+      } catch (err) {
+        const localPost = LOCAL_BLOGS.find(b => b.slug === slug)
+        if (localPost) {
+          setPost(localPost)
+          setRelatedPosts(LOCAL_BLOGS.filter(b => b.slug !== slug).slice(0, 3))
+        } else {
+          navigate('/not-found')
+          return
+        }
       }
-
       setLoading(false)
     }
     loadPost()
@@ -81,6 +117,11 @@ export default function BlogPost() {
 
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="bg-graphite min-h-screen">
+      {/* Top reading progress bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] bg-weld z-[200] origin-[0%]"
+        style={{ scaleX }}
+      />
       <SEO
         title={`${post.title} | Jazeerat Al Hadeed Insights`}
         description={post.excerpt}
@@ -175,8 +216,11 @@ export default function BlogPost() {
               </div>
             </div>
             
-            <button className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-weld hover:text-signal transition-colors border border-weld/30 px-6 py-3 rounded-full hover:bg-weld/10">
-              <Share2 size={16} /> Share Article
+            <button 
+              onClick={handleShare}
+              className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-weld hover:text-signal transition-colors border border-weld/30 px-6 py-3 rounded-full hover:bg-weld/10"
+            >
+              <Share2 size={16} /> {shared ? 'Link Copied!' : 'Share Article'}
             </button>
           </motion.div>
         </div>

@@ -938,14 +938,14 @@ export default function About() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          ── TEAM ── NEW SECTION (cula.tech inspired)
+          ── TEAM ── NEW SECTION (cula.tech inspired) [COMMENTED OUT]
       ════════════════════════════════════════════════════════ */}
+      {/* 
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <Cutline label="Fig. 04 — The Team" />
       </div>
 
       <section ref={teamContainerRef} className="py-24 lg:py-32 overflow-hidden relative">
-        {/* subtle grid */}
         <div className="absolute inset-0 bp-grid opacity-10 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-14">
@@ -973,7 +973,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* horizontal scroll strip */}
         <div className="overflow-hidden">
           <motion.div
             className="flex gap-6 px-6 lg:px-10"
@@ -983,7 +982,6 @@ export default function About() {
               <TeamCard key={member.name} member={member} index={i} />
             ))}
 
-            {/* filler "Join Us" card */}
             <motion.div
               className="flex-none w-72 lg:w-80 h-96 border border-dashed border-panel-line bg-graphite/50 flex flex-col items-center justify-center gap-4 group hover:border-weld/40 transition-colors cursor-pointer"
               initial={{ opacity: 0, y: 50 }}
@@ -1011,7 +1009,6 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* scroll hint */}
         <motion.div
           className="flex items-center gap-2 px-6 lg:px-10 mt-8 text-steel/50 text-xs font-mono uppercase tracking-widest"
           initial={{ opacity: 0 }}
@@ -1032,7 +1029,6 @@ export default function About() {
           />
         </motion.div>
 
-        {/* ── SEE ALL TEAM CTA ─────────────────────── */}
         <motion.div
           className="flex justify-center mt-14"
           initial={{ opacity: 0, y: 20 }}
@@ -1044,7 +1040,6 @@ export default function About() {
             to="/team"
             className="group relative inline-flex items-center gap-3 border border-weld/40 hover:border-weld px-8 py-4 font-display uppercase tracking-widest text-sm text-steel-light hover:text-weld transition-all duration-300 overflow-hidden"
           >
-            {/* animated bg sweep */}
             <span className="absolute inset-0 bg-weld/0 group-hover:bg-weld/[0.06] transition-colors duration-300 pointer-events-none" />
             <span className="relative">See All Team Members</span>
             <motion.span
@@ -1057,6 +1052,7 @@ export default function About() {
           </NavLink>
         </motion.div>
       </section>
+      */}
 
       {/* ── CUTLINE 05 ─────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10">

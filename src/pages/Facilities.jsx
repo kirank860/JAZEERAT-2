@@ -61,6 +61,7 @@ export default function Facilities() {
       />
       <VideoHero
         pageKey="facilities"
+        videoSrc="/assets/facilities-hero.mp4"
         poster="/assets/slides/slide-2.webp"
         showSparks={false}
         className="pt-40 pb-20 lg:pt-48 lg:pb-28"

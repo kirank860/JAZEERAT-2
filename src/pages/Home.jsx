@@ -243,6 +243,31 @@ function ProjectCard({ proj, i }) {
 }
 
 /* ─── Main Page ──────────────────────────────────────────── */
+const LOCAL_PROJECTS = [
+  {
+    title: 'Industrial Fabrication',
+    location: 'Sharjah, UAE',
+    scope: 'Portal frames, columns and steel decks',
+    tag: 'Fabrication',
+    image: '/assets/project-truss-install.jpg'
+  },
+  {
+    title: 'Heavy Erection & Lift',
+    location: 'Kuwait',
+    scope: 'Column splicing and crane rigging',
+    tag: 'Erection',
+    image: '/assets/project-crane-hoist.jpg'
+  },
+  {
+    title: 'Sobha One Facades',
+    location: 'Dubai, UAE',
+    scope: 'Architectural facade steel and balcony structures',
+    tag: 'Architectural',
+    image: '/assets/project-sobha-rendering.jpg'
+  }
+]
+
+/* ─── Main Page ──────────────────────────────────────────── */
 export default function Home() {
   const [projects, setProjects] = useState([])
   const [loadingProjects, setLoadingProjects] = useState(true)
@@ -251,25 +276,51 @@ export default function Home() {
   useEffect(() => {
     async function loadData() {
       // Load projects
-      const { data: projData, error: projError } = await supabase.from('projects').select('*').order('created_at', { ascending: true }).limit(3)
-      if (!projError && projData) {
-        setProjects(projData.map(p => ({
-          ...p,
-          image: p.image_url,
-          tag: 'Structural' // fallback tag
-        })))
+      try {
+        const { data: projData, error: projError } = await supabase.from('projects').select('*').order('created_at', { ascending: true }).limit(3)
+        if (!projError && projData && projData.length > 0) {
+          setProjects(projData.map((p, idx) => {
+            let localImg = p.image_url
+            const titleLower = p.title.toLowerCase()
+            if (titleLower.includes('industrial')) {
+              localImg = '/assets/project-truss-install.jpg'
+            } else if (titleLower.includes('oil & gas') || titleLower.includes('erection') || titleLower.includes('heavy') || titleLower.includes('kuwait')) {
+              localImg = '/assets/project-crane-hoist.jpg'
+            } else if (titleLower.includes('architectural') || titleLower.includes('sobha')) {
+              localImg = '/assets/project-sobha-rendering.jpg'
+            } else if (titleLower.includes('logistics') || titleLower.includes('canopy')) {
+              localImg = '/assets/project-facade-canopy.jpg'
+            } else if (titleLower.includes('compliance')) {
+              localImg = '/assets/project-sobha-aerial.jpg'
+            }
+
+            return {
+              ...p,
+              image: localImg,
+              tag: idx === 0 ? 'Fabrication' : idx === 1 ? 'Erection' : 'Architectural'
+            }
+          }))
+        } else {
+          setProjects(LOCAL_PROJECTS)
+        }
+      } catch (err) {
+        setProjects(LOCAL_PROJECTS)
       }
       setLoadingProjects(false)
 
       // Load hero slides
-      const { data: slideData, error: slideError } = await supabase.from('hero_assets').select('*').eq('page_key', 'home').order('sort_order', { ascending: true })
-      if (!slideError && slideData && slideData.length > 0) {
-        setSlides(slideData.map(s => ({
-          src: s.asset_url,
-          caption: s.title,
-          sub: s.subtitle,
-          tag: s.tag || 'Slide',
-        })))
+      try {
+        const { data: slideData, error: slideError } = await supabase.from('hero_assets').select('*').eq('page_key', 'home').order('sort_order', { ascending: true })
+        if (!slideError && slideData && slideData.length > 0) {
+          setSlides(slideData.map(s => ({
+            src: s.asset_url,
+            caption: s.title,
+            sub: s.subtitle,
+            tag: s.tag || 'Slide',
+          })))
+        }
+      } catch (err) {
+        // Fallback handled inside SlidingHero
       }
     }
     loadData()

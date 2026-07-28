@@ -6,6 +6,7 @@ import { supabase } from '../lib/supabase'
 import SEO from '../components/SEO'
 import SectionLabel from '../components/SectionLabel'
 import TiltImage from '../components/TiltImage'
+import { LOCAL_BLOGS } from '../data/localBlogs'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
@@ -31,13 +32,19 @@ export default function Blogs() {
 
   useEffect(() => {
     async function loadBlogs() {
-      const { data, error } = await supabase
-        .from('blogs')
-        .select('*')
-        .order('created_at', { ascending: false })
-      
-      if (!error && data) {
-        setBlogs(data)
+      try {
+        const { data, error } = await supabase
+          .from('blogs')
+          .select('*')
+          .order('created_at', { ascending: false })
+        
+        if (!error && data && data.length > 0) {
+          setBlogs(data)
+        } else {
+          setBlogs(LOCAL_BLOGS)
+        }
+      } catch (err) {
+        setBlogs(LOCAL_BLOGS)
       }
       setLoading(false)
     }
@@ -87,17 +94,26 @@ export default function Blogs() {
       {/* Category Filters */}
       <section className="bg-graphite pt-4 pb-12 relative z-20 border-b border-panel-line mb-12">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-wrap gap-4">
-          {categories.map((cat, i) => (
+          {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`font-mono text-xs uppercase tracking-widest px-6 py-3 rounded-full font-bold transition-all border ${
+              className={`font-mono text-xs uppercase tracking-widest px-6 py-3 rounded-full font-bold relative transition-all duration-300 border ${
                 activeCategory === cat
-                  ? cat === 'All' ? 'bg-weld border-weld text-black' : `${getCategoryColor(cat).split(' ')[0]} border-transparent text-black`
+                  ? 'border-transparent text-black font-extrabold'
                   : 'bg-transparent border-panel-line text-steel hover:border-weld/50 hover:text-weld'
               }`}
             >
-              {cat}
+              {activeCategory === cat && (
+                <motion.span
+                  layoutId="activeCategoryBg"
+                  className={`absolute inset-0 rounded-full z-0 ${
+                    cat === 'All' ? 'bg-weld' : getCategoryColor(cat).split(' ')[0]
+                  }`}
+                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{cat}</span>
             </button>
           ))}
         </div>

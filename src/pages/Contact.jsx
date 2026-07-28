@@ -63,6 +63,7 @@ export default function Contact() {
 
       <VideoHero
         pageKey="contact"
+        videoSrc="/assets/contact-hero.mp4"
         poster="/assets/slides/slide-1.webp"
         showSparks={false}
         className="pt-40 pb-20 lg:pt-48 lg:pb-24"

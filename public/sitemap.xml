@@ -4,7 +4,7 @@
   <!-- Home -->
   <url>
     <loc>https://jazeerat-2.vercel.app/</loc>
-    <lastmod>2025-07-03</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,7 +12,7 @@
   <!-- About -->
   <url>
     <loc>https://jazeerat-2.vercel.app/about</loc>
-    <lastmod>2025-07-03</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -20,15 +20,77 @@
   <!-- Services -->
   <url>
     <loc>https://jazeerat-2.vercel.app/services</loc>
-    <lastmod>2025-07-03</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- Detailed Services -->
+  <url>
+    <loc>https://jazeerat-2.vercel.app/services/design-detailing</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jazeerat-2.vercel.app/services/estimation-takeoff</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jazeerat-2.vercel.app/services/bandsaw-cutting</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jazeerat-2.vercel.app/services/rolling-bending-shearing</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jazeerat-2.vercel.app/services/structural-fabrication</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jazeerat-2.vercel.app/services/precision-machining</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jazeerat-2.vercel.app/services/custom-fabrication</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jazeerat-2.vercel.app/services/welding-qc</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jazeerat-2.vercel.app/services/surface-finishing</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jazeerat-2.vercel.app/services/delivery-installation</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- Facilities -->
   <url>
     <loc>https://jazeerat-2.vercel.app/facilities</loc>
-    <lastmod>2025-07-03</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -36,7 +98,7 @@
   <!-- Projects -->
   <url>
     <loc>https://jazeerat-2.vercel.app/projects</loc>
-    <lastmod>2025-07-03</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -44,25 +106,37 @@
   <!-- Contact -->
   <url>
     <loc>https://jazeerat-2.vercel.app/contact</loc>
-    <lastmod>2025-07-03</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Team -->
-  <url>
-    <loc>https://jazeerat-2.vercel.app/team</loc>
-    <lastmod>2025-07-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Blogs -->
+  <!-- Blogs Index -->
   <url>
     <loc>https://jazeerat-2.vercel.app/blogs</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- Individual Blogs -->
+  <url>
+    <loc>https://jazeerat-2.vercel.app/blogs/cnc-plasma-cutting-heavy-fabrication</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jazeerat-2.vercel.app/blogs/understanding-aess-balcony-steelwork</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jazeerat-2.vercel.app/blogs/mitigating-thermal-expansion-warehouse-frames</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>

@@ -24,19 +24,39 @@ const services = [
     desc: 'Shop drawings, structural detailing and material takeoffs prepared in-house before a single plate is cut.',
     category: 'design',
     spec: 'Detailing tolerance ±0.5mm',
+    slug: 'design-detailing'
   },
   {
-    icon: Flame,
-    title: 'CNC Plasma & Laser Cutting',
-    desc: 'High-accuracy plate cutting for structural and architectural steel components at production scale.',
+    icon: Ruler,
+    title: 'Estimation & Material Takeoff',
+    desc: 'Comprehensive structural steel material takeoffs and commercial cost estimations prepared from client drawings.',
+    category: 'design',
+    spec: 'Accurate MTO within 24-48 hours',
+    slug: 'estimation-takeoff'
+  },
+  {
+    icon: Wrench,
+    title: 'Bandsaw Cutting',
+    desc: 'Precision bandsaw cutting for structural steel sections, UB/UC beams, channels, and hollow profiles.',
     category: 'cutting',
-    spec: 'Plate thickness up to 50mm',
+    spec: 'Section size up to 1000mm',
+    slug: 'bandsaw-cutting'
+  },
+  {
+    icon: Boxes,
+    title: 'Rolling, Bending & Shearing',
+    desc: 'Plate rolling, section bending, press-brake folding, and shearing services for custom steel elements.',
+    category: 'fabrication',
+    spec: 'Plate thickness up to 25mm',
+    slug: 'rolling-bending-shearing'
   },
   {
     icon: Factory,
     title: 'Structural Steel Fabrication',
     desc: 'Portal frames, trusses, columns and beams fabricated and pre-assembled for site-ready installation.',
+    category: 'fabrication',
     spec: 'Spans up to 30,000mm',
+    slug: 'structural-fabrication'
   },
   {
     icon: Wrench,
@@ -44,6 +64,7 @@ const services = [
     desc: 'In-house CNC machining, drilling and boring for precision components and custom mechanical parts.',
     category: 'machining',
     spec: 'Full workshop, one roof',
+    slug: 'precision-machining'
   },
   {
     icon: Boxes,
@@ -51,12 +72,15 @@ const services = [
     desc: 'Bespoke steelwork built directly to client specification — tanks, platforms, ducting and enclosures.',
     category: 'fabrication',
     spec: 'Built to client drawing',
+    slug: 'custom-fabrication'
   },
   {
     icon: ShieldCheck,
     title: 'Welding & QC',
     desc: 'Certified welders working to code, with every joint logged against our internal QC record.',
+    category: 'fabrication',
     spec: 'Certified welders on shift',
+    slug: 'welding-qc'
   },
   {
     icon: Ruler,
@@ -64,6 +88,7 @@ const services = [
     desc: 'Shot blasting, priming, painting and galvanizing prepared for MENA climate and site conditions.',
     category: 'finishing',
     spec: 'Coating to spec or standard',
+    slug: 'surface-finishing'
   },
   {
     icon: Truck,
@@ -71,7 +96,8 @@ const services = [
     desc: 'Coordinated transport and on-site installation support for contractors across the region.',
     category: 'logistics',
     spec: 'Site-coordinated logistics',
-  },
+    slug: 'delivery-installation'
+  }
 ]
 
 export default function Services() {
@@ -87,6 +113,7 @@ export default function Services() {
 
       <VideoHero
         pageKey="services"
+        videoSrc="/assets/services-hero.mp4"
         poster="/assets/slides/slide-1.webp"
         showSparks={false}
         className="pt-40 pb-20 lg:pt-48 lg:pb-28"
@@ -132,25 +159,35 @@ export default function Services() {
           </div>
           <div className="grid sm:grid-cols-2 gap-px bg-panel-line border border-panel-line">
             {services.filter(s => filter === 'all' ? true : s.category === filter).map((s, i) => (
-              <motion.div
+              <NavLink
                 key={s.title}
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }} custom={i % 4} variants={fadeUp}
-                className="bg-graphite p-10 hover:bg-panel transition-colors group"
+                to={`/services/${s.slug}`}
+                className="bg-graphite p-10 hover:bg-panel transition-colors group block relative"
               >
-                <div className="flex items-start justify-between mb-6">
-                  <s.icon size={30} className="text-weld" strokeWidth={1.5} />
-                  <span className="font-mono text-[10px] text-steel tracking-widest">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                </div>
-                <h3 className="font-display uppercase text-2xl text-steel-light mb-3 group-hover:text-weld transition-colors">
-                  {s.title}
-                </h3>
-                <p className="text-steel text-sm leading-relaxed mb-4">{s.desc}</p>
-                <p className="font-mono text-[11px] text-steel/80 uppercase tracking-wide border-t border-panel-line pt-4">
-                  {s.spec}
-                </p>
-              </motion.div>
+                <motion.div
+                  initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }} custom={i % 4} variants={fadeUp}
+                >
+                  <div className="flex items-start justify-between mb-6">
+                    <s.icon size={30} className="text-weld" strokeWidth={1.5} />
+                    <span className="font-mono text-[10px] text-steel tracking-widest">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <h3 className="font-display uppercase text-2xl text-steel-light mb-3 group-hover:text-weld transition-colors">
+                    {s.title}
+                  </h3>
+                  <p className="text-steel text-sm leading-relaxed mb-4">{s.desc}</p>
+                  
+                  <div className="flex items-center justify-between border-t border-panel-line pt-4 mt-6">
+                    <span className="font-mono text-[11px] text-steel/80 uppercase tracking-wide">
+                      {s.spec}
+                    </span>
+                    <span className="font-mono text-[10px] text-weld uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                      Details →
+                    </span>
+                  </div>
+                </motion.div>
+              </NavLink>
             ))}
           </div>
         </div>

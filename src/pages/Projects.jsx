@@ -20,14 +20,29 @@ const fadeUp = {
   }),
 }
 
+const projectFadeInLeft = {
+  hidden: { opacity: 0, x: -50 },
+  visible: (i = 0) => ({
+    opacity: 1, x: 0,
+    transition: { duration: 1.2, delay: 5.0 + i * 0.2, ease: 'easeOut' },
+  }),
+}
+
 function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
+  const [imgIndex, setImgIndex] = useState(0)
+
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [onClose])
 
+  useEffect(() => {
+    setImgIndex(0)
+  }, [project.title])
+
   const Icon = project.icon
+  const currentImg = project.gallery && project.gallery[imgIndex] ? project.gallery[imgIndex] : project.image
 
   return (
     <motion.div
@@ -45,43 +60,63 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
       />
 
       <motion.div
-        className="relative z-10 w-full max-w-5xl bg-graphite-light border border-panel-line overflow-hidden flex flex-col md:flex-row h-[80vh] md:h-[600px]"
+        className="relative z-10 w-full max-w-5xl bg-graphite-light border border-panel-line overflow-hidden flex flex-col md:flex-row h-[85vh] md:h-[600px]"
         initial={{ scale: 0.95, opacity: 0, y: 30 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.95, opacity: 0, y: 30 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* LEFT — Image */}
-        <div className="relative w-full md:w-1/2 h-1/2 md:h-full bg-graphite overflow-hidden shrink-0">
-          <motion.img
-            key={project.title}
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover"
-            initial={{ scale: 1.05, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-graphite/80 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-graphite-light/90" />
-          
-          <div className="absolute bottom-4 left-4 flex gap-2">
-            <button
-              onClick={onPrev}
-              className="w-10 h-10 border border-panel-line bg-graphite/80 flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors"
-            >
-              <ArrowLeft size={16} />
-            </button>
-            <button
-              onClick={onNext}
-              className="w-10 h-10 border border-panel-line bg-graphite/80 flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors"
-            >
-              <ArrowRight size={16} />
-            </button>
+        {/* LEFT — Image & Gallery Controls */}
+        <div className="relative w-full md:w-1/2 h-1/2 md:h-full bg-graphite overflow-hidden shrink-0 flex flex-col justify-between">
+          <div className="relative w-full h-full">
+            <motion.img
+              key={currentImg}
+              src={currentImg}
+              alt={project.title}
+              className="w-full h-full object-cover"
+              initial={{ scale: 1.05, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-graphite/95 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-graphite-light/95" />
           </div>
-          <span className="absolute bottom-6 right-6 font-mono text-[10px] text-steel-light tracking-widest bg-graphite/60 px-2 py-1 rounded backdrop-blur-sm border border-panel-line">
-            {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-          </span>
+          
+          {/* Bottom Bar: Prev/Next, Thumbnails, Index */}
+          <div className="absolute bottom-0 left-0 right-0 bg-graphite/90 backdrop-blur-md border-t border-panel-line p-3 flex items-center justify-between z-20">
+            <div className="flex gap-2">
+              <button
+                onClick={onPrev}
+                className="w-8 h-8 border border-panel-line bg-graphite/90 flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors"
+              >
+                <ArrowLeft size={14} />
+              </button>
+              <button
+                onClick={onNext}
+                className="w-8 h-8 border border-panel-line bg-graphite/90 flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors"
+              >
+                <ArrowRight size={14} />
+              </button>
+            </div>
+            
+            {project.gallery && project.gallery.length > 0 && (
+              <div className="flex gap-1.5">
+                {project.gallery.map((img, idx) => (
+                  <button
+                    key={img + idx}
+                    onClick={() => setImgIndex(idx)}
+                    className={`w-12 h-8 border transition-all overflow-hidden ${idx === imgIndex ? 'border-weld scale-105 opacity-100' : 'border-panel-line opacity-50 hover:opacity-100'}`}
+                  >
+                    <img src={img} alt="thumb" className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <span className="font-mono text-[9px] text-steel-light tracking-widest bg-graphite px-2.5 py-1 border border-panel-line rounded">
+              {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+            </span>
+          </div>
         </div>
 
         {/* RIGHT — Details */}
@@ -131,6 +166,74 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
   )
 }
 
+const LOCAL_PROJECTS = [
+  {
+    title: 'Industrial Fabrication',
+    location: 'Sharjah, UAE',
+    scope: 'Portal frames, columns and steel decks',
+    desc: 'A massive 40,000 sqm industrial fabrication facility requiring over 2,500 tons of structural steel. Included full portal frames, mezzanine decks, and heavy gantry crane runway beams.',
+    icon: Factory,
+    image: '/assets/project-truss-install.jpg',
+    gallery: [
+      '/assets/project-truss-install.jpg',
+      '/assets/project-crane-hoist.jpg',
+      '/assets/project-facade-canopy.jpg'
+    ]
+  },
+  {
+    title: 'Heavy Erection & Lift',
+    location: 'Kuwait',
+    scope: 'Column splicing and crane rigging',
+    desc: 'Heavy steel structural erection for industrial columns and A-frame modules. Coordinated complex heavy lifting and modular pre-assemblies at height.',
+    icon: Truck,
+    image: '/assets/project-crane-hoist.jpg',
+    gallery: [
+      '/assets/project-crane-hoist.jpg',
+      '/assets/project-truss-install.jpg',
+      '/assets/project-sobha-aerial.jpg'
+    ]
+  },
+  {
+    title: 'Sobha One Facades',
+    location: 'Dubai, UAE',
+    scope: 'Architectural facade steel and balcony structures',
+    desc: 'Fabrication and erection of custom high-rise structural facade elements and balcony framing for the landmark Sobha One tower development in Dubai, adhering to AESS (Architecturally Exposed Structural Steel) finishing standards.',
+    icon: Layers,
+    image: '/assets/project-sobha-rendering.jpg',
+    gallery: [
+      '/assets/project-sobha-rendering.jpg',
+      '/assets/project-sobha-aerial.jpg',
+      '/assets/project-facade-canopy.jpg'
+    ]
+  },
+  {
+    title: 'Logistics Hub Canopy',
+    location: 'Qatar',
+    scope: 'Warehouse steelwork and loading canopies',
+    desc: 'A regional distribution center featuring wide-span steel trusses and extensive cantilevered loading canopies. Engineered for fast on-site bolted assembly, significantly reducing the main contractor\'s erection timeline.',
+    icon: Home,
+    image: '/assets/project-facade-canopy.jpg',
+    gallery: [
+      '/assets/project-facade-canopy.jpg',
+      '/assets/project-sobha-aerial.jpg',
+      '/assets/project-truss-install.jpg'
+    ]
+  },
+  {
+    title: 'Sobha One Erection',
+    location: 'Dubai, UAE',
+    scope: 'Structural framework and tower modules',
+    desc: 'Erection of main structural framing and heavy girder modules for the waterfront tower units at Sobha One.',
+    icon: ShieldCheck,
+    image: '/assets/project-sobha-aerial.jpg',
+    gallery: [
+      '/assets/project-sobha-aerial.jpg',
+      '/assets/project-sobha-rendering.jpg',
+      '/assets/project-crane-hoist.jpg'
+    ]
+  }
+]
+
 export default function Projects() {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
@@ -138,14 +241,52 @@ export default function Projects() {
 
   useEffect(() => {
     async function loadProjects() {
-      const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: true })
-      if (!error && data) {
-        setProjects(data.map(p => ({
-          ...p,
-          icon: iconMap[p.icon] || Layers,
-          image: p.image_url,
-          desc: p.description
-        })))
+      try {
+        const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: true })
+        if (!error && data && data.length > 0) {
+          setProjects(data.map(p => {
+            let localImg = p.image_url
+            const titleLower = p.title.toLowerCase()
+            if (titleLower.includes('industrial')) {
+              localImg = '/assets/project-truss-install.jpg'
+            } else if (titleLower.includes('oil & gas') || titleLower.includes('erection') || titleLower.includes('heavy') || titleLower.includes('kuwait')) {
+              localImg = '/assets/project-crane-hoist.jpg'
+            } else if (titleLower.includes('architectural') || titleLower.includes('sobha')) {
+              localImg = '/assets/project-sobha-rendering.jpg'
+            } else if (titleLower.includes('logistics') || titleLower.includes('canopy')) {
+              localImg = '/assets/project-facade-canopy.jpg'
+            } else if (titleLower.includes('compliance')) {
+              localImg = '/assets/project-sobha-aerial.jpg'
+            }
+
+            let gallery = [localImg]
+            if (localImg === '/assets/project-truss-install.jpg') {
+              gallery = ['/assets/project-truss-install.jpg', '/assets/project-crane-hoist.jpg', '/assets/project-facade-canopy.jpg']
+            } else if (localImg === '/assets/project-crane-hoist.jpg') {
+              gallery = ['/assets/project-crane-hoist.jpg', '/assets/project-truss-install.jpg', '/assets/project-sobha-aerial.jpg']
+            } else if (localImg === '/assets/project-sobha-rendering.jpg') {
+              gallery = ['/assets/project-sobha-rendering.jpg', '/assets/project-sobha-aerial.jpg', '/assets/project-facade-canopy.jpg']
+            } else if (localImg === '/assets/project-facade-canopy.jpg') {
+              gallery = ['/assets/project-facade-canopy.jpg', '/assets/project-sobha-aerial.jpg', '/assets/project-truss-install.jpg']
+            } else if (localImg === '/assets/project-sobha-aerial.jpg') {
+              gallery = ['/assets/project-sobha-aerial.jpg', '/assets/project-sobha-rendering.jpg', '/assets/project-crane-hoist.jpg']
+            } else {
+              gallery = [localImg, '/assets/project-truss-install.jpg', '/assets/project-sobha-rendering.jpg']
+            }
+
+            return {
+              ...p,
+              icon: iconMap[p.icon] || Layers,
+              image: localImg,
+              gallery: gallery,
+              desc: p.description
+            }
+          }))
+        } else {
+          setProjects(LOCAL_PROJECTS)
+        }
+      } catch (err) {
+        setProjects(LOCAL_PROJECTS)
       }
       setLoading(false)
     }
@@ -167,18 +308,21 @@ export default function Projects() {
       />
       <VideoHero
         pageKey="projects"
+        videoSrc="/assets/projects-hero.mp4"
         poster="/assets/slides/slide-3.webp"
         showSparks={false}
         className="pt-40 pb-20 lg:pt-48 lg:pb-28"
       >
         <div className="relative max-w-5xl mx-auto px-6 lg:px-10">
-          <SectionLabel index="PROJECTS">Project Gallery</SectionLabel>
-          <motion.h1 initial="hidden" animate="visible" custom={0} variants={fadeUp}
+          <motion.div initial="hidden" animate="visible" custom={0} variants={projectFadeInLeft}>
+            <SectionLabel index="PROJECTS">Project Gallery</SectionLabel>
+          </motion.div>
+          <motion.h1 initial="hidden" animate="visible" custom={1} variants={projectFadeInLeft}
             className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-steel-light"
           >
             Delivered steel work with clarity and control.
           </motion.h1>
-          <motion.p initial="hidden" animate="visible" custom={1} variants={fadeUp}
+          <motion.p initial="hidden" animate="visible" custom={2} variants={projectFadeInLeft}
             className="mt-8 max-w-2xl text-steel text-base leading-relaxed"
           >
             Browse a curated selection of our recent fabrication and erection projects across the Gulf, with emphasis on structural quality and execution speed.

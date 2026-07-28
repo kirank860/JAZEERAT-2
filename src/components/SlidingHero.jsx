@@ -234,7 +234,7 @@ export default function SlidingHero({ slides }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.65, ease: 'easeOut' }}
-                  className="font-display font-extrabold uppercase text-[2.1rem] leading-[1.05] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.0] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)]"
+                  className="font-display font-extrabold uppercase text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.0] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)]"
                 >
                   {allSlides[index].caption}
                 </motion.h1>
@@ -249,7 +249,7 @@ export default function SlidingHero({ slides }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.55, delay: 0.15 }}
-                className="mt-6 ml-0 sm:ml-8 text-white/80 text-[15px] sm:text-base leading-relaxed max-w-md"
+                className="mt-6 ml-8 text-white/75 text-[15px] leading-relaxed max-w-md"
               >
                 {allSlides[index].sub}
               </motion.p>
@@ -260,23 +260,23 @@ export default function SlidingHero({ slides }) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 sm:mt-9 ml-0 sm:ml-8 grid grid-cols-2 sm:flex sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto pr-6 sm:pr-0"
+              className="mt-9 ml-8 flex flex-wrap items-center gap-3"
             >
               <NavLink
                 to="/contact"
-                className="col-span-2 inline-flex justify-center items-center gap-2 bg-weld text-graphite font-display uppercase font-semibold tracking-wide px-6 py-4 sm:py-3 text-[15px] sm:text-sm hover:bg-signal transition-colors w-full sm:w-auto shadow-[0_0_15px_rgba(255,90,31,0.4)] animate-[pulse_3s_ease-in-out_infinite]"
+                className="inline-flex items-center gap-2 bg-weld text-graphite font-display uppercase font-semibold tracking-wide px-6 py-3 text-sm hover:bg-signal transition-colors"
               >
-                Start a Project <ArrowUpRight size={18} className="sm:w-4 sm:h-4" />
+                Start a Project <ArrowUpRight size={16} />
               </NavLink>
               <NavLink
                 to="/services"
-                className="col-span-1 inline-flex justify-center items-center gap-2 border border-white/30 text-white/90 font-display uppercase tracking-wide px-2 sm:px-6 py-3.5 sm:py-3 text-[12px] sm:text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm w-full sm:w-auto text-center"
+                className="inline-flex items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-3 text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm"
               >
                 Our Services
               </NavLink>
               <NavLink
                 to="/projects"
-                className="col-span-1 inline-flex justify-center items-center gap-2 border border-white/30 text-white/90 font-display uppercase tracking-wide px-2 sm:px-6 py-3.5 sm:py-3 text-[12px] sm:text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm w-full sm:w-auto text-center"
+                className="inline-flex items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-3 text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm"
               >
                 View Projects
               </NavLink>
@@ -290,8 +290,8 @@ export default function SlidingHero({ slides }) {
           LAYER 4 — HUD chrome
       ═══════════════════════════════════════════ */}
 
-      {/* slide counter — top right (pushed down on mobile to clear navbar) */}
-      <div className="absolute top-[90px] lg:top-8 right-6 lg:right-10 z-40 flex items-center gap-2 font-mono text-xs text-white/50 tracking-widest">
+      {/* slide counter — top right */}
+      <div className="absolute top-6 right-8 z-40 flex items-center gap-2 font-mono text-xs text-white/50 tracking-widest">
         <AnimatePresence mode="wait">
           <motion.span
             key={index}
@@ -309,7 +309,7 @@ export default function SlidingHero({ slides }) {
       </div>
 
       {/* coordinate ticker — bottom left */}
-      <div className="absolute bottom-20 left-6 lg:left-10 z-40 hidden sm:block">
+      <div className="absolute bottom-20 left-6 lg:left-10 z-40">
         <CoordinateTicker />
       </div>
 
@@ -354,7 +354,7 @@ export default function SlidingHero({ slides }) {
           key={label}
           aria-label={label}
           onClick={() => { go(index + dir); setIsPaused(true); setTimeout(() => setIsPaused(false), 1200) }}
-          className={`absolute top-1/2 -translate-y-1/2 ${side} z-40 group hidden md:block`}
+          className={`absolute top-1/2 -translate-y-1/2 ${side} z-40 group`}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -365,7 +365,7 @@ export default function SlidingHero({ slides }) {
       ))}
 
       {/* scroll cue — bottom center */}
-      <div className="absolute bottom-[6.5rem] left-0 right-0 z-40 hidden sm:flex flex-col items-center gap-1 text-white/50 text-[10px] uppercase tracking-[0.35em]">
+      <div className="absolute bottom-[6.5rem] left-0 right-0 z-40 flex flex-col items-center gap-1 text-white/50 text-[10px] uppercase tracking-[0.35em]">
         <span>Scroll</span>
         <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.4, repeat: Infinity }}>
           <ChevronsDown size={16} className="text-weld/70" />

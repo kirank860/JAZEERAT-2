@@ -29,8 +29,12 @@ const VideoHero = forwardRef(({
       if (!pageKey) return
       const { data, error } = await supabase.from('hero_assets').select('*').eq('page_key', pageKey).single()
       if (!error && data && data.asset_url) {
-        setMediaUrl(data.asset_url)
-        setIsImage(data.asset_type === 'image')
+        // Only override if the database has a specific custom asset,
+        // avoiding overriding custom local page videos with the generic default about-hero.mp4
+        if (data.asset_url !== '/assets/about-hero.mp4' || pageKey === 'about') {
+          setMediaUrl(data.asset_url)
+          setIsImage(data.asset_type === 'image')
+        }
       }
     }
     loadHeroAsset()
@@ -54,6 +58,7 @@ const VideoHero = forwardRef(({
           muted
           loop
           playsInline
+          preload="metadata"
           onError={(e) => { e.target.style.display = 'none' }}
         />
       )}
