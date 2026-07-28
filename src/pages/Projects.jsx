@@ -259,19 +259,21 @@ export default function Projects() {
               localImg = '/assets/project-sobha-aerial.jpg'
             }
 
-            let gallery = [localImg]
-            if (localImg === '/assets/project-truss-install.jpg') {
-              gallery = ['/assets/project-truss-install.jpg', '/assets/project-crane-hoist.jpg', '/assets/project-facade-canopy.jpg']
-            } else if (localImg === '/assets/project-crane-hoist.jpg') {
-              gallery = ['/assets/project-crane-hoist.jpg', '/assets/project-truss-install.jpg', '/assets/project-sobha-aerial.jpg']
-            } else if (localImg === '/assets/project-sobha-rendering.jpg') {
-              gallery = ['/assets/project-sobha-rendering.jpg', '/assets/project-sobha-aerial.jpg', '/assets/project-facade-canopy.jpg']
-            } else if (localImg === '/assets/project-facade-canopy.jpg') {
-              gallery = ['/assets/project-facade-canopy.jpg', '/assets/project-sobha-aerial.jpg', '/assets/project-truss-install.jpg']
-            } else if (localImg === '/assets/project-sobha-aerial.jpg') {
-              gallery = ['/assets/project-sobha-aerial.jpg', '/assets/project-sobha-rendering.jpg', '/assets/project-crane-hoist.jpg']
-            } else {
-              gallery = [localImg, '/assets/project-truss-install.jpg', '/assets/project-sobha-rendering.jpg']
+            let gallery = p.gallery
+            if (!gallery || gallery.length === 0) {
+              if (localImg === '/assets/project-truss-install.jpg') {
+                gallery = ['/assets/project-truss-install.jpg', '/assets/project-crane-hoist.jpg', '/assets/project-facade-canopy.jpg']
+              } else if (localImg === '/assets/project-crane-hoist.jpg') {
+                gallery = ['/assets/project-crane-hoist.jpg', '/assets/project-truss-install.jpg', '/assets/project-sobha-aerial.jpg']
+              } else if (localImg === '/assets/project-sobha-rendering.jpg') {
+                gallery = ['/assets/project-sobha-rendering.jpg', '/assets/project-sobha-aerial.jpg', '/assets/project-facade-canopy.jpg']
+              } else if (localImg === '/assets/project-facade-canopy.jpg') {
+                gallery = ['/assets/project-facade-canopy.jpg', '/assets/project-sobha-aerial.jpg', '/assets/project-truss-install.jpg']
+              } else if (localImg === '/assets/project-sobha-aerial.jpg') {
+                gallery = ['/assets/project-sobha-aerial.jpg', '/assets/project-sobha-rendering.jpg', '/assets/project-crane-hoist.jpg']
+              } else {
+                gallery = [localImg, '/assets/project-truss-install.jpg', '/assets/project-sobha-rendering.jpg']
+              }
             }
 
             return {
