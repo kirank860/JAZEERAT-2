@@ -77,7 +77,7 @@ export default function Contact() {
             className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-steel-light"
           >
             Tell us what
-            <br />you're <span className="text-weld">building.</span>
+            <br />you're <span className="text-white">building.</span>
           </motion.h1>
         </div>
       </VideoHero>
@@ -91,7 +91,7 @@ export default function Contact() {
           >
             {sent ? (
               <div className="border border-panel-line p-10 flex flex-col items-start gap-4">
-                <span className="w-12 h-12 flex items-center justify-center bg-weld text-graphite">
+                <span className="w-12 h-12 flex items-center justify-center bg-white/5 border border-panel-line text-white">
                   <Check size={24} />
                 </span>
                 <h3 className="font-display uppercase text-2xl text-steel-light">Request received</h3>
@@ -136,7 +136,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? 'Sending...' : 'Send Request'}
                   {!isSubmitting && <ArrowUpRight size={18} />}
@@ -158,10 +158,10 @@ export default function Contact() {
             ].map((c) => {
               const content = (
                 <>
-                  <c.icon size={22} className="text-weld shrink-0 mt-0.5" />
+                  <c.icon size={22} className="text-steel-light shrink-0 mt-0.5" />
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-widest text-steel">{c.label}</p>
-                    <p className="text-steel-light mt-1 group-hover:text-weld transition-colors">{c.value}</p>
+                    <p className="text-steel-light mt-1 group-hover:text-white transition-colors">{c.value}</p>
                   </div>
                 </>
               )

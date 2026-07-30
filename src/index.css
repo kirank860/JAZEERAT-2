@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
 @theme {
   --color-graphite: #131519;
@@ -8,13 +7,13 @@
   --color-panel-line: #2a2e34;
   --color-steel: #8b929a;
   --color-steel-light: #c7cdd3;
-  --color-weld: #ff5a1f;
-  --color-weld-dim: #c2441a;
-  --color-signal: #ffb020;
-
-  --font-display: 'Oswald', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'Space Mono', monospace;
+  --color-weld: #cc0000;
+  --color-weld-dim: #7F1D1D;
+  --color-signal: #94A3B8;
+  --font-display: Poppins, sans-serif;
+  --font-body: Inter, sans-serif;
+  --font-sans: Inter, sans-serif;
+  --font-mono: "Space Mono", monospace;
 }
 
 html {
@@ -126,4 +125,12 @@ body {
 .text-outline {
   -webkit-text-stroke: 1px var(--color-panel-line);
   color: transparent;
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hidden-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

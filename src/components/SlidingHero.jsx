@@ -37,7 +37,8 @@ export default function SlidingHero({ slides }) {
     target: containerRef,
     offset: ['start start', 'end start'],
   })
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 200])
+  // Momentum-based vertical scroll moving slightly upwards as user scrolls down
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, -150])
   const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.15])
   const overlayY = useTransform(scrollYProgress, [0, 1], [0, -180])
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0])
@@ -160,7 +161,7 @@ export default function SlidingHero({ slides }) {
       {/* 2f. Orange weld-tone tint — very subtle brand colour warmth */}
       <div
         className="absolute inset-0 z-20 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 80% 60% at 0% 100%, rgba(255,90,31,0.10) 0%, transparent 55%)' }}
+        style={{ background: 'radial-gradient(ellipse 80% 60% at 0% 100%, rgba(214,47,34,0.10) 0%, transparent 55%)' }}
       />
 
       {/* 2g. Film grain overlay */}
@@ -184,7 +185,7 @@ export default function SlidingHero({ slides }) {
       <AnimatePresence>
         <motion.div
           key={`flash-${index}`}
-          className="absolute inset-0 z-[22] pointer-events-none bg-weld/8"
+          className="absolute inset-0 z-[22] pointer-events-none bg-white/5"
           initial={{ opacity: 0.4 }}
           animate={{ opacity: 0 }}
           exit={{ opacity: 0 }}
@@ -212,7 +213,7 @@ export default function SlidingHero({ slides }) {
                 transition={{ duration: 0.45 }}
                 className="inline-flex items-center gap-2 mb-6"
               >
-                <span className="w-2 h-2 rounded-full bg-weld animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
                 <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-white/70">
                   {allSlides[index].tag}
                 </span>
@@ -222,7 +223,7 @@ export default function SlidingHero({ slides }) {
             {/* orange accent bar + headline */}
             <div className="flex items-start gap-5">
               <motion.div
-                className="w-[3px] bg-weld rounded-sm mt-2 shrink-0 shadow-[0_0_16px_rgba(255,90,31,0.8)]"
+                className="w-[3px] bg-white/80 rounded-sm mt-2 shrink-0"
                 initial={{ height: 0 }}
                 animate={{ height: 160 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -257,29 +258,41 @@ export default function SlidingHero({ slides }) {
 
             {/* CTA buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.15, delayChildren: 0.4 }
+                }
+              }}
               className="mt-9 ml-8 flex flex-wrap items-center gap-3"
             >
-              <NavLink
-                to="/contact"
-                className="inline-flex items-center gap-2 bg-weld text-graphite font-display uppercase font-semibold tracking-wide px-6 py-3 text-sm hover:bg-signal transition-colors"
-              >
-                Start a Project <ArrowUpRight size={16} />
-              </NavLink>
-              <NavLink
-                to="/services"
-                className="inline-flex items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-3 text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm"
-              >
-                Our Services
-              </NavLink>
-              <NavLink
-                to="/projects"
-                className="inline-flex items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-3 text-sm hover:border-weld hover:text-weld transition-colors backdrop-blur-sm"
-              >
-                View Projects
-              </NavLink>
+              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } } }}>
+                <NavLink
+                  to="/contact"
+                  className="inline-flex items-center gap-2 bg-white text-graphite font-display uppercase font-semibold tracking-wide px-6 py-3 text-sm hover:bg-steel-light transition-colors"
+                >
+                  Start a Project <ArrowUpRight size={16} />
+                </NavLink>
+              </motion.div>
+              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } } }}>
+                <NavLink
+                  to="/services"
+                  className="inline-flex items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-3 text-sm hover:border-white hover:text-graphite hover:bg-white transition-colors backdrop-blur-sm"
+                >
+                  Our Services
+                </NavLink>
+              </motion.div>
+              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } } }}>
+                <NavLink
+                  to="/projects"
+                  className="inline-flex items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-3 text-sm hover:border-white hover:text-graphite hover:bg-white transition-colors backdrop-blur-sm"
+                >
+                  View Projects
+                </NavLink>
+              </motion.div>
             </motion.div>
 
           </div>
@@ -299,7 +312,7 @@ export default function SlidingHero({ slides }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.3 }}
-            className="text-weld font-bold text-sm"
+            className="text-white font-bold text-sm"
           >
             {String(index + 1).padStart(2, '0')}
           </motion.span>
@@ -309,23 +322,14 @@ export default function SlidingHero({ slides }) {
       </div>
 
       {/* coordinate ticker — bottom left */}
-      <div className="absolute bottom-20 left-6 lg:left-10 z-40">
+      <motion.div style={{ opacity: overlayOpacity }} className="absolute bottom-20 left-6 lg:left-10 z-40">
         <CoordinateTicker />
-      </div>
+      </motion.div>
 
-      {/* progress bar — bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] z-40 bg-white/10">
-        <motion.div
-          className="h-full bg-weld shadow-[0_0_8px_rgba(255,90,31,0.8)]"
-          key={index}
-          initial={{ width: '0%' }}
-          animate={{ width: '100%' }}
-          transition={{ duration: 6, ease: 'linear' }}
-        />
-      </div>
+
 
       {/* dot pagination */}
-      <div className="absolute bottom-14 left-0 right-0 z-40 flex justify-center gap-3">
+      <motion.div style={{ opacity: overlayOpacity }} className="absolute bottom-14 left-0 right-0 z-40 flex justify-center gap-3">
         {allSlides.map((_, i) => (
           <motion.button
             key={i}
@@ -334,16 +338,16 @@ export default function SlidingHero({ slides }) {
             className="relative"
             whileHover={{ scale: 1.4 }}
           >
-            <span className={`block w-2 h-2 rounded-full transition-colors ${i === index ? 'bg-weld' : 'bg-white/40 hover:bg-white/70'}`} />
+            <span className={`block w-2 h-2 rounded-full transition-colors ${i === index ? 'bg-white' : 'bg-white/40 hover:bg-white/70'}`} />
             {i === index && (
               <motion.span
                 layoutId="activeDot"
-                className="absolute inset-0 rounded-full border border-weld/50 scale-150"
+                className="absolute inset-0 rounded-full border border-white/50 scale-150"
               />
             )}
           </motion.button>
         ))}
-      </div>
+      </motion.div>
 
       {/* prev / next arrows */}
       {[
@@ -355,22 +359,23 @@ export default function SlidingHero({ slides }) {
           aria-label={label}
           onClick={() => { go(index + dir); setIsPaused(true); setTimeout(() => setIsPaused(false), 1200) }}
           className={`absolute top-1/2 -translate-y-1/2 ${side} z-40 group`}
+          style={{ opacity: overlayOpacity }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
-          <span className="flex items-center justify-center w-11 h-11 border border-white/20 bg-black/30 backdrop-blur-sm group-hover:border-weld group-hover:bg-weld/10 transition-all">
-            <Icon size={18} className="text-white group-hover:text-weld transition-colors" />
+          <span className="flex items-center justify-center w-11 h-11 border border-white/20 bg-black/30 backdrop-blur-sm group-hover:border-white group-hover:bg-white/10 transition-all">
+            <Icon size={18} className="text-white transition-colors" />
           </span>
         </motion.button>
       ))}
 
       {/* scroll cue — bottom center */}
-      <div className="absolute bottom-[6.5rem] left-0 right-0 z-40 flex flex-col items-center gap-1 text-white/50 text-[10px] uppercase tracking-[0.35em]">
+      <motion.div style={{ opacity: overlayOpacity }} className="absolute bottom-[6.5rem] left-0 right-0 z-40 flex flex-col items-center gap-1 text-white/50 text-[10px] uppercase tracking-[0.35em]">
         <span>Scroll</span>
         <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.4, repeat: Infinity }}>
-          <ChevronsDown size={16} className="text-weld/70" />
+          <ChevronsDown size={16} className="text-white/70" />
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* aria-live (screen readers) */}
       <div aria-live="polite" className="sr-only">{allSlides[index].caption}</div>

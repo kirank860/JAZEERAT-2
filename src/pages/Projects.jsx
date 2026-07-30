@@ -81,24 +81,24 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-graphite/95 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-graphite-light/95" />
           </div>
-          
+
           {/* Bottom Bar: Prev/Next, Thumbnails, Index */}
           <div className="absolute bottom-0 left-0 right-0 bg-graphite/90 backdrop-blur-md border-t border-panel-line p-3 flex items-center justify-between z-20">
             <div className="flex gap-2">
               <button
                 onClick={onPrev}
-                className="w-8 h-8 border border-panel-line bg-graphite/90 flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors"
+                className="w-8 h-8 border border-panel-line bg-graphite/90 flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors"
               >
                 <ArrowLeft size={14} />
               </button>
               <button
                 onClick={onNext}
-                className="w-8 h-8 border border-panel-line bg-graphite/90 flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors"
+                className="w-8 h-8 border border-panel-line bg-graphite/90 flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors"
               >
                 <ArrowRight size={14} />
               </button>
             </div>
-            
+
             {project.gallery && project.gallery.length > 0 && (
               <div className="flex gap-1.5">
                 {project.gallery.map((img, idx) => (
@@ -123,7 +123,7 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
         <div className="relative w-full md:w-1/2 p-6 md:p-10 flex flex-col h-1/2 md:h-full overflow-y-auto">
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 w-9 h-9 border border-panel-line flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors bg-graphite z-20"
+            className="absolute top-6 right-6 w-9 h-9 border border-panel-line flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors bg-graphite z-20"
           >
             <X size={16} />
           </button>
@@ -136,10 +136,10 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
             className="my-auto"
           >
             <div className="flex items-center gap-3 mb-4">
-              <span className="flex h-8 w-8 items-center justify-center rounded bg-weld/10 text-weld border border-weld/20">
+              <span className="flex h-8 w-8 items-center justify-center rounded bg-white/5 text-white border border-white/10">
                 <Icon size={14} />
               </span>
-              <span className="font-mono text-[10px] tracking-[0.25em] text-weld uppercase">
+              <span className="font-mono text-[10px] tracking-[0.25em] text-steel-light uppercase">
                 {project.location}
               </span>
             </div>
@@ -148,7 +148,7 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
               {project.title}
             </h2>
 
-            <div className="h-[2px] bg-weld mb-6 w-12" />
+            <div className="h-[2px] bg-steel-light mb-6 w-12" />
 
             <h3 className="font-mono text-xs uppercase tracking-widest text-steel-light mb-2">Scope of Work</h3>
             <p className="text-steel text-sm leading-relaxed mb-6 border-l-2 border-panel-line pl-4">
@@ -308,69 +308,154 @@ export default function Projects() {
         path="/projects"
         image="https://jazeerat-2.vercel.app/assets/slides/slide-2.webp"
       />
-      <VideoHero
-        pageKey="projects"
-        videoSrc="/assets/projects-hero.mp4"
-        poster="/assets/slides/slide-3.webp"
-        showSparks={false}
-        className="pt-40 pb-20 lg:pt-48 lg:pb-28"
-      >
-        <div className="relative max-w-5xl mx-auto px-6 lg:px-10">
-          <motion.div initial="hidden" animate="visible" custom={0} variants={projectFadeInLeft}>
-            <SectionLabel index="PROJECTS">Project Gallery</SectionLabel>
-          </motion.div>
-          <motion.h1 initial="hidden" animate="visible" custom={1} variants={projectFadeInLeft}
-            className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-steel-light"
-          >
-            Delivered steel work with clarity and control.
-          </motion.h1>
-          <motion.p initial="hidden" animate="visible" custom={2} variants={projectFadeInLeft}
-            className="mt-8 max-w-2xl text-steel text-base leading-relaxed"
-          >
-            Browse a curated selection of our recent fabrication and erection projects across the Gulf, with emphasis on structural quality and execution speed.
-          </motion.p>
+      <section className="relative pt-56 pb-32 lg:pt-64 lg:pb-40 overflow-hidden">
+        {/* Clean Static Background Image */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="w-full h-full bg-cover bg-center" 
+            style={{ backgroundImage: `url('/assets/project-sobha-aerial.jpg')` }} 
+          />
+          {/* Heavy gradient overlay to make the massive white text pop flawlessly */}
+          <div className="absolute inset-0 bg-gradient-to-b from-graphite via-graphite/80 to-graphite" />
         </div>
-      </VideoHero>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <Cutline label="Fig. 01 — Project Gallery" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.15 } }
+            }}
+          >
+            <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }}>
+              <SectionLabel index="PROJECTS">Project Gallery</SectionLabel>
+            </motion.div>
+            <motion.h1
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }}
+              className="font-display font-black uppercase text-[clamp(4rem,9vw,9rem)] tracking-tighter leading-[0.85] text-steel-light max-w-5xl"
+            >
+              Delivered steel work with clarity and control.
+            </motion.h1>
+            <motion.p
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }}
+              className="mt-12 max-w-2xl text-steel text-lg sm:text-xl font-light leading-relaxed"
+            >
+              Browse a curated selection of our recent fabrication and erection projects across the Gulf, with emphasis on structural quality and execution speed.
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 relative h-16 flex items-center">
+        {/* Animated Line Intro Synchronized */}
+        <svg className="w-full h-full absolute inset-0 pointer-events-none" viewBox="0 0 1000 60" preserveAspectRatio="none">
+          <line x1="0" y1="30" x2="1000" y2="30" stroke="#2a2e34" strokeWidth="1" />
+          <motion.line
+            x1="0" y1="30" x2="1000" y2="30"
+            stroke="#c7cdd3" strokeWidth="2"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.5, ease: "circOut", delay: 0.4 }}
+          />
+        </svg>
+        <motion.span
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.8 }}
+          className="relative z-10 font-mono text-[10px] uppercase tracking-[0.3em] text-steel bg-graphite pr-4"
+        >
+          Fig. 01 — Project Gallery
+        </motion.span>
       </div>
 
-      <section className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid gap-6 lg:grid-cols-3">
+      <section className="py-32 lg:py-48 overflow-hidden">
+        <motion.div
+          className="max-w-7xl mx-auto px-6 lg:px-10 grid gap-8 lg:grid-cols-3"
+          initial="hidden" animate="visible"
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.15, delayChildren: 1.0 } }
+          }}
+        >
           {loading ? (
-            <div className="col-span-1 lg:col-span-3 py-20 text-center font-mono text-steel uppercase tracking-widest text-sm">
+            <div className="col-span-1 lg:col-span-3 py-32 text-center font-mono text-steel uppercase tracking-widest text-sm">
               Loading Projects...
             </div>
           ) : projects.length === 0 ? (
-            <div className="col-span-1 lg:col-span-3 py-20 text-center font-mono text-steel uppercase tracking-widest text-sm">
+            <div className="col-span-1 lg:col-span-3 py-32 text-center font-mono text-steel uppercase tracking-widest text-sm">
               No projects found.
             </div>
           ) : projects.map((project, i) => {
             const Icon = project.icon
+
+            // Asymmetric CSS Grid sizing for editorial layout
+            let colSpan = 'lg:col-span-1'
+            let minHeight = 'min-h-[500px]'
+
+            if (i === 0) {
+              colSpan = 'lg:col-span-2'
+              minHeight = 'min-h-[600px] lg:min-h-[700px]'
+            } else if (i === 1) {
+              colSpan = 'lg:col-span-1'
+              minHeight = 'min-h-[600px] lg:min-h-[700px]'
+            } else if (i === 2) {
+              colSpan = 'lg:col-span-3'
+              minHeight = 'min-h-[600px] lg:min-h-[800px]'
+            } else if (i === 3) {
+              colSpan = 'lg:col-span-1'
+              minHeight = 'min-h-[500px]'
+            } else if (i === 4) {
+              colSpan = 'lg:col-span-2'
+              minHeight = 'min-h-[500px]'
+            }
+
             return (
-              <motion.div key={project.title} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }} custom={i} variants={fadeUp}
-                className="group overflow-hidden rounded-3xl border border-panel-line bg-graphite shadow-lg shadow-black/20"
+              <motion.div
+                key={project.title}
+                variants={{
+                  hidden: { opacity: 0, y: 100 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } }
+                }}
+                className={`group relative overflow-hidden bg-graphite flex flex-col cursor-pointer ${colSpan} ${minHeight}`}
+                onClick={() => openModal(i)}
               >
-                <div className="h-64 bg-cover bg-center" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.24),rgba(0,0,0,0.45)),url('${project.image}')` }} />
-                <div className="p-7">
-                  <div className="flex items-center justify-between gap-4 mb-6">
-                    <span className="text-sm uppercase tracking-[0.3em] text-steel">{project.location}</span>
-                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-weld text-graphite">
-                      <Icon size={20} />
+                {/* Ken Burns effect image container */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                  <div
+                    className="w-full h-full bg-cover bg-center transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                    style={{ backgroundImage: `url('${project.image}')` }}
+                  />
+                  {/* Dynamic gradient overlay that lightens on hover */}
+                  <div className="absolute inset-0 transition-opacity duration-700 bg-gradient-to-t from-graphite-light via-graphite-light/50 to-transparent opacity-95 group-hover:opacity-75" />
+                </div>
+
+                {/* Content Overlay */}
+                <div className="p-8 lg:p-12 relative z-10 flex-1 flex flex-col justify-end">
+                  <div className="flex items-center justify-between gap-4 mb-auto">
+                    <span className="text-xs uppercase tracking-[0.3em] text-white/80 font-mono">{project.location}</span>
+                    <span className="flex text-white/80 transition-colors group-hover:text-white">
+                      <Icon size={24} strokeWidth={1.5} />
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl uppercase text-steel-light mb-3 group-hover:text-weld transition-colors">{project.title}</h3>
-                  <p className="text-steel text-sm leading-relaxed mb-6">{project.scope}</p>
-                  <button onClick={() => openModal(i)} className="inline-flex items-center gap-2 font-mono uppercase tracking-[0.2em] text-weld text-sm">
-                    View Details
-                    <ArrowUpRight size={16} />
-                  </button>
+
+                  <div className="mt-12 transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 translate-y-4">
+                    <h3 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl uppercase text-white tracking-tighter leading-[0.9] mb-4">
+                      {project.title}
+                    </h3>
+
+                    <div className="flex items-end justify-between gap-6 overflow-hidden">
+                      <p className="text-steel-light text-base sm:text-lg leading-relaxed max-w-md font-light flex-1">
+                        {project.scope}
+                      </p>
+                      <button className="flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-full border border-white/20 text-white group-hover:bg-white group-hover:text-graphite transition-all duration-300">
+                        <ArrowRight size={20} className="transform transition-transform duration-300 group-hover:translate-x-1" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             )
           })}
-        </div>
+        </motion.div>
 
         {/* modal for project preview */}
         <AnimatePresence>
@@ -397,7 +482,7 @@ export default function Projects() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} variants={fadeUp} className="mt-10">
             <NavLink
               to="/contact"
-              className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors"
+              className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors"
             >
               Talk to Sales
             </NavLink>

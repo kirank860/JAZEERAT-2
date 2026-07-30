@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import Logo from './Logo'
 
 const links = [
   { to: '/', label: 'Home' },
@@ -36,15 +37,11 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-graphite/90 backdrop-blur-md border-b border-panel-line' : 'bg-transparent'
-        }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
-        <NavLink to="/" className="flex flex-col leading-none group">
-          <span className="font-display font-extrabold text-2xl tracking-wide text-steel-light group-hover:text-weld transition-colors">
-            JAZEERAT
-          </span>
-          <span className="font-mono text-[10px] tracking-[0.3em] text-steel">AL HADEED · STEEL FABRICATION</span>
+        <NavLink to="/" className="flex items-center leading-none group">
+          <Logo className="h-8 sm:h-10 lg:h-12 w-auto transition-transform duration-300 group-hover:scale-105" />
         </NavLink>
 
         <nav className="hidden md:flex items-center gap-10">
@@ -53,7 +50,7 @@ export default function Navbar() {
               key={l.to}
               to={l.to}
               className={({ isActive }) =>
-                `relative font-display text-base tracking-wide uppercase pb-1 transition-colors ${isActive ? 'text-weld' : 'text-steel-light hover:text-weld'
+                `relative font-display text-base tracking-wide uppercase pb-1 transition-colors ${isActive ? 'text-white' : 'text-steel-light hover:text-white'
                 }`
               }
             >
@@ -72,7 +69,7 @@ export default function Navbar() {
           ))}
           <NavLink
             to="/contact"
-            className="font-display uppercase tracking-wide text-sm font-semibold bg-weld text-graphite px-5 py-2.5 hover:bg-signal transition-colors"
+            className="font-display uppercase tracking-wide text-sm font-semibold bg-white text-graphite px-5 py-2.5 hover:bg-steel-light transition-colors"
           >
             Request a Quote
           </NavLink>
@@ -98,11 +95,11 @@ export default function Navbar() {
           >
             {/* Header */}
             <div className="flex items-center justify-between h-20 px-6 shrink-0">
-              <span className="font-display font-extrabold text-2xl text-steel-light">JAZEERAT</span>
+              <Logo className="h-8 w-auto" showText={false} />
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"
-                className="w-12 h-12 flex items-center justify-center text-white hover:text-weld transition-colors bg-white/5 rounded-full"
+                className="w-12 h-12 flex items-center justify-center text-white hover:opacity-80 transition-opacity bg-white/5 rounded-full"
               >
                 <X size={24} />
               </button>
@@ -122,7 +119,7 @@ export default function Navbar() {
                     to={l.to}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
-                      `group flex items-end gap-6 font-display uppercase transition-colors block w-full ${isActive ? 'text-weld' : 'text-steel-light hover:text-white'}`
+                      `group flex items-end gap-6 font-display uppercase transition-colors block w-full ${isActive ? 'text-white' : 'text-steel-light hover:text-white'}`
                     }
                   >
                     {({ isActive }) => (
@@ -138,7 +135,7 @@ export default function Navbar() {
                         <span className="text-4xl sm:text-5xl tracking-tight truncate pb-1">
                           {l.label}
                         </span>
-                        {isActive && <span className="w-2 h-2 rounded-full bg-weld mb-4 ml-auto shrink-0" />}
+                        {isActive && <span className="w-2 h-2 rounded-full bg-white mb-4 ml-auto shrink-0" />}
                       </motion.div>
                     )}
                   </NavLink>
@@ -156,17 +153,17 @@ export default function Navbar() {
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="flex flex-col gap-1 text-xs font-mono text-steel uppercase tracking-widest truncate">
                   <span className="text-white/30 mb-1">Email</span>
-                  <a href="mailto:info@jahsteel.ae" className="hover:text-weld transition-colors truncate">info@jahsteel.ae</a>
+                  <a href="mailto:info@jahsteel.ae" className="hover:text-white transition-colors truncate">info@jahsteel.ae</a>
                 </div>
                 <div className="flex flex-col gap-1 text-xs font-mono text-steel uppercase tracking-widest truncate">
                   <span className="text-white/30 mb-1">Phone</span>
-                  <a href="tel:+971000000000" className="hover:text-weld transition-colors truncate">+971 00 000 0000</a>
+                  <a href="tel:+971000000000" className="hover:text-white transition-colors truncate">+971 00 000 0000</a>
                 </div>
               </div>
               <NavLink
                 to="/contact"
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center w-full font-display uppercase tracking-wider text-sm font-semibold bg-weld text-graphite px-5 py-4 rounded-full hover:bg-signal transition-colors"
+                className="flex items-center justify-center w-full font-display uppercase tracking-wider text-sm font-semibold bg-white text-graphite px-5 py-4 rounded-full hover:bg-steel-light transition-colors"
               >
                 Request a Quote
               </NavLink>

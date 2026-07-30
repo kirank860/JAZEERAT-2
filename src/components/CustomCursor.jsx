@@ -52,7 +52,7 @@ export default function CustomCursor() {
       y: mousePosition.y - 24,
       height: 48,
       width: 48,
-      backgroundColor: 'rgba(255, 90, 31, 0.1)',
+      backgroundColor: 'rgba(214,47,34, 0.1)',
       border: '1px solid var(--color-weld)',
       opacity: 1
     }
@@ -60,7 +60,7 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden lg:block shadow-[0_0_10px_rgba(255,90,31,0.5)]"
+      className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden lg:block shadow-[0_0_10px_rgba(214,47,34,0.5)]"
       variants={variants}
       animate={isHovering ? 'hover' : 'default'}
       transition={{ type: 'spring', stiffness: 400, damping: 28, mass: 0.5 }}

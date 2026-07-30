@@ -98,10 +98,10 @@ export default function Facilities() {
                 </div>
                 <div className="flex items-center justify-between gap-4 mb-6">
                   <div>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-weld">Facility</p>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-steel-light">Facility</p>
                     <h3 className="mt-3 font-display text-2xl uppercase text-steel-light">{facility.title}</h3>
                   </div>
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-weld text-graphite">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 border border-panel-line text-white">
                     <Icon size={24} />
                   </span>
                 </div>
@@ -122,7 +122,7 @@ export default function Facilities() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} variants={fadeUp} className="mt-10">
             <NavLink
               to="/contact"
-              className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors"
+              className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors"
             >
               Schedule a Tour
             </NavLink>

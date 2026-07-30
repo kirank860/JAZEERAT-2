@@ -148,17 +148,17 @@ function CapabilityItem({ cap, delay, direction }) {
     >
       <div className="flex items-center gap-3 mb-2">
         <motion.div
-          className="relative text-weld bg-weld/10 p-3 rounded-none border border-weld/20 group-hover:bg-weld/20 transition-colors"
+          className="relative text-white bg-white/5 p-3 rounded-none border border-white/10 group-hover:bg-white/10 transition-colors"
           whileHover={{ rotate: [0, -8, 8, -4, 0], transition: { duration: 0.4 } }}
         >
           <Icon size={20} strokeWidth={1.5} />
         </motion.div>
-        <h3 className="font-display uppercase text-lg text-steel-light group-hover:text-weld transition-colors">
+        <h3 className="font-display uppercase text-lg text-steel-light group-hover:text-white transition-colors">
           {cap.title}
         </h3>
       </div>
       <p className="text-sm text-steel leading-relaxed pl-[52px]">{cap.desc}</p>
-      <div className="mt-2 pl-[52px] flex items-center gap-1 text-weld text-xs font-mono uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="mt-2 pl-[52px] flex items-center gap-1 text-white text-xs font-mono uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
         View capability <ArrowRight size={12} />
       </div>
     </motion.div>
@@ -188,18 +188,18 @@ function StatCounter({ icon: Icon, value, suffix, label, delay }) {
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
     >
       <motion.div
-        className="w-14 h-14 border border-panel-line flex items-center justify-center mb-4 text-weld group-hover:border-weld/50 transition-colors"
+        className="w-14 h-14 border border-panel-line flex items-center justify-center mb-4 text-white group-hover:border-white/50 transition-colors"
         whileHover={{ rotate: 360, transition: { duration: 0.8 } }}
       >
         <Icon size={22} strokeWidth={1.5} />
       </motion.div>
       <div ref={ref} className="font-display font-extrabold text-4xl text-steel-light flex items-end gap-0.5">
         <motion.span>{display}</motion.span>
-        <span className="text-weld">{suffix}</span>
+        <span className="text-white">{suffix}</span>
       </div>
       <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-steel mt-2">{label}</p>
       <motion.div
-        className="mt-3 h-px bg-weld"
+        className="mt-3 h-px bg-steel-light"
         initial={{ width: 24 }}
         whileInView={{ width: 48 }}
         transition={{ duration: 0.6, delay: delay + 0.3 }}
@@ -223,7 +223,7 @@ function MissionPillar({ pillar, index }) {
     >
       {/* number */}
       <motion.span
-        className="absolute -left-2 -top-1 font-display font-extrabold text-[7rem] leading-none text-weld/5 select-none pointer-events-none group-hover:text-weld/10 transition-colors duration-500"
+        className="absolute -left-2 -top-1 font-display font-extrabold text-[7rem] leading-none text-white/5 select-none pointer-events-none group-hover:text-white/10 transition-colors duration-500"
         aria-hidden
       >
         {pillar.number}
@@ -231,14 +231,14 @@ function MissionPillar({ pillar, index }) {
 
       <div className="relative pl-2">
         <motion.div
-          className="h-[2px] bg-weld origin-left mb-6"
+          className="h-[2px] bg-steel-light origin-left mb-6"
           initial={{ scaleX: 0 }}
           animate={isInView ? { scaleX: 1 } : {}}
           transition={{ duration: 0.8, delay: index * 0.15 + 0.3 }}
           style={{ width: 48 }}
         />
-        <p className="font-mono text-xs text-weld tracking-[0.25em] uppercase mb-3">{pillar.number}</p>
-        <h3 className="font-display font-bold uppercase text-3xl lg:text-4xl text-steel-light mb-5 group-hover:text-weld transition-colors duration-300">
+        <p className="font-mono text-xs text-steel-light tracking-[0.25em] uppercase mb-3">{pillar.number}</p>
+        <h3 className="font-display font-bold uppercase text-3xl lg:text-4xl text-steel-light mb-5 group-hover:text-white transition-colors duration-300">
           {pillar.heading}
         </h3>
         <p className="text-steel text-base leading-relaxed max-w-2xl">{pillar.body}</p>
@@ -278,37 +278,37 @@ function TeamCard({ member, index }) {
               <img src={member.img} alt={member.name} className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-panel to-graphite">
-                <span className="font-display font-extrabold text-6xl text-weld/20">{member.initials}</span>
+                <span className="font-display font-extrabold text-6xl text-white/10">{member.initials}</span>
               </div>
             )}
             {/* subtle weld glow overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-graphite-light/80 to-transparent" />
             {/* animated corner bracket */}
             <motion.div
-              className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-weld/50"
+              className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-white/50"
               whileHover={{ scale: 1.2 }}
             />
             <motion.div
-              className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-weld/50"
+              className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-white/50"
               whileHover={{ scale: 1.2 }}
             />
           </div>
 
           {/* info */}
           <div className="p-6">
-            <h4 className="font-display uppercase text-xl text-steel-light group-hover:text-weld transition-colors">
+            <h4 className="font-display uppercase text-xl text-steel-light group-hover:text-white transition-colors">
               {member.name}
             </h4>
             <p className="font-mono text-xs text-steel tracking-widest uppercase mt-1">{member.role}</p>
             <motion.div
-              className="mt-4 h-px bg-weld origin-left"
+              className="mt-4 h-px bg-steel-light origin-left"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 + 0.4 }}
               style={{ width: 32 }}
             />
-            <p className="mt-3 font-mono text-[10px] text-weld/60 tracking-widest uppercase">Tap to read →</p>
+            <p className="mt-3 font-mono text-[10px] text-steel-light/60 tracking-widest uppercase">Tap to read →</p>
           </div>
         </div>
 
@@ -317,13 +317,13 @@ function TeamCard({ member, index }) {
           className="absolute inset-0 border border-weld/30 bg-graphite flex flex-col items-center justify-center p-8 text-center"
           style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
         >
-          <Quote size={32} className="text-weld/40 mb-4" />
+          <Quote size={32} className="text-steel-light/40 mb-4" />
           <p className="font-display uppercase text-2xl text-steel-light leading-snug">
             "{member.quote}"
           </p>
           <p className="mt-6 font-mono text-xs text-steel uppercase tracking-widest">— {member.name}</p>
-          <motion.div className="mt-6 h-px bg-weld" style={{ width: 48 }} />
-          <p className="mt-3 font-mono text-[10px] text-weld/60 tracking-widest uppercase">Tap to flip back</p>
+          <motion.div className="mt-6 h-px bg-steel-light" style={{ width: 48 }} />
+          <p className="mt-3 font-mono text-[10px] text-steel-light/60 tracking-widest uppercase">Tap to flip back</p>
         </div>
       </motion.div>
     </motion.div>
@@ -413,7 +413,7 @@ function MilestoneScroller({ timeline }) {
           <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-graphite to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-graphite to-transparent" />
           {/* weld glow on active image */}
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-weld/40" />
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-steel-light/40" />
         </div>
 
         {/* ── CONTENT LAYER ─────────────────────────────── */}
@@ -430,7 +430,7 @@ function MilestoneScroller({ timeline }) {
 
           {/* main heading — always visible */}
           <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light mt-2 max-w-xl">
-            The foundation of <span className="text-weld">steel craft.</span>
+            The foundation of <span className="text-white">steel craft.</span>
           </h2>
 
           {/* milestone card — swaps per stage */}
@@ -448,7 +448,7 @@ function MilestoneScroller({ timeline }) {
                 {/* year badge */}
                 <div className="flex items-center gap-3 mb-3">
                   <motion.span
-                    className="font-display font-extrabold text-[5rem] lg:text-[7rem] leading-none text-weld"
+                    className="font-display font-extrabold text-[5rem] lg:text-[7rem] leading-none text-white"
                     animate={{ opacity: i === activeIndex ? 1 : 0 }}
                     transition={{ duration: 0.4 }}
                   >
@@ -456,7 +456,7 @@ function MilestoneScroller({ timeline }) {
                   </motion.span>
                 </div>
 
-                <div className="border-l-2 border-weld pl-6">
+                <div className="border-l-2 border-panel-line pl-6">
                   <h3 className="font-display uppercase text-3xl lg:text-4xl text-steel-light mb-3">
                     {t.title}
                   </h3>
@@ -478,7 +478,7 @@ function MilestoneScroller({ timeline }) {
                 transition={{ duration: 0.35 }}
               >
                 <motion.div
-                  className="h-full bg-weld"
+                  className="h-full bg-steel-light"
                   animate={{ width: i < activeIndex ? '100%' : i === activeIndex ? undefined : '0%' }}
                   style={i === activeIndex ? { width: progressWidth } : {}}
                 />
@@ -498,7 +498,7 @@ function MilestoneScroller({ timeline }) {
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 1.4, repeat: Infinity }}
             >
-              <ChevronsDown size={14} className="text-weld/50" />
+              <ChevronsDown size={14} className="text-steel-light/50" />
             </motion.div>
             Scroll to advance
           </motion.div>
@@ -526,8 +526,8 @@ function MilestoneScroller({ timeline }) {
                 animate={{
                   width: i === activeIndex ? 10 : 6,
                   height: i === activeIndex ? 10 : 6,
-                  backgroundColor: i === activeIndex ? 'var(--color-weld)' : 'var(--color-panel-line)',
-                  boxShadow: i === activeIndex ? '0 0 10px rgba(255,90,31,0.7)' : 'none',
+                  backgroundColor: i === activeIndex ? 'var(--color-white)' : 'var(--color-panel-line)',
+                  boxShadow: i === activeIndex ? '0 0 10px rgba(214,47,34,0.7)' : 'none',
                 }}
                 transition={{ duration: 0.3 }}
               />
@@ -537,7 +537,7 @@ function MilestoneScroller({ timeline }) {
 
         {/* ── bottom weld progress bar ───────────────────── */}
         <motion.div
-          className="absolute bottom-0 left-0 h-[3px] bg-weld shadow-[0_0_8px_rgba(255,90,31,0.6)]"
+          className="absolute bottom-0 left-0 h-[3px] bg-steel-light shadow-none"
           style={{ width: fullProgressWidth }}
         />
       </div>
@@ -598,12 +598,12 @@ export default function About() {
               <h1 className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-8xl leading-[0.9] text-steel-light drop-shadow-lg">
                 Built on the
                 <br />
-                <span className="text-weld">shop floor.</span>
+                <span className="text-white">shop floor.</span>
               </h1>
             </MaskReveal>
 
             <motion.div
-              className="mt-5 h-[3px] bg-weld origin-left shadow-[0_0_12px_rgba(255,90,31,0.7)]"
+              className="mt-5 h-[3px] bg-steel-light origin-left shadow-none"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1.1, delay: 0.5, ease: 'easeOut' }}
@@ -628,7 +628,7 @@ export default function About() {
               <Magnetic>
                 <NavLink
                   to="/contact"
-                  className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-7 py-4 hover:bg-signal transition-colors"
+                  className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-white text-graphite px-7 py-4 hover:bg-steel-light transition-colors"
                 >
                   Request a Quote <ArrowRight size={18} />
                 </NavLink>
@@ -670,7 +670,7 @@ export default function About() {
           style={{ y: y1, rotate: rot1 }}
         />
         <motion.div
-          className="absolute bottom-16 right-8 w-72 h-72 rounded-full bg-signal/5 blur-3xl pointer-events-none"
+          className="absolute bottom-16 right-8 w-72 h-72 rounded-full bg-weld/5 blur-3xl pointer-events-none"
           style={{ y: y2, rotate: rot2 }}
         />
 
@@ -740,7 +740,7 @@ export default function About() {
                   >
                     <NavLink
                       to="/projects"
-                      className="flex items-center gap-2 border border-weld text-weld px-4 py-2 font-display uppercase text-sm tracking-widest hover:bg-weld hover:text-graphite transition-colors"
+                      className="flex items-center gap-2 bg-white text-graphite px-4 py-2 font-display uppercase text-sm tracking-widest hover:bg-graphite hover:text-white transition-colors"
                     >
                       Our Projects <ArrowRight size={14} />
                     </NavLink>
@@ -754,7 +754,7 @@ export default function About() {
                   transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 />
                 <motion.div
-                  className="absolute -bottom-6 -left-10 w-20 h-20 rounded-full bg-signal/10 border border-signal/20 hidden md:block"
+                  className="absolute -bottom-6 -left-10 w-20 h-20 rounded-full bg-weld/10 border border-weld/20 hidden md:block"
                   style={{ y: y2 }}
                   animate={{ opacity: [0.4, 0.9, 0.4] }}
                   transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
@@ -869,11 +869,11 @@ export default function About() {
         {/* top fade */}
         <div className="absolute top-0 left-0 right-0 h-24 z-[1] bg-gradient-to-b from-graphite to-transparent pointer-events-none" />
         {/* subtle weld-tinted vignette on the right */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-l from-weld/[0.06] to-transparent pointer-events-none" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-l from-white/[0.03] to-transparent pointer-events-none" />
 
         {/* large background word — sits above image, below content */}
         <motion.span
-          className="absolute right-0 top-1/2 -translate-y-1/2 font-display font-extrabold text-[clamp(5rem,20vw,18rem)] leading-none text-weld/[0.06] select-none pointer-events-none uppercase z-[2]"
+          className="absolute right-0 top-1/2 -translate-y-1/2 font-display font-extrabold text-[clamp(5rem,20vw,18rem)] leading-none text-white/[0.03] select-none pointer-events-none uppercase z-[2]"
           aria-hidden
           initial={{ x: 60, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
@@ -893,10 +893,10 @@ export default function About() {
               <SectionLabel index="§ 03">Our Mission</SectionLabel>
               <h2 className="font-display font-extrabold uppercase text-5xl lg:text-6xl text-steel-light leading-[0.92] mt-4">
                 Precision steel.<br />
-                <span className="text-weld">Real purpose.</span>
+                <span className="text-white">Real purpose.</span>
               </h2>
               <motion.div
-                className="mt-6 h-[3px] bg-weld origin-left shadow-[0_0_10px_rgba(255,90,31,0.5)]"
+                className="mt-6 h-[3px] bg-steel-light origin-left shadow-none"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
@@ -1096,7 +1096,7 @@ export default function About() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <NavLink
                 to="/contact"
-                className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors"
+                className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors"
               >
                 Start a Project
                 <ArrowRight size={18} />

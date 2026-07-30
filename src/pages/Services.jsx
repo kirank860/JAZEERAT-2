@@ -19,83 +19,83 @@ const fadeUp = {
 
 const services = [
   {
-    icon: PenTool,
-    title: 'Design & Detailing',
-    desc: 'Shop drawings, structural detailing and material takeoffs prepared in-house before a single plate is cut.',
-    category: 'design',
-    spec: 'Detailing tolerance ±0.5mm',
-    slug: 'design-detailing'
-  },
-  {
     icon: Ruler,
     title: 'Estimation & Material Takeoff',
-    desc: 'Comprehensive structural steel material takeoffs and commercial cost estimations prepared from client drawings.',
+    desc: 'We provide accurate estimation and material takeoff services through detailed drawing and specification analysis. Our precise quantity calculations support cost control, efficient procurement, reduced waste, and effective project planning.',
     category: 'design',
-    spec: 'Accurate MTO within 24-48 hours',
+    spec: 'Accurate MTO & estimation',
     slug: 'estimation-takeoff'
   },
   {
-    icon: Wrench,
-    title: 'Bandsaw Cutting',
-    desc: 'Precision bandsaw cutting for structural steel sections, UB/UC beams, channels, and hollow profiles.',
-    category: 'cutting',
-    spec: 'Section size up to 1000mm',
-    slug: 'bandsaw-cutting'
+    icon: PenTool,
+    title: 'Structural Design & Engineering',
+    desc: 'Our experienced structural engineers deliver innovative steel design solutions, including structural analysis, complex and iconic structures, and value engineering. We optimize performance, safety, material efficiency, and constructability for successful project execution.',
+    category: 'design',
+    spec: 'Innovative steel design',
+    slug: 'structural-design-engineering'
   },
   {
-    icon: Boxes,
-    title: 'Rolling, Bending & Shearing',
-    desc: 'Plate rolling, section bending, press-brake folding, and shearing services for custom steel elements.',
-    category: 'fabrication',
-    spec: 'Plate thickness up to 25mm',
-    slug: 'rolling-bending-shearing'
+    icon: PenTool,
+    title: 'Design & Detailing',
+    desc: 'Using Tekla Structures and AutoCAD, we develop accurate 3D models, fabrication drawings, erection drawings, and connection details. With PowerFab for project tracking and production management, we ensure seamless coordination from design through fabrication and installation.',
+    category: 'design',
+    spec: 'Tekla & AutoCAD detailing',
+    slug: 'design-detailing'
   },
   {
     icon: Factory,
-    title: 'Structural Steel Fabrication',
-    desc: 'Portal frames, trusses, columns and beams fabricated and pre-assembled for site-ready installation.',
+    title: 'State-of-the-Art Fabrication Facility',
+    desc: 'Our modern fabrication facility combines advanced technology with a skilled workforce of engineers, supervisors, fabricators, welders, and quality inspectors. We deliver high-quality structural steel components through efficient production processes and strict quality control.',
     category: 'fabrication',
-    spec: 'Spans up to 30,000mm',
-    slug: 'structural-fabrication'
+    spec: 'Modern integrated workshop',
+    slug: 'fabrication-facility'
   },
   {
     icon: Wrench,
-    title: 'Machine Workshop',
-    desc: 'In-house CNC machining, drilling and boring for precision components and custom mechanical parts.',
+    title: 'Advanced Machinery & Technology',
+    desc: 'Equipped with CNC laser cutting, press brake, plate rolling, band saw cutting, MIG welding, ARC welding, and supporting fabrication equipment, we ensure precision, efficiency, and consistent quality in every project.',
     category: 'machining',
-    spec: 'Full workshop, one roof',
-    slug: 'precision-machining'
+    spec: 'Precision CNC & welding tech',
+    slug: 'advanced-machinery'
+  },
+  {
+    icon: Flame,
+    title: 'CNC Laser Cutting',
+    desc: 'Our CNC laser cutting technology delivers high-precision cutting with excellent accuracy, clean finishes, and minimal material waste, enabling the production of complex steel components with superior quality.',
+    category: 'cutting',
+    spec: 'High-precision finishes',
+    slug: 'cnc-laser-cutting'
   },
   {
     icon: Boxes,
-    title: 'Custom Fabrication',
-    desc: 'Bespoke steelwork built directly to client specification — tanks, platforms, ducting and enclosures.',
+    title: 'Custom Steel Fabrication',
+    desc: 'We provide customized steel fabrication solutions including tanks, platforms, architectural structures, and specialized metal works, delivering durable and precise solutions tailored to client requirements.',
     category: 'fabrication',
-    spec: 'Built to client drawing',
+    spec: 'Bespoke steel solutions',
     slug: 'custom-fabrication'
   },
   {
     icon: ShieldCheck,
-    title: 'Welding & QC',
-    desc: 'Certified welders working to code, with every joint logged against our internal QC record.',
+    title: 'Welding & Quality Control',
+    desc: 'Our qualified welding team applies advanced welding techniques and strict inspection procedures to ensure strong, reliable, and high-quality fabricated structures that meet project specifications and industry standards.',
     category: 'fabrication',
-    spec: 'Certified welders on shift',
+    spec: 'Strict inspection protocols',
     slug: 'welding-qc'
   },
   {
     icon: Ruler,
     title: 'Surface Finishing',
-    desc: 'Shot blasting, priming, painting and galvanizing prepared for MENA climate and site conditions.',
+    desc: 'We provide professional surface protection solutions including industrial painting, protective coatings, and hot-dip galvanizing (HDG) to enhance durability, corrosion resistance, and long-term performance.',
     category: 'finishing',
-    spec: 'Coating to spec or standard',
+    spec: 'Protective coatings & HDG',
     slug: 'surface-finishing'
   },
   {
     icon: Truck,
     title: 'Delivery & Installation',
-    desc: 'Coordinated transport and on-site installation support for contractors across the region.',
+    desc: 'Our experienced installation teams provide safe and efficient steel erection services, ensuring accurate assembly, quality workmanship, and timely project completion from fabrication to final installation.',
     category: 'logistics',
-    spec: 'Site-coordinated logistics',
+    spec: 'Safe & efficient erection',
     slug: 'delivery-installation'
   }
 ]
@@ -127,7 +127,7 @@ export default function Services() {
             className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-steel-light"
           >
             Every stage,
-            <br /><span className="text-weld">one workshop.</span>
+            <br /><span className="text-white">one workshop.</span>
           </motion.h1>
           <motion.p
             initial="hidden" animate="visible" custom={2} variants={fadeUp}
@@ -151,7 +151,7 @@ export default function Services() {
               <button
                 key={c}
                 onClick={() => setFilter(c)}
-                className={`text-sm px-3 py-2 rounded-full border ${filter === c ? 'bg-weld text-graphite border-weld' : 'border-panel-line text-steel'}`}
+                className={`text-sm px-3 py-2 rounded-full border ${filter === c ? 'bg-white text-graphite border-white' : 'border-panel-line text-steel'}`}
               >
                 {c === 'all' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1)}
               </button>
@@ -168,12 +168,12 @@ export default function Services() {
                   initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }} custom={i % 4} variants={fadeUp}
                 >
                   <div className="flex items-start justify-between mb-6">
-                    <s.icon size={30} className="text-weld" strokeWidth={1.5} />
+                    <s.icon size={30} className="text-steel-light" strokeWidth={1.5} />
                     <span className="font-mono text-[10px] text-steel tracking-widest">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   </div>
-                  <h3 className="font-display uppercase text-2xl text-steel-light mb-3 group-hover:text-weld transition-colors">
+                  <h3 className="font-display uppercase text-2xl text-steel-light mb-3 group-hover:text-white transition-colors">
                     {s.title}
                   </h3>
                   <p className="text-steel text-sm leading-relaxed mb-4">{s.desc}</p>
@@ -182,7 +182,7 @@ export default function Services() {
                     <span className="font-mono text-[11px] text-steel/80 uppercase tracking-wide">
                       {s.spec}
                     </span>
-                    <span className="font-mono text-[10px] text-weld uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    <span className="font-mono text-[10px] text-steel-light group-hover:text-white uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-1 transition-all">
                       Details →
                     </span>
                   </div>
@@ -199,12 +199,12 @@ export default function Services() {
             initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} variants={fadeUp}
             className="font-display font-extrabold uppercase text-4xl sm:text-5xl text-steel-light"
           >
-            Send us a drawing. <span className="text-weld">We'll send back a quote.</span>
+            Send us a drawing. <span className="text-white">We'll send back a quote.</span>
           </motion.h2>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} variants={fadeUp} className="mt-10">
             <NavLink
               to="/contact"
-              className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors"
+              className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors"
             >
               Get in Touch
               <ArrowUpRight size={18} />

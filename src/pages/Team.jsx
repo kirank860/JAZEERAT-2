@@ -69,13 +69,13 @@ function MemberModal({ member, onClose, onPrev, onNext, total, index }) {
             <div className="absolute bottom-4 left-4 flex gap-2">
               <button
                 onClick={onPrev}
-                className="w-10 h-10 border border-panel-line bg-graphite/80 flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors"
+                className="w-10 h-10 border border-panel-line bg-graphite/80 flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors"
               >
                 <ArrowLeft size={16} />
               </button>
               <button
                 onClick={onNext}
-                className="w-10 h-10 border border-panel-line bg-graphite/80 flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors"
+                className="w-10 h-10 border border-panel-line bg-graphite/80 flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors"
               >
                 <ArrowRight size={16} />
               </button>
@@ -90,7 +90,7 @@ function MemberModal({ member, onClose, onPrev, onNext, total, index }) {
           <div className="p-8 flex flex-col">
             <button
               onClick={onClose}
-              className="self-end w-9 h-9 border border-panel-line flex items-center justify-center text-steel hover:text-weld hover:border-weld/40 transition-colors mb-6"
+              className="self-end w-9 h-9 border border-panel-line flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors mb-6"
             >
               <X size={16} />
             </button>
@@ -102,7 +102,7 @@ function MemberModal({ member, onClose, onPrev, onNext, total, index }) {
               transition={{ duration: 0.4, delay: 0.1 }}
             >
               {/* role tag */}
-              <span className="font-mono text-[10px] tracking-[0.25em] text-weld uppercase">{member.role}</span>
+              <span className="font-mono text-[10px] tracking-[0.25em] text-steel-light uppercase">{member.role}</span>
 
               <h2 className="font-display font-extrabold uppercase text-3xl text-steel-light mt-2 mb-1">
                 {member.name}
@@ -115,7 +115,7 @@ function MemberModal({ member, onClose, onPrev, onNext, total, index }) {
               </div>
 
               <motion.div
-                className="h-[2px] bg-weld mb-6 origin-left"
+                className="h-[2px] bg-steel-light mb-6 origin-left"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -123,7 +123,7 @@ function MemberModal({ member, onClose, onPrev, onNext, total, index }) {
               />
 
               {/* quote */}
-              <blockquote className="font-display uppercase text-lg text-steel-light/80 italic mb-5 border-l-2 border-weld pl-4">
+              <blockquote className="font-display uppercase text-lg text-steel-light/80 italic mb-5 border-l-2 border-panel-line pl-4">
                 "{member.quote}"
               </blockquote>
 
@@ -142,7 +142,7 @@ function MemberModal({ member, onClose, onPrev, onNext, total, index }) {
               {/* contact */}
               <a
                 href={`mailto:${member.email}`}
-                className="inline-flex items-center gap-2 font-mono text-xs text-weld tracking-widest uppercase hover:text-signal transition-colors"
+                className="inline-flex items-center gap-2 font-mono text-xs text-steel-light tracking-widest uppercase hover:text-white transition-colors"
               >
                 <Mail size={12} /> {member.email}
               </a>
@@ -165,7 +165,7 @@ function GlobeCard({ member, onClick }) {
       onClick={onClick}
     >
       {/* photo card */}
-      <div className="absolute inset-0 overflow-hidden border border-panel-line group-hover:border-weld/50 transition-colors duration-300">
+      <div className="absolute inset-0 overflow-hidden border border-panel-line group-hover:border-white/50 transition-colors duration-300">
         <img
           src={member.img}
           alt={member.name}
@@ -176,18 +176,18 @@ function GlobeCard({ member, onClick }) {
         <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/30 to-transparent" />
 
         {/* weld corner brackets */}
-        <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-weld/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-weld/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
       {/* name overlay */}
       <div className="absolute bottom-0 left-0 right-0 p-5">
-        <p className="font-mono text-[9px] tracking-[0.25em] text-weld uppercase mb-1">{member.role}</p>
-        <h3 className="font-display uppercase font-bold text-lg text-steel-light leading-tight group-hover:text-weld transition-colors">
+        <p className="font-mono text-[9px] tracking-[0.25em] text-steel-light uppercase mb-1">{member.role}</p>
+        <h3 className="font-display uppercase font-bold text-lg text-steel-light leading-tight group-hover:text-white transition-colors">
           {member.name}
         </h3>
         <motion.div
-          className="mt-2 h-px bg-weld origin-left"
+          className="mt-2 h-px bg-steel-light origin-left"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
@@ -198,8 +198,8 @@ function GlobeCard({ member, onClick }) {
 
       {/* hover arrow */}
       <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="w-8 h-8 bg-weld flex items-center justify-center">
-          <ArrowUpRight size={14} className="text-graphite" />
+        <div className="w-8 h-8 bg-white/5 border border-panel-line flex items-center justify-center">
+          <ArrowUpRight size={14} className="text-white" />
         </div>
       </div>
     </motion.div>
@@ -282,7 +282,7 @@ export default function Team() {
       <div className="fixed top-6 left-6 z-50">
         <NavLink
           to="/about"
-          className="flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-steel hover:text-weld transition-colors group"
+          className="flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-steel hover:text-white transition-colors group"
         >
           <motion.div
             className="w-8 h-8 border border-panel-line group-hover:border-weld/50 flex items-center justify-center transition-colors"
@@ -298,7 +298,7 @@ export default function Team() {
       <section className="pt-32 pb-16 px-6 lg:px-16 relative overflow-hidden">
         {/* giant bg text */}
         <motion.span
-          className="absolute right-0 top-0 font-display font-extrabold uppercase text-[clamp(6rem,22vw,20rem)] leading-none text-weld/[0.04] select-none pointer-events-none"
+          className="absolute right-0 top-0 font-display font-extrabold uppercase text-[clamp(6rem,22vw,20rem)] leading-none text-white/[0.02] select-none pointer-events-none"
           initial={{ x: 80, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1.2 }}
@@ -316,21 +316,21 @@ export default function Team() {
             transition={{ duration: 0.7 }}
           >
             <div className="flex items-center gap-3 mb-6">
-              <span className="font-mono text-xs text-weld tracking-[0.25em] uppercase">Jazeerat</span>
-              <span className="h-px w-8 bg-weld" />
+              <span className="font-mono text-xs text-steel-light tracking-[0.25em] uppercase">Jazeerat</span>
+              <span className="h-px w-8 bg-steel-light" />
               <span className="font-mono text-xs text-steel tracking-[0.2em] uppercase">The People</span>
             </div>
 
             <h1 className="font-display font-extrabold uppercase text-6xl sm:text-7xl lg:text-9xl leading-[0.88] text-steel-light">
               The people
               <br />
-              <span className="text-weld">behind the</span>
+              <span className="text-white">behind the</span>
               <br />
               steel.
             </h1>
 
             <motion.div
-              className="mt-6 h-[3px] bg-weld origin-left shadow-[0_0_12px_rgba(255,90,31,0.6)]"
+              className="mt-6 h-[3px] bg-steel-light origin-left"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1, delay: 0.4 }}
@@ -357,7 +357,7 @@ export default function Team() {
               { n: '6', label: 'Countries Served' },
             ].map((s) => (
               <div key={s.label}>
-                <p className="font-display font-extrabold text-3xl text-weld">{s.n}</p>
+                <p className="font-display font-extrabold text-3xl text-white">{s.n}</p>
                 <p className="font-mono text-[10px] tracking-widest uppercase text-steel mt-1">{s.label}</p>
               </div>
             ))}
@@ -391,7 +391,7 @@ export default function Team() {
       ───────────────────────────────────────────────────────────── */}
       <section ref={containerRef} className="relative py-8 overflow-hidden">
         {/* subtle radial glow from center */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,90,31,0.04)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(214,47,34,0.04)_0%,transparent_70%)] pointer-events-none" />
 
         {/* ROW 1 — moves LEFT as you scroll down */}
         <div className="overflow-hidden mb-4">
@@ -449,7 +449,7 @@ export default function Team() {
       {/* ── TEAM LIST — accessible fallback + detail trigger ── */}
       <section className="py-24 px-6 lg:px-16 max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-12">
-          <span className="font-mono text-xs text-weld tracking-[0.25em] uppercase">§ Full Roster</span>
+          <span className="font-mono text-xs text-steel-light tracking-[0.25em] uppercase">§ Full Roster</span>
           <span className="h-px flex-1 bg-panel-line" />
         </div>
 
@@ -469,20 +469,20 @@ export default function Team() {
               whileHover={{ y: -4 }}
               onClick={() => openMember(i)}
             >
-              <div className="absolute inset-0 bg-weld/0 group-hover:bg-weld/[0.03] transition-colors pointer-events-none" />
+              <div className="absolute inset-0 bg-white/0 group-hover:bg-white/[0.03] transition-colors pointer-events-none" />
 
               <div className="w-14 h-14 overflow-hidden mb-4 border border-panel-line group-hover:border-weld/40 transition-colors">
                 <img src={m.img} alt={m.name} className="w-full h-full object-cover object-top" />
               </div>
 
-              <p className="font-mono text-[9px] tracking-[0.2em] text-weld uppercase mb-1">{m.role}</p>
-              <h3 className="font-display uppercase text-base text-steel-light group-hover:text-weld transition-colors leading-tight">
+              <p className="font-mono text-[9px] tracking-[0.2em] text-steel-light uppercase mb-1">{m.role}</p>
+              <h3 className="font-display uppercase text-base text-steel-light group-hover:text-white transition-colors leading-tight">
                 {m.name}
               </h3>
               <p className="font-mono text-[9px] text-steel mt-2">{m.location}</p>
 
               <motion.div
-                className="mt-3 h-px bg-weld origin-left"
+                className="mt-3 h-px bg-steel-light origin-left"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
@@ -505,7 +505,7 @@ export default function Team() {
           </div>
           <NavLink
             to="/contact"
-            className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors"
+            className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors"
           >
             Get in Touch <ArrowUpRight size={18} />
           </NavLink>

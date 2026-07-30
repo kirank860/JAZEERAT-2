@@ -18,7 +18,7 @@ export default function Cutline({ label }) {
         <line x1="0" y1="30" x2="1000" y2="30" stroke="#2a2e34" strokeWidth="1" />
         <motion.line
           x1="0" y1="30" x2="1000" y2="30"
-          stroke="#ff5a1f"
+          stroke="#c7cdd3"
           strokeWidth="2"
           style={{ pathLength }}
         />
@@ -27,7 +27,7 @@ export default function Cutline({ label }) {
         ))}
       </svg>
       <motion.div
-        className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-signal shadow-[0_0_8px_2px_rgba(255,176,32,0.6)]"
+        className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_8px_2px_rgba(255,255,255,0.4)]"
         style={{ left: dotX }}
       />
       {label && (

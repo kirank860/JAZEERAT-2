@@ -65,8 +65,8 @@ export default function WeldingCanvas() {
       const grad = ctx.createRadialGradient(x, y, 0, x, y, 32)
       grad.addColorStop(0, 'rgba(255,255,240,1)')
       grad.addColorStop(0.15, 'rgba(255,200,40,0.8)')
-      grad.addColorStop(0.4, 'rgba(255,90,31,0.4)')
-      grad.addColorStop(1, 'rgba(255,90,31,0)')
+      grad.addColorStop(0.4, 'rgba(214,47,34,0.4)')
+      grad.addColorStop(1, 'rgba(214,47,34,0)')
       return grad
     }
 
@@ -83,7 +83,7 @@ export default function WeldingCanvas() {
       // Draw as a single continuous path for much better performance
       if (arcPoints.length < 2) return
       ctx.globalAlpha = 0.4
-      ctx.strokeStyle = '#ff5a1f'
+      ctx.strokeStyle = '#d62f22'
       ctx.lineWidth = 4
       ctx.lineCap = 'round'
       ctx.lineJoin = 'round'

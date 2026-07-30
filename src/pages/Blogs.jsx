@@ -18,9 +18,9 @@ const fadeUp = {
 
 const categoryColors = {
   'Technical Insights': 'bg-[#ed91fa] text-black',
-  'Industry News': 'bg-[#05aa82] text-black',
-  'Company Updates': 'bg-[#ffc828] text-black',
-  'default': 'bg-weld text-black'
+  'Industry News': 'bg-[#ffc828] text-black',
+  'Company Updates': 'bg-black text-white border border-white/20',
+  'default': 'bg-weld text-white'
 }
 
 const getCategoryColor = (category) => categoryColors[category] || categoryColors.default
@@ -80,7 +80,7 @@ export default function Blogs() {
             className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-8xl leading-[0.9] text-steel-light max-w-4xl mt-6 mb-8"
           >
             The science of<br />
-            <span className="text-weld">structural steel.</span>
+            <span className="text-white">structural steel.</span>
           </motion.h1>
           <motion.p
             initial="hidden" animate="visible" custom={2} variants={fadeUp}
@@ -101,14 +101,14 @@ export default function Blogs() {
               className={`font-mono text-xs uppercase tracking-widest px-6 py-3 rounded-full font-bold relative transition-all duration-300 border ${
                 activeCategory === cat
                   ? 'border-transparent text-black font-extrabold'
-                  : 'bg-transparent border-panel-line text-steel hover:border-weld/50 hover:text-weld'
+                  : 'bg-transparent border-panel-line text-steel hover:border-white/50 hover:text-white'
               }`}
             >
               {activeCategory === cat && (
                 <motion.span
                   layoutId="activeCategoryBg"
                   className={`absolute inset-0 rounded-full z-0 ${
-                    cat === 'All' ? 'bg-weld' : getCategoryColor(cat).split(' ')[0]
+                    cat === 'All' ? 'bg-white' : getCategoryColor(cat).split(' ')[0]
                   }`}
                   transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                 />
@@ -149,12 +149,12 @@ export default function Blogs() {
                     
                     <div className="flex flex-col">
                       <div className="flex items-center gap-4 mb-6 font-mono text-[11px] tracking-widest uppercase text-steel">
-                        <span className="flex items-center gap-1.5"><Clock size={14} className="text-weld" /> {featuredPost.read_time}</span>
+                        <span className="flex items-center gap-1.5"><Clock size={14} className="text-steel-light" /> {featuredPost.read_time}</span>
                         <span className="w-1 h-1 bg-panel-line rounded-full" />
-                        <span className="flex items-center gap-1.5"><User size={14} className="text-weld" /> {featuredPost.author}</span>
+                        <span className="flex items-center gap-1.5"><User size={14} className="text-steel-light" /> {featuredPost.author}</span>
                       </div>
                       
-                      <h2 className="font-display font-extrabold uppercase text-4xl lg:text-6xl text-steel-light mb-6 leading-[1.05] group-hover:text-weld transition-colors">
+                      <h2 className="font-display font-extrabold uppercase text-4xl lg:text-6xl text-steel-light mb-6 leading-[1.05] group-hover:text-white transition-colors">
                         {featuredPost.title}
                       </h2>
                       
@@ -162,7 +162,7 @@ export default function Blogs() {
                         {featuredPost.excerpt}
                       </p>
 
-                      <div className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-widest text-weld font-semibold group-hover:text-signal transition-colors">
+                      <div className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-widest text-steel-light font-semibold group-hover:text-white transition-colors">
                         Read Featured Article 
                         <motion.div className="group-hover:translate-x-2 transition-transform">
                           <ArrowRight size={16} />
@@ -193,7 +193,7 @@ export default function Blogs() {
                         </div>
 
                         <div className="flex flex-col flex-1">
-                          <h3 className="font-display font-bold uppercase text-2xl lg:text-3xl text-steel-light mb-4 group-hover:text-weld transition-colors leading-tight">
+                          <h3 className="font-display font-bold uppercase text-2xl lg:text-3xl text-steel-light mb-4 group-hover:text-white transition-colors leading-tight">
                             {blog.title}
                           </h3>
                           
@@ -203,9 +203,9 @@ export default function Blogs() {
 
                           <div className="flex items-center justify-between mt-auto pt-6 border-t border-panel-line">
                             <div className="flex items-center gap-3 font-mono text-[10px] tracking-widest uppercase text-steel">
-                              <span className="flex items-center gap-1.5"><Clock size={12} className="text-weld" /> {blog.read_time}</span>
+                              <span className="flex items-center gap-1.5"><Clock size={12} className="text-steel-light" /> {blog.read_time}</span>
                             </div>
-                            <div className="text-weld group-hover:translate-x-1 transition-transform">
+                            <div className="text-steel-light group-hover:text-white group-hover:translate-x-1 transition-all">
                               <ArrowRight size={16} />
                             </div>
                           </div>
@@ -222,7 +222,7 @@ export default function Blogs() {
 
       {/* Newsletter Section */}
       <section className="py-24 lg:py-32 bg-graphite relative overflow-hidden border-t border-panel-line">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,90,31,0.05),transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(214,47,34,0.05),transparent_70%)] pointer-events-none" />
         
         <div className="max-w-4xl mx-auto px-6 lg:px-10 text-center relative z-10">
           <motion.div
@@ -230,14 +230,14 @@ export default function Blogs() {
             custom={0} variants={fadeUp}
             className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-graphite border border-panel-line mb-8"
           >
-            <Mail size={24} className="text-weld" />
+            <Mail size={24} className="text-white" />
           </motion.div>
           
           <motion.h2 
             initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} variants={fadeUp}
             className="font-display font-extrabold uppercase text-4xl lg:text-5xl text-steel-light mb-6"
           >
-            Get the latest <span className="text-weld">insights.</span>
+            Get the latest <span className="text-white">insights.</span>
           </motion.h2>
           
           <motion.p 
@@ -260,7 +260,7 @@ export default function Blogs() {
             />
             <button 
               type="submit"
-              className="font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-signal transition-colors whitespace-nowrap"
+              className="font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-weld transition-colors whitespace-nowrap"
             >
               Subscribe
             </button>
