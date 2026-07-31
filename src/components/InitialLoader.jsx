@@ -23,7 +23,7 @@ export default function InitialLoader({ onComplete }) {
         transition={{ duration: 1, ease: 'easeOut' }}
         className="flex flex-col items-center gap-8"
       >
-        <img src="/logo.svg" alt="Jazeerat Al Hadeed" className="h-32 md:h-40 w-auto object-contain" />
+        <img src="/JAH Logo2.png" alt="Jazeerat Al Hadeed" className="h-32 md:h-40 w-auto object-contain" />
         
         <div className="h-[1px] w-48 bg-white/10 overflow-hidden relative">
           <motion.div
