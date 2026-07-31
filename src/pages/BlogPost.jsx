@@ -5,7 +5,6 @@ import { ArrowLeft, Clock, User, Share2, ArrowRight } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import SEO from '../components/SEO'
 import TiltImage from '../components/TiltImage'
-import { LOCAL_BLOGS } from '../data/localBlogs'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -70,28 +69,15 @@ export default function BlogPost() {
           if (relatedData && relatedData.length > 0) {
             setRelatedPosts(relatedData)
           } else {
-            setRelatedPosts(LOCAL_BLOGS.filter(b => b.slug !== slug).slice(0, 3))
+            setRelatedPosts([])
           }
-        } else {
-          // Fallback to local
-          const localPost = LOCAL_BLOGS.find(b => b.slug === slug)
-          if (localPost) {
-            setPost(localPost)
-            setRelatedPosts(LOCAL_BLOGS.filter(b => b.slug !== slug).slice(0, 3))
-          } else {
-            navigate('/not-found')
-            return
-          }
-        }
-      } catch (err) {
-        const localPost = LOCAL_BLOGS.find(b => b.slug === slug)
-        if (localPost) {
-          setPost(localPost)
-          setRelatedPosts(LOCAL_BLOGS.filter(b => b.slug !== slug).slice(0, 3))
         } else {
           navigate('/not-found')
           return
         }
+      } catch (err) {
+        navigate('/not-found')
+        return
       }
       setLoading(false)
     }
@@ -197,7 +183,7 @@ export default function BlogPost() {
               prose-a:text-white prose-a:no-underline hover:prose-a:underline hover:prose-a:text-white/80 transition-colors
               prose-strong:text-steel-light prose-strong:font-semibold
               prose-li:text-steel prose-li:leading-relaxed prose-li:marker:text-steel-light
-              first-letter:text-6xl first-letter:font-display first-letter:font-bold first-letter:text-white first-letter:float-left first-letter:mr-4 first-letter:mt-2"
+              first-letter:text-6xl first-letter:font-display first-letter:font-bold first-letter:text-weld first-letter:float-left first-letter:mr-4 first-letter:mt-2"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 

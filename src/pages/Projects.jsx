@@ -166,73 +166,7 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
   )
 }
 
-const LOCAL_PROJECTS = [
-  {
-    title: 'Industrial Fabrication',
-    location: 'Sharjah, UAE',
-    scope: 'Portal frames, columns and steel decks',
-    desc: 'A massive 40,000 sqm industrial fabrication facility requiring over 2,500 tons of structural steel. Included full portal frames, mezzanine decks, and heavy gantry crane runway beams.',
-    icon: Factory,
-    image: '/assets/project-truss-install.jpg',
-    gallery: [
-      '/assets/project-truss-install.jpg',
-      '/assets/project-crane-hoist.jpg',
-      '/assets/project-facade-canopy.jpg'
-    ]
-  },
-  {
-    title: 'Heavy Erection & Lift',
-    location: 'Kuwait',
-    scope: 'Column splicing and crane rigging',
-    desc: 'Heavy steel structural erection for industrial columns and A-frame modules. Coordinated complex heavy lifting and modular pre-assemblies at height.',
-    icon: Truck,
-    image: '/assets/project-crane-hoist.jpg',
-    gallery: [
-      '/assets/project-crane-hoist.jpg',
-      '/assets/project-truss-install.jpg',
-      '/assets/project-sobha-aerial.jpg'
-    ]
-  },
-  {
-    title: 'Sobha One Facades',
-    location: 'Dubai, UAE',
-    scope: 'Architectural facade steel and balcony structures',
-    desc: 'Fabrication and erection of custom high-rise structural facade elements and balcony framing for the landmark Sobha One tower development in Dubai, adhering to AESS (Architecturally Exposed Structural Steel) finishing standards.',
-    icon: Layers,
-    image: '/assets/project-sobha-rendering.jpg',
-    gallery: [
-      '/assets/project-sobha-rendering.jpg',
-      '/assets/project-sobha-aerial.jpg',
-      '/assets/project-facade-canopy.jpg'
-    ]
-  },
-  {
-    title: 'Logistics Hub Canopy',
-    location: 'Qatar',
-    scope: 'Warehouse steelwork and loading canopies',
-    desc: 'A regional distribution center featuring wide-span steel trusses and extensive cantilevered loading canopies. Engineered for fast on-site bolted assembly, significantly reducing the main contractor\'s erection timeline.',
-    icon: Home,
-    image: '/assets/project-facade-canopy.jpg',
-    gallery: [
-      '/assets/project-facade-canopy.jpg',
-      '/assets/project-sobha-aerial.jpg',
-      '/assets/project-truss-install.jpg'
-    ]
-  },
-  {
-    title: 'Sobha One Erection',
-    location: 'Dubai, UAE',
-    scope: 'Structural framework and tower modules',
-    desc: 'Erection of main structural framing and heavy girder modules for the waterfront tower units at Sobha One.',
-    icon: ShieldCheck,
-    image: '/assets/project-sobha-aerial.jpg',
-    gallery: [
-      '/assets/project-sobha-aerial.jpg',
-      '/assets/project-sobha-rendering.jpg',
-      '/assets/project-crane-hoist.jpg'
-    ]
-  }
-]
+// Removed LOCAL_PROJECTS array
 
 export default function Projects() {
   const [projects, setProjects] = useState([])
@@ -245,50 +179,21 @@ export default function Projects() {
         const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: true })
         if (!error && data && data.length > 0) {
           setProjects(data.map(p => {
-            let localImg = p.image_url
-            const titleLower = p.title.toLowerCase()
-            if (titleLower.includes('industrial')) {
-              localImg = '/assets/project-truss-install.jpg'
-            } else if (titleLower.includes('oil & gas') || titleLower.includes('erection') || titleLower.includes('heavy') || titleLower.includes('kuwait')) {
-              localImg = '/assets/project-crane-hoist.jpg'
-            } else if (titleLower.includes('architectural') || titleLower.includes('sobha')) {
-              localImg = '/assets/project-sobha-rendering.jpg'
-            } else if (titleLower.includes('logistics') || titleLower.includes('canopy')) {
-              localImg = '/assets/project-facade-canopy.jpg'
-            } else if (titleLower.includes('compliance')) {
-              localImg = '/assets/project-sobha-aerial.jpg'
-            }
-
-            let gallery = p.gallery
-            if (!gallery || gallery.length === 0) {
-              if (localImg === '/assets/project-truss-install.jpg') {
-                gallery = ['/assets/project-truss-install.jpg', '/assets/project-crane-hoist.jpg', '/assets/project-facade-canopy.jpg']
-              } else if (localImg === '/assets/project-crane-hoist.jpg') {
-                gallery = ['/assets/project-crane-hoist.jpg', '/assets/project-truss-install.jpg', '/assets/project-sobha-aerial.jpg']
-              } else if (localImg === '/assets/project-sobha-rendering.jpg') {
-                gallery = ['/assets/project-sobha-rendering.jpg', '/assets/project-sobha-aerial.jpg', '/assets/project-facade-canopy.jpg']
-              } else if (localImg === '/assets/project-facade-canopy.jpg') {
-                gallery = ['/assets/project-facade-canopy.jpg', '/assets/project-sobha-aerial.jpg', '/assets/project-truss-install.jpg']
-              } else if (localImg === '/assets/project-sobha-aerial.jpg') {
-                gallery = ['/assets/project-sobha-aerial.jpg', '/assets/project-sobha-rendering.jpg', '/assets/project-crane-hoist.jpg']
-              } else {
-                gallery = [localImg, '/assets/project-truss-install.jpg', '/assets/project-sobha-rendering.jpg']
-              }
-            }
+            const gallery = p.gallery && p.gallery.length > 0 ? p.gallery : [p.image_url]
 
             return {
               ...p,
               icon: iconMap[p.icon] || Layers,
-              image: localImg,
+              image: p.image_url,
               gallery: gallery,
               desc: p.description
             }
           }))
         } else {
-          setProjects(LOCAL_PROJECTS)
+          setProjects([])
         }
       } catch (err) {
-        setProjects(LOCAL_PROJECTS)
+        setProjects([])
       }
       setLoading(false)
     }

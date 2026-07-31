@@ -332,11 +332,11 @@ function TeamCard({ member, index }) {
 
 /* ─── stage images mapped to each timeline entry ────────── */
 const stageImages = [
-  '/assets/milestone-stage1.jpg',
-  '/assets/milestone-stage2.jpg',
-  '/assets/milestone-stage3.jpg',
-  '/assets/milestone-stage4.jpg',
-  '/assets/milestone-stage5.jpg',
+  '/assets/assetsJazeerat/IMG_8971.jpg',
+  '/assets/assetsJazeerat/IMG_8972.jpg',
+  '/assets/assetsJazeerat/IMG_8974.jpg',
+  '/assets/assetsJazeerat/IMG_8976.jpg',
+  '/assets/assetsJazeerat/PHOTO-2026-01-02-08-37-41.jpg',
 ]
 
 const stageLabels = [
@@ -727,7 +727,7 @@ export default function About() {
                   whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
                 >
                   <img
-                    src="/assets/slides/slide-1.webp"
+                    src="/assets/assetsJazeerat/IMG_8964.jpg"
                     alt="Jazeerat Al Hadeed workshop"
                     className="w-full h-72 md:h-96 object-cover"
                   />

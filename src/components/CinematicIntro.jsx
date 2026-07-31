@@ -63,7 +63,7 @@ export default function CinematicIntro() {
             style={{ scale: imageScale }}
             className="absolute inset-0 w-full h-full"
           >
-            <div className="absolute inset-0 bg-[url('/assets/what-we-do.webp')] bg-cover bg-center" />
+            <div className="absolute inset-0 bg-[url('/assets/team-in-jah-uniform.jpg')] bg-cover bg-center" />
             {/* Soft directional spotlight effect */}
             <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/40 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-graphite/80 via-transparent to-transparent" />

@@ -114,7 +114,7 @@ export default function Services() {
       <VideoHero
         pageKey="services"
         videoSrc="/assets/services-hero.mp4"
-        poster="/assets/slides/slide-1.webp"
+        poster="/assets/assetsJazeerat/mild-steel-fabrication-works.jpeg"
         showSparks={false}
         className="pt-40 pb-20 lg:pt-48 lg:pb-28"
       >

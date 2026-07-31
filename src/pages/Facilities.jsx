@@ -11,35 +11,37 @@ const facilities = [
     icon: Factory,
     title: 'CNC Plasma Cutting',
     desc: 'High-capacity plate cutting for structural steel profiles and architectural components.',
-    image: '/assets/slides/slide-1.webp',
+    image: '/assets/assetsJazeerat/IMG_9079.jpg',
   },
   {
     icon: Flame,
     title: 'CNC Laser & Fiber Cutting',
     desc: 'Fine-detail cutting for precision work, openings, and intricate fabrication pieces.',
-    image: '/assets/slides/slide-2.webp',
+    image: '/assets/assetsJazeerat/IMG_9084.jpg',
   },
   {
     icon: Wrench,
     title: 'CNC Machine Workshop',
     desc: 'Drilling, boring, and machining with digital tolerance control in one facility.',
-    image: '/assets/slides/slide-3.webp',
+    image: '/assets/assetsJazeerat/IMG_9087.jpg',
   },
   {
     icon: ShieldCheck,
     title: 'Welding Bays',
     desc: 'Dedicated welding stations with certified welders and multi-process capability.',
+    image: '/assets/assetsJazeerat/2. site photos /IMG_5998.JPG',
   },
   {
     icon: Boxes,
     title: 'Surface Finishing',
     desc: 'Shot blasting, priming, painting and protective coating optimised for MENA climates.',
+    image: '/assets/assetsJazeerat/2. site photos /IMG_4981.JPG',
   },
   {
     icon: Truck,
     title: 'Logistics & Storage',
     desc: 'Site-ready staging, secure storage and coordinated transport from the workshop.',
-    image: '/assets/what-we-do.webp',
+    image: '/assets/assetsJazeerat/IMG_8609.jpg',
   },
 ]
 
@@ -62,7 +64,7 @@ export default function Facilities() {
       <VideoHero
         pageKey="facilities"
         videoSrc="/assets/facilities-hero.mp4"
-        poster="/assets/slides/slide-2.webp"
+        poster="/assets/assetsJazeerat/IMG_8960.jpg"
         showSparks={false}
         className="pt-40 pb-20 lg:pt-48 lg:pb-28"
       >

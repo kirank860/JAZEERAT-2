@@ -15,7 +15,7 @@ import WeldingCanvas from './WeldingCanvas'
  */
 const VideoHero = forwardRef(({
   videoSrc = '/assets/about-hero.mp4',
-  poster = '/assets/slides/slide-1.webp',
+  poster = '/assets/assetsJazeerat/mild-steel-fabrication-works.jpeg',
   showSparks = false,
   className = '',
   pageKey,
@@ -29,9 +29,7 @@ const VideoHero = forwardRef(({
       if (!pageKey) return
       const { data, error } = await supabase.from('hero_assets').select('*').eq('page_key', pageKey).single()
       if (!error && data && data.asset_url) {
-        // Only override if the database has a specific custom asset,
-        // avoiding overriding custom local page videos with the generic default about-hero.mp4
-        if (data.asset_url !== '/assets/about-hero.mp4' || pageKey === 'about') {
+        if (data.asset_url) {
           setMediaUrl(data.asset_url)
           setIsImage(data.asset_type === 'image')
         }

@@ -131,7 +131,7 @@ const LOCAL_PROJECTS = [
     location: 'Sharjah, UAE',
     scope: 'Portal frames, columns and steel decks',
     tag: 'Fabrication',
-    image: '/assets/project-truss-install.jpg'
+    image: '/assets/assetsJazeerat/mild-steel-fabrication-works.jpeg'
   },
   {
     title: 'Heavy Erection & Lift',
@@ -145,7 +145,7 @@ const LOCAL_PROJECTS = [
     location: 'Dubai, UAE',
     scope: 'Architectural facade steel and balcony structures',
     tag: 'Architectural',
-    image: '/assets/project-sobha-rendering.jpg'
+    image: '/assets/assetsJazeerat/sobha-one-element-tower-dubai.jpg'
   }
 ]
 
@@ -163,48 +163,47 @@ export default function Home() {
         const { data: projData, error: projError } = await supabase.from('projects').select('*').order('created_at', { ascending: true }).limit(3)
         if (!projError && projData && projData.length > 0) {
           setProjects(projData.map((p, idx) => {
-            let localImg = p.image_url
-            const titleLower = p.title.toLowerCase()
-            if (titleLower.includes('industrial')) {
-              localImg = '/assets/project-truss-install.jpg'
-            } else if (titleLower.includes('oil & gas') || titleLower.includes('erection') || titleLower.includes('heavy') || titleLower.includes('kuwait')) {
-              localImg = '/assets/project-crane-hoist.jpg'
-            } else if (titleLower.includes('architectural') || titleLower.includes('sobha')) {
-              localImg = '/assets/project-sobha-rendering.jpg'
-            } else if (titleLower.includes('logistics') || titleLower.includes('canopy')) {
-              localImg = '/assets/project-facade-canopy.jpg'
-            } else if (titleLower.includes('compliance')) {
-              localImg = '/assets/project-sobha-aerial.jpg'
-            }
-
             return {
               ...p,
-              image: localImg,
+              image: p.image_url,
               tag: idx === 0 ? 'Fabrication' : idx === 1 ? 'Erection' : 'Architectural'
             }
           }))
         } else {
-          setProjects(LOCAL_PROJECTS)
+          setProjects([])
+        }
+
+        // Fetch dynamic hero slides
+        const { data: heroData, error: heroError } = await supabase.from('hero_assets').select('*')
+        if (!heroError && heroData) {
+          // Find rows meant for the slider by excluding known page heroes
+          const excludedKeys = ['about', 'services', 'facilities', 'projects', 'contact']
+          const sliderRows = heroData.filter(h => {
+            if (h.page_key && excludedKeys.includes(h.page_key.toLowerCase())) return false
+            if (h.title && h.title.includes('Request a Quote')) return false
+            if (h.title && h.title.includes('About Jazeerat')) return false
+            if (h.title && h.title.includes('Project Gallery')) return false
+            if (h.title && h.title.includes('Our Facilities')) return false
+            if (h.title && h.title.includes('Our Services')) return false
+            return true
+          })
+
+          if (sliderRows.length > 0) {
+            sliderRows.sort((a, b) => (a.page_key || '').localeCompare(b.page_key || ''))
+            setSlides(sliderRows.map(h => ({
+              src: h.asset_url,
+              caption: h.title && h.title !== 'EMPTY' ? h.title : '',
+              sub: h.subtitle || '',
+              tag: h.tag || ''
+            })))
+          }
         }
       } catch (err) {
         setProjects(LOCAL_PROJECTS)
       }
       setLoadingProjects(false)
 
-      // Load hero slides
-      try {
-        const { data: slideData, error: slideError } = await supabase.from('hero_assets').select('*').eq('page_key', 'home').order('sort_order', { ascending: true })
-        if (!slideError && slideData && slideData.length > 0) {
-          setSlides(slideData.map(s => ({
-            src: s.asset_url,
-            caption: s.title,
-            sub: s.subtitle,
-            tag: s.tag || 'Slide',
-          })))
-        }
-      } catch (err) {
-        // Fallback handled inside SlidingHero
-      }
+
     }
     loadData()
   }, [])
@@ -464,13 +463,13 @@ export default function Home() {
                 viewport={{ once: false, margin: '-40px' }}
                 custom={i}
                 variants={fadeUp}
-                className="bg-white/5 backdrop-blur-md border border-white/10 p-10 lg:p-12 text-center lg:text-left group hover:bg-white/10 transition-colors shadow-2xl"
+                className="bg-white/5 backdrop-blur-md border border-white/10 p-6 lg:p-8 text-center lg:text-left group hover:bg-white/10 transition-colors shadow-2xl flex flex-col justify-center"
                 whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.3 } }}
               >
                 {/* sleek micro-accent line */}
                 <div className="w-12 h-[2px] bg-white/30 mb-8 group-hover:bg-white group-hover:w-20 transition-all duration-300" />
 
-                <p className="font-display font-extrabold text-5xl lg:text-6xl text-white mb-2 tracking-tight">
+                <p className="font-display font-extrabold text-4xl lg:text-5xl xl:text-6xl text-white mb-2 tracking-tighter break-words">
                   {s.value}
                 </p>
                 <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/50 group-hover:text-white/80 transition-colors">

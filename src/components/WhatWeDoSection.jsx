@@ -5,25 +5,29 @@ import { NavLink } from 'react-router-dom'
 
 const servicesData = [
   {
-    icon: PenTool,
-    num: '01',
-    title: 'Design & Detailing',
-    short: 'Shop drawings and structural detailing prepared before a single plate is cut.',
-    spec: 'Tolerance ±0.5mm',
-  },
-  {
-    icon: Flame,
-    num: '02',
-    title: 'CNC Plasma & Laser',
-    short: 'High-accuracy plate cutting for structural and architectural steel at production scale.',
-    spec: 'Plate up to 50mm',
-  },
-  {
     icon: Factory,
-    num: '03',
+    num: '01',
     title: 'Structural Fabrication',
     short: 'Portal frames, trusses and columns pre-assembled for site-ready installation.',
     spec: 'Spans up to 30,000mm',
+    spanClass: 'md:col-span-2 md:row-span-2',
+    image: '/assets/team-in-jah-uniform.jpg'
+  },
+  {
+    icon: PenTool,
+    num: '02',
+    title: 'Design & Detailing',
+    short: 'Shop drawings and structural detailing prepared before a single plate is cut.',
+    spec: 'Tolerance ±0.5mm',
+    spanClass: 'md:col-span-1 md:row-span-1',
+  },
+  {
+    icon: Flame,
+    num: '03',
+    title: 'CNC Plasma & Laser',
+    short: 'High-accuracy plate cutting for structural and architectural steel at production scale.',
+    spec: 'Plate up to 50mm',
+    spanClass: 'md:col-span-1 md:row-span-1',
   },
   {
     icon: Wrench,
@@ -31,6 +35,7 @@ const servicesData = [
     title: 'Machine Workshop',
     short: 'CNC machining, drilling and boring for precision components and mechanical parts.',
     spec: 'Full workshop, one roof',
+    spanClass: 'md:col-span-2 md:row-span-1',
   },
   {
     icon: ShieldCheck,
@@ -38,6 +43,7 @@ const servicesData = [
     title: 'Welding & QC',
     short: 'Certified welders working to code — every joint logged against our QC record.',
     spec: 'Certified welders on shift',
+    spanClass: 'md:col-span-1 md:row-span-1',
   },
   {
     icon: Truck,
@@ -45,6 +51,8 @@ const servicesData = [
     title: 'Delivery & Install',
     short: 'Coordinated transport and on-site installation support across the MENA region.',
     spec: 'Site-coordinated logistics',
+    spanClass: 'md:col-span-3 md:row-span-1',
+    image: '/assets/project-crane-hoist.jpg'
   },
 ]
 
@@ -85,54 +93,64 @@ function ServiceCard({ svc, i }) {
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: false, margin: '-40px' }}
+      viewport={{ once: true, margin: '-40px' }}
       custom={i}
       variants={fadeUp}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative group border-b border-r border-panel-line bg-graphite overflow-hidden cursor-pointer"
+      className={`relative group overflow-hidden cursor-pointer rounded-3xl bg-graphite-light border border-white/5 transition-colors hover:border-white/20 ${svc.spanClass || ''}`}
     >
-      {/* active state subtle background glow */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-weld/5 to-transparent"
-        animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.35 }}
-      />
+      {/* Background Image if available */}
+      {svc.image && (
+        <div className="absolute inset-0 z-0">
+          <img src={svc.image} alt={svc.title} className="w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-transform duration-700 ease-out group-hover:scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-t from-graphite-light via-graphite-light/60 to-graphite-light/20" />
+        </div>
+      )}
 
-      <div className="relative p-10 md:p-12 flex flex-col h-full min-h-[360px]">
+      {/* Active state subtle background glow */}
+      {!svc.image && (
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-weld/10 to-transparent"
+          animate={{ opacity: hovered ? 1 : 0 }}
+          transition={{ duration: 0.35 }}
+        />
+      )}
+
+      <div className="relative z-10 p-8 md:p-10 flex flex-col h-full min-h-[320px]">
+        {/* large watermark number */}
+        <span className="absolute -bottom-4 right-4 text-[8rem] leading-none font-display font-bold text-white/[0.02] pointer-events-none select-none transition-all duration-500 group-hover:text-weld/[0.05] group-hover:-translate-y-2">
+          {svc.num}
+        </span>
+
         {/* number + icon row */}
         <div className="flex items-start justify-between mb-8">
           <motion.div
-            className="text-weld border border-weld/30 p-4 relative"
+            className="text-weld bg-white/5 p-4 rounded-2xl relative border border-white/10 backdrop-blur-sm shadow-xl"
             animate={{ rotate: hovered ? 12 : 0, scale: hovered ? 1.1 : 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
           >
-            {/* pulse dot behind icon on hover */}
-            <motion.div 
-              className="absolute -bottom-1 -right-1 w-2 h-2 bg-weld rounded-full shadow-[0_0_10px_rgba(214,47,34,0.8)]"
-              initial={{ scale: 0 }}
-              animate={{ scale: hovered ? 1 : 0 }}
-              transition={{ delay: 0.1 }}
-            />
             <Icon size={28} strokeWidth={1.5} />
           </motion.div>
-          <span className="font-mono text-xs text-steel/60 tracking-widest">{svc.num}</span>
+          <span className="font-mono text-xs text-steel/60 tracking-widest bg-black/20 px-3 py-1 rounded-full backdrop-blur-sm border border-white/5">{svc.num}</span>
         </div>
 
-        <h3 className="font-display uppercase text-2xl text-white mb-4 group-hover:text-weld transition-colors duration-300">
-          {svc.title}
-        </h3>
-        <p className="text-steel text-base leading-relaxed flex-1">{svc.short}</p>
+        <div className="mt-auto">
+          <h3 className="font-display uppercase text-2xl lg:text-3xl text-white mb-3 group-hover:text-weld transition-colors duration-300">
+            {svc.title}
+          </h3>
+          <p className="text-steel text-base leading-relaxed mb-6 max-w-sm">{svc.short}</p>
 
-        {/* spec tag */}
-        <div className="mt-8 pt-6 border-t border-panel-line flex items-center justify-between">
-          <span className="font-mono text-xs text-steel/70 uppercase tracking-widest">{svc.spec}</span>
-          <motion.div
-            animate={{ x: hovered ? 4 : 0, opacity: hovered ? 1 : 0.4 }}
-            transition={{ duration: 0.25 }}
-          >
-            <ArrowRight size={16} className="text-weld" />
-          </motion.div>
+          {/* spec tag */}
+          <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+            <span className="font-mono text-xs text-steel/70 uppercase tracking-widest">{svc.spec}</span>
+            <motion.div
+              animate={{ x: hovered ? 4 : 0, opacity: hovered ? 1 : 0.4 }}
+              transition={{ duration: 0.25 }}
+            >
+              <ArrowRight size={16} className="text-weld" />
+            </motion.div>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -183,8 +201,8 @@ export default function WhatWeDoSection() {
           </motion.div>
         </div>
 
-        {/* 3x2 Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-panel-line">
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
           {servicesData.map((svc, i) => (
             <ServiceCard key={svc.title} svc={svc} i={i} />
           ))}

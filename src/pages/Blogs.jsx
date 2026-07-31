@@ -6,7 +6,6 @@ import { supabase } from '../lib/supabase'
 import SEO from '../components/SEO'
 import SectionLabel from '../components/SectionLabel'
 import TiltImage from '../components/TiltImage'
-import { LOCAL_BLOGS } from '../data/localBlogs'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
@@ -41,10 +40,10 @@ export default function Blogs() {
         if (!error && data && data.length > 0) {
           setBlogs(data)
         } else {
-          setBlogs(LOCAL_BLOGS)
+          setBlogs([])
         }
       } catch (err) {
-        setBlogs(LOCAL_BLOGS)
+        setBlogs([])
       }
       setLoading(false)
     }

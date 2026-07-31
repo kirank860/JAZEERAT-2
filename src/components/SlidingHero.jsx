@@ -4,29 +4,11 @@ import { NavLink } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronsDown } from 'lucide-react'
 import CoordinateTicker from './CoordinateTicker'
 
-const SLIDES = [
-  {
-    src: '/assets/slides/slide-3.webp',
-    caption: 'Leading Manufacturers of Versatile Steel Products',
-    sub: 'Structural steel, CNC fabrication and precision machining for the MENA region.',
-    tag: 'GCC Fabrication',
-  },
-  {
-    src: '/assets/slides/slide-2.webp',
-    caption: 'Precision Fabrication. Reliable Delivery.',
-    sub: 'Every weld certified, every deadline met — from first drawing to final installation.',
-    tag: 'Machine Workshop',
-  },
-  {
-    src: '/assets/slides/slide-1.webp',
-    caption: 'Engineering Steel Solutions Across The Region',
-    sub: 'One integrated workshop. Full capability. On-time delivery to any GCC site.',
-    tag: 'Structural Steel',
-  },
-]
+
+
 
 export default function SlidingHero({ slides }) {
-  const allSlides = slides || SLIDES
+  const allSlides = slides || []
   const [index, setIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const startX = useRef(0)
@@ -44,7 +26,7 @@ export default function SlidingHero({ slides }) {
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0])
 
   useEffect(() => {
-    if (isPaused) return undefined
+    if (isPaused || allSlides.length === 0) return undefined
     const t = setInterval(() => setIndex(i => (i + 1) % allSlides.length), 6000)
     return () => clearInterval(t)
   }, [isPaused, allSlides.length])
@@ -70,6 +52,8 @@ export default function SlidingHero({ slides }) {
     if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1) }
     if (e.key === ' ') { e.preventDefault(); setIsPaused(p => !p) }
   }
+
+  if (allSlides.length === 0) return null
 
   return (
     <section
@@ -338,36 +322,12 @@ export default function SlidingHero({ slides }) {
             className="relative"
             whileHover={{ scale: 1.4 }}
           >
-            <span className={`block w-2 h-2 rounded-full transition-colors ${i === index ? 'bg-white' : 'bg-white/40 hover:bg-white/70'}`} />
-            {i === index && (
-              <motion.span
-                layoutId="activeDot"
-                className="absolute inset-0 rounded-full border border-white/50 scale-150"
-              />
-            )}
+            <span className={`block h-2 rounded-full transition-all duration-300 ${i === index ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'}`} />
           </motion.button>
         ))}
       </motion.div>
 
-      {/* prev / next arrows */}
-      {[
-        { label: 'prev', side: 'left-5', dir: -1, Icon: ArrowLeft },
-        { label: 'next', side: 'right-5', dir: 1, Icon: ArrowRight },
-      ].map(({ label, side, dir, Icon }) => (
-        <motion.button
-          key={label}
-          aria-label={label}
-          onClick={() => { go(index + dir); setIsPaused(true); setTimeout(() => setIsPaused(false), 1200) }}
-          className={`absolute top-1/2 -translate-y-1/2 ${side} z-40 group`}
-          style={{ opacity: overlayOpacity }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <span className="flex items-center justify-center w-11 h-11 border border-white/20 bg-black/30 backdrop-blur-sm group-hover:border-white group-hover:bg-white/10 transition-all">
-            <Icon size={18} className="text-white transition-colors" />
-          </span>
-        </motion.button>
-      ))}
+
 
       {/* scroll cue — bottom center */}
       <motion.div style={{ opacity: overlayOpacity }} className="absolute bottom-[6.5rem] left-0 right-0 z-40 flex flex-col items-center gap-1 text-white/50 text-[10px] uppercase tracking-[0.35em]">
