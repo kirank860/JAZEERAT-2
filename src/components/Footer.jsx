@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom'
 import { Phone, Mail, MapPin } from 'lucide-react'
-import CoordinateTicker from './CoordinateTicker'
 import Logo from './Logo'
 
 export default function Footer() {
@@ -58,7 +57,6 @@ export default function Footer() {
           <p className="text-steel text-xs">
             © {new Date().getFullYear()} Jazeerat Al Hadeed. All rights reserved.
           </p>
-          <CoordinateTicker />
         </div>
       </div>
     </footer>

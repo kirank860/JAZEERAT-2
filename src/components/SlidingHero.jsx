@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronsDown } from 'lucide-react'
-import CoordinateTicker from './CoordinateTicker'
 
 
 
@@ -304,11 +303,6 @@ export default function SlidingHero({ slides }) {
         <span>/</span>
         <span>{String(allSlides.length).padStart(2, '0')}</span>
       </div>
-
-      {/* coordinate ticker — bottom left */}
-      <motion.div style={{ opacity: overlayOpacity }} className="absolute bottom-20 left-6 lg:left-10 z-40">
-        <CoordinateTicker />
-      </motion.div>
 
 
 

@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
-import CoordinateTicker from '../components/CoordinateTicker'
+import PageTransition from '../components/PageTransition'
 import WeldingCanvas from '../components/WeldingCanvas'
 import SEO from '../components/SEO'
 import VideoHero from '../components/VideoHero'
@@ -641,10 +641,6 @@ export default function About() {
               </NavLink>
             </motion.div>
           </motion.div>
-        </div>
-
-        <div className="absolute bottom-8 left-6 lg:left-10 z-10">
-          <CoordinateTicker />
         </div>
 
         <div className="absolute bottom-6 left-0 right-0 z-10 flex flex-col items-center gap-1 text-steel/70 text-xs uppercase tracking-[0.3em]">

@@ -259,7 +259,7 @@ export default function Blogs() {
             />
             <button 
               type="submit"
-              className="font-display uppercase tracking-wide font-semibold bg-weld text-graphite px-8 py-4 hover:bg-weld transition-colors whitespace-nowrap"
+              className="font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors whitespace-nowrap"
             >
               Subscribe
             </button>

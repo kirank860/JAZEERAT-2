@@ -11,7 +11,6 @@ import Cutline from '../components/Cutline'
 import SectionLabel from '../components/SectionLabel'
 import WhatWeDoSection from '../components/WhatWeDoSection'
 import CinematicIntro from '../components/CinematicIntro'
-import CoordinateTicker from '../components/CoordinateTicker'
 import Reveal from '../components/Reveal'
 import Magnetic from '../components/Magnetic'
 import MaskReveal from '../components/MaskReveal'
@@ -38,6 +37,30 @@ const stats = [
 /* ─── animation variants ─────────────────────────────────── */
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
+  visible: (i = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.6, delay: i * 0.08, ease: 'easeOut' },
+  }),
+}
+
+const fadeRight = {
+  hidden: { opacity: 0, x: -32 },
+  visible: (i = 0) => ({
+    opacity: 1, x: 0,
+    transition: { duration: 0.6, delay: i * 0.08, ease: 'easeOut' },
+  }),
+}
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: 32 },
+  visible: (i = 0) => ({
+    opacity: 1, x: 0,
+    transition: { duration: 0.6, delay: i * 0.08, ease: 'easeOut' },
+  }),
+}
+
+const fadeDown = {
+  hidden: { opacity: 0, y: -32 },
   visible: (i = 0) => ({
     opacity: 1, y: 0,
     transition: { duration: 0.6, delay: i * 0.08, ease: 'easeOut' },
@@ -224,15 +247,6 @@ export default function Home() {
   const { scrollYProgress: projectsProgress } = useScroll({ target: projectsRef, offset: ['start end', 'end start'] })
   const glowY2 = useTransform(projectsProgress, [0, 1], [150, -150])
 
-  // Parallax Stacking Transforms
-  const { scrollYProgress: projectsReveal } = useScroll({ target: projectsWrapperRef, offset: ['start end', 'start start'] })
-  const servicesScale = useTransform(projectsReveal, [0, 1], [1, 0.92])
-  const servicesOpacity = useTransform(projectsReveal, [0, 1], [1, 0.4])
-
-  const { scrollYProgress: processReveal } = useScroll({ target: processWrapperRef, offset: ['start end', 'start start'] })
-  const projectsScale = useTransform(processReveal, [0, 1], [1, 0.92])
-  const projectsOpacity = useTransform(processReveal, [0, 1], [1, 0.4])
-
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
@@ -253,19 +267,19 @@ export default function Home() {
         {/* ═══════════════════════════════════════════════════
             SERVICES SECTION (What We Do)
         ═══════════════════════════════════════════════════ */}
-        <motion.div ref={servicesRef} style={{ scale: servicesScale, opacity: servicesOpacity, transformOrigin: 'top center' }} className="sticky top-0 h-screen overflow-y-auto hidden-scrollbar z-0 bg-graphite w-full" data-lenis-prevent="true">
+        <div ref={servicesRef} className="relative z-0 bg-graphite w-full py-16">
           <WhatWeDoSection />
-        </motion.div>
+        </div>
 
         {/* ═══════════════════════════════════════════════════
             PROJECT GALLERY PREVIEW
         ═══════════════════════════════════════════════════ */}
-        <motion.div ref={projectsWrapperRef} style={{ scale: projectsScale, opacity: projectsOpacity, transformOrigin: 'top center' }} className="sticky top-0 h-screen overflow-y-auto hidden-scrollbar z-10 bg-graphite-light shadow-[0_-30px_60px_rgba(0,0,0,0.5)] w-full" data-lenis-prevent="true">
-          <Reveal>
+        <div ref={projectsWrapperRef} className="relative z-10 bg-graphite-light shadow-[0_-30px_60px_rgba(0,0,0,0.5)] w-full py-16">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, margin: '-40px' }} variants={fadeRight}>
             <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-16">
               <Cutline label="Fig. 02 — Project Gallery" />
             </div>
-          </Reveal>
+          </motion.div>
 
           <section ref={projectsRef} className="py-24 lg:py-32 relative overflow-hidden">
             {/* ambient dot pattern */}
@@ -284,7 +298,7 @@ export default function Home() {
                   initial="hidden" whileInView="visible" viewport={{ once: false }}
                   variants={stagger}
                 >
-                  <motion.div variants={fadeUp} custom={0}>
+                  <motion.div variants={fadeRight} custom={0}>
                     <SectionLabel index="§ 02">Recent Projects</SectionLabel>
                   </motion.div>
                   <MaskReveal delay={0.1}>
@@ -294,7 +308,7 @@ export default function Home() {
                     </h2>
                   </MaskReveal>
                   <motion.p
-                    variants={fadeUp} custom={2}
+                    variants={fadeRight} custom={2}
                     className="mt-3 text-steel text-sm max-w-md leading-relaxed"
                   >
                     A selection of recent fabrication and erection projects across the Gulf.
@@ -365,23 +379,23 @@ export default function Home() {
               </motion.div>
             </div>
           </section>
-        </motion.div>
+        </div>
 
         {/* ═══════════════════════════════════════════════════
             PROCESS TIMELINE
         ═══════════════════════════════════════════════════ */}
         <div ref={processWrapperRef} className="relative z-20 bg-graphite shadow-[0_-30px_60px_rgba(0,0,0,0.5)]">
-          <Reveal>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, margin: '-40px' }} variants={fadeRight}>
             <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-16">
               <Cutline label="Fig. 03 — Process" />
             </div>
-          </Reveal>
+          </motion.div>
 
           <section ref={processRef} className="py-24 lg:py-32 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 lg:px-10">
               <motion.div
                 initial="hidden" whileInView="visible" viewport={{ once: false, margin: '-80px' }}
-                custom={0} variants={fadeUp}
+                custom={0} variants={fadeLeft}
               >
                 <SectionLabel index="§ 03">From Drawing to Delivery</SectionLabel>
                 <MaskReveal delay={0.1}>
@@ -494,12 +508,8 @@ export default function Home() {
               initial="hidden" whileInView="visible" viewport={{ once: false }}
               variants={stagger}
             >
-              <motion.div variants={fadeUp} custom={0}>
-                <CoordinateTicker className="justify-center mb-6" />
-              </motion.div>
-
               <motion.h2
-                variants={fadeUp} custom={1}
+                variants={fadeDown} custom={1}
                 className="font-display font-extrabold uppercase text-4xl sm:text-5xl lg:text-6xl text-steel-light leading-tight"
               >
                 Have a spec?{' '}
@@ -507,14 +517,14 @@ export default function Home() {
               </motion.h2>
 
               <motion.p
-                variants={fadeUp} custom={2}
+                variants={fadeDown} custom={2}
                 className="mt-5 text-steel text-base max-w-xl mx-auto leading-relaxed"
               >
                 Send us a drawing and we'll send back a quote — typically within 24 hours.
               </motion.p>
 
               <motion.div
-                variants={fadeUp} custom={3}
+                variants={fadeDown} custom={3}
                 className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
               >
                 <Magnetic>
