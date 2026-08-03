@@ -9,6 +9,7 @@ import {
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import PageTransition from '../components/PageTransition'
+import { WordReveal, LetterReveal, LineReveal } from '../components/TypographyAnimations'
 import WeldingCanvas from '../components/WeldingCanvas'
 import SEO from '../components/SEO'
 import VideoHero from '../components/VideoHero'
@@ -425,12 +426,13 @@ function MilestoneScroller({ timeline }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <SectionLabel index="§ 05">Milestones</SectionLabel>
+            <SectionLabel>Milestones</SectionLabel>
           </motion.div>
 
           {/* main heading — always visible */}
-          <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light mt-2 max-w-xl">
-            The foundation of <span className="text-white">steel craft.</span>
+          <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light mt-2 max-w-xl flex flex-wrap gap-[0.25em]">
+            <WordReveal delay={0.1}>The foundation of</WordReveal>
+            <WordReveal delay={0.3} className="text-white">steel craft.</WordReveal>
           </h2>
 
           {/* milestone card — swaps per stage */}
@@ -653,7 +655,7 @@ export default function About() {
 
       {/* ── CUTLINE 01 ─────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <Cutline label="Fig. 01 — Capabilities & Identity" />
+        <Cutline label="Capabilities & Identity" />
       </div>
 
       {/* ── 3-COLUMN CAPABILITIES + CENTER IMAGE ───────── */}
@@ -677,7 +679,7 @@ export default function About() {
             className="flex flex-col items-center mb-16 text-center"
           >
             <motion.div variants={fadeUp} custom={0}>
-              <SectionLabel index="§ 01">Our Capabilities</SectionLabel>
+              <SectionLabel>Our Capabilities</SectionLabel>
             </motion.div>
             <motion.h2
               variants={fadeUp} custom={1}
@@ -775,14 +777,14 @@ export default function About() {
 
       {/* ── CUTLINE 02 ─────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <Cutline label="Fig. 02 — Core Values" />
+        <Cutline label="Core Values" />
       </div>
 
       {/* ── VALUES ─────────────────────────────────────── */}
       <section className="py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} variants={fadeUp}>
-            <SectionLabel index="§ 02">What Drives the Work</SectionLabel>
+            <SectionLabel>What Drives the Work</SectionLabel>
           </motion.div>
 
           <div className="grid sm:grid-cols-3 gap-px bg-panel-line mt-12 border border-panel-line">
@@ -838,7 +840,7 @@ export default function About() {
           ── MISSION ── NEW SECTION (cula.tech inspired)
       ════════════════════════════════════════════════════════ */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <Cutline label="Fig. 03 — Our Mission" />
+        <Cutline label="Our Mission" />
       </div>
 
       <section className="py-24 lg:py-36 relative overflow-hidden">
@@ -886,10 +888,10 @@ export default function About() {
               initial="hidden" whileInView="visible" viewport={{ once: true }}
               variants={fadeLeft}
             >
-              <SectionLabel index="§ 03">Our Mission</SectionLabel>
+              <SectionLabel>Our Mission</SectionLabel>
               <h2 className="font-display font-extrabold uppercase text-5xl lg:text-6xl text-steel-light leading-[0.92] mt-4">
-                Precision steel.<br />
-                <span className="text-white">Real purpose.</span>
+                <span className="block"><LetterReveal delay={0.1} stagger={0.03}>Precision steel.</LetterReveal></span>
+                <span className="block text-white mt-1 lg:mt-2"><LetterReveal delay={0.6} stagger={0.03} className="text-white">Real purpose.</LetterReveal></span>
               </h2>
               <motion.div
                 className="mt-6 h-[3px] bg-steel-light origin-left shadow-none"
@@ -901,17 +903,16 @@ export default function About() {
               />
             </motion.div>
 
-            <motion.p
-              className="text-steel text-lg leading-relaxed self-end pt-8 lg:pt-16 border-l border-panel-line pl-8"
-              initial="hidden" whileInView="visible" viewport={{ once: true }}
-              variants={fadeRight}
-              custom={1}
-            >
-              We exist to eliminate the gap between engineering intent and fabricated reality.
-              Every drawing that enters our workshop leaves as a component — measured, tested,
-              documented and ready for site. This commitment to verifiable precision is not
-              a marketing statement; it is the operating standard our clients rely on.
-            </motion.p>
+            <div className="self-end pt-8 lg:pt-16 border-l border-panel-line pl-8">
+              <LineReveal delay={0.3}>
+                <p className="text-steel text-lg leading-relaxed">
+                  We exist to eliminate the gap between engineering intent and fabricated reality.
+                  Every drawing that enters our workshop leaves as a component — measured, tested,
+                  documented and ready for site. This commitment to verifiable precision is not
+                  a marketing statement; it is the operating standard our clients rely on.
+                </p>
+              </LineReveal>
+            </div>
           </div>
 
           {/* pillars */}
@@ -938,7 +939,7 @@ export default function About() {
       ════════════════════════════════════════════════════════ */}
       {/* 
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <Cutline label="Fig. 04 — The Team" />
+        <Cutline label="The Team" />
       </div>
 
       <section ref={teamContainerRef} className="py-24 lg:py-32 overflow-hidden relative">
@@ -950,7 +951,7 @@ export default function About() {
               initial="hidden" whileInView="visible" viewport={{ once: true }}
               variants={fadeUp}
             >
-              <SectionLabel index="§ 04">The Team</SectionLabel>
+              <SectionLabel>The Team</SectionLabel>
               <h2 className="font-display font-extrabold uppercase text-5xl lg:text-6xl text-steel-light leading-[0.92] mt-4">
                 The people<br />
                 <span className="text-weld">behind the steel.</span>
@@ -1052,7 +1053,7 @@ export default function About() {
 
       {/* ── CUTLINE 05 ─────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <Cutline label="Fig. 05 — Milestones" />
+        <Cutline label="Milestones" />
       </div>
 
       {/* ════════════════════════════════════════════════════

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { PenTool, Flame, Factory, Wrench, ShieldCheck, Truck, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
+import { LetterReveal } from './TypographyAnimations'
 
 const servicesData = [
   {
@@ -131,7 +132,7 @@ function ServiceCard({ svc, i }) {
         />
       )}
 
-      <motion.div 
+      <motion.div
         className="relative z-10 p-8 lg:p-10 flex flex-col h-full min-h-[340px]"
         animate={{ padding: hovered ? '2.5rem' : '2rem' }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -179,13 +180,12 @@ export default function WhatWeDoSection() {
           <motion.div variants={fadeRight} className="max-w-2xl">
             <div className="flex items-center gap-4 mb-4">
               <span className="w-2 h-2 bg-weld rounded-full animate-pulse" />
-              <span className="font-mono text-xs tracking-[0.25em] uppercase text-weld">01 — What We Do</span>
+              <span className="font-mono text-xs tracking-[0.25em] uppercase text-weld"> What We Do</span>
             </div>
-            <MaskReveal delay={0.1}>
-              <h2 className="font-display font-extrabold uppercase text-4xl sm:text-5xl md:text-7xl text-white mt-4 md:mt-6 leading-[1] md:leading-[0.9]">
-                Precision at <br className="md:hidden" /><span className="text-white">Scale.</span>
-              </h2>
-            </MaskReveal>
+            <h2 className="font-display font-extrabold uppercase text-4xl sm:text-5xl md:text-7xl text-white mt-4 md:mt-6 leading-[1] md:leading-[0.9]">
+              <span className="block"><LetterReveal delay={0.1} stagger={0.04}>Precision at</LetterReveal></span>
+              <span className="block"><LetterReveal delay={0.5} stagger={0.04}>Scale.</LetterReveal></span>
+            </h2>
           </motion.div>
           <motion.div variants={fadeLeft}>
             <NavLink
@@ -206,11 +206,11 @@ export default function WhatWeDoSection() {
         </motion.div>
 
         {/* Bento Grid */}
-        <motion.div 
-          initial="hidden" 
-          whileInView="visible" 
-          viewport={{ once: true, margin: '-40px' }} 
-          variants={stagger} 
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-40px' }}
+          variants={stagger}
           className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6"
         >
           {servicesData.map((svc, i) => (

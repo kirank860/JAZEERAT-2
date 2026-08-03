@@ -216,9 +216,9 @@ export default function Projects() {
       <section className="relative pt-56 pb-32 lg:pt-64 lg:pb-40 overflow-hidden">
         {/* Clean Static Background Image */}
         <div className="absolute inset-0 z-0">
-          <div 
-            className="w-full h-full bg-cover bg-center" 
-            style={{ backgroundImage: `url('/assets/project-sobha-aerial.jpg')` }} 
+          <div
+            className="w-full h-full bg-cover bg-center"
+            style={{ backgroundImage: `url('/assets/project-sobha-aerial.jpg')` }}
           />
           {/* Heavy gradient overlay to make the massive white text pop flawlessly */}
           <div className="absolute inset-0 bg-gradient-to-b from-graphite via-graphite/80 to-graphite" />
@@ -264,12 +264,7 @@ export default function Projects() {
             transition={{ duration: 1.5, ease: "circOut", delay: 0.4 }}
           />
         </svg>
-        <motion.span
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.8 }}
-          className="relative z-10 font-mono text-[10px] uppercase tracking-[0.3em] text-steel bg-graphite pr-4"
-        >
-          Fig. 01 — Project Gallery
-        </motion.span>
+
       </div>
 
       <section className="py-32 lg:py-48 overflow-hidden">

@@ -141,7 +141,7 @@ export default function Services() {
       </VideoHero>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <Cutline label="Fig. 01 — Service Index" />
+        <Cutline label="Service Index" />
       </div>
 
       <section className="py-20 lg:py-28">

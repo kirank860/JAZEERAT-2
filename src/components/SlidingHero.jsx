@@ -229,10 +229,10 @@ export default function SlidingHero({ slides }) {
             <AnimatePresence mode="wait">
               <motion.div
                 key={`tag-${index}`}
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 16 }}
-                transition={{ duration: 0.45 }}
+                initial={{ opacity: 0, x: -24, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, x: 24, filter: 'blur(8px)' }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="inline-flex items-center gap-2 mb-6"
               >
                 <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
@@ -253,10 +253,10 @@ export default function SlidingHero({ slides }) {
               <AnimatePresence mode="wait">
                 <motion.h1
                   key={`h1-${index}`}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.65, ease: 'easeOut' }}
+                  initial={{ opacity: 0, y: 30, filter: 'blur(12px)', scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
+                  exit={{ opacity: 0, y: -20, filter: 'blur(12px)', scale: 1.02 }}
+                  transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
                   className="font-display font-extrabold uppercase text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.0] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)]"
                 >
                   {allSlides[index].caption}
@@ -268,10 +268,10 @@ export default function SlidingHero({ slides }) {
             <AnimatePresence mode="wait">
               <motion.p
                 key={`sub-${index}`}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.55, delay: 0.15 }}
+                initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, filter: 'blur(8px)' }}
+                transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-6 ml-8 text-white/75 text-[15px] leading-relaxed max-w-md"
               >
                 {allSlides[index].sub}

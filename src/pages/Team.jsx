@@ -449,7 +449,7 @@ export default function Team() {
       {/* ── TEAM LIST — accessible fallback + detail trigger ── */}
       <section className="py-24 px-6 lg:px-16 max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-12">
-          <span className="font-mono text-xs text-steel-light tracking-[0.25em] uppercase">§ Full Roster</span>
+          <span className="font-mono text-xs text-steel-light tracking-[0.25em] uppercase">Full Roster</span>
           <span className="h-px flex-1 bg-panel-line" />
         </div>
 

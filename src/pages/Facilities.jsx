@@ -84,7 +84,7 @@ export default function Facilities() {
       </VideoHero>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <Cutline label="Fig. 01 — Facility Highlights" />
+        <Cutline label="Facility Highlights" />
       </div>
 
       <section className="py-20 lg:py-28">

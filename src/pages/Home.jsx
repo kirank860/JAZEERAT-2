@@ -14,6 +14,7 @@ import CinematicIntro from '../components/CinematicIntro'
 import Reveal from '../components/Reveal'
 import Magnetic from '../components/Magnetic'
 import MaskReveal from '../components/MaskReveal'
+import { WordReveal, LineReveal } from '../components/TypographyAnimations'
 
 /* ─── data ───────────────────────────────────────────────── */
 
@@ -276,12 +277,6 @@ export default function Home() {
             PROJECT GALLERY PREVIEW
         ═══════════════════════════════════════════════════ */}
         <div ref={projectsWrapperRef} className="relative z-10 bg-graphite-light shadow-[0_-30px_60px_rgba(0,0,0,0.5)] w-full py-16">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, margin: '-40px' }} variants={fadeRight}>
-            <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-16">
-              <Cutline label="Fig. 02 — Project Gallery" />
-            </div>
-          </motion.div>
-
           <section ref={projectsRef} className="py-24 lg:py-32 relative overflow-hidden">
             {/* ambient dot pattern */}
             <div className="absolute inset-0 bp-grid-fine opacity-40 pointer-events-none" />
@@ -300,14 +295,12 @@ export default function Home() {
                   variants={stagger}
                 >
                   <motion.div variants={fadeRight} custom={0}>
-                    <SectionLabel index="§ 02">Recent Projects</SectionLabel>
+                    <SectionLabel>Recent Projects</SectionLabel>
                   </motion.div>
-                  <MaskReveal delay={0.1}>
-                    <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-lg mt-2">
-                      Delivered with{' '}
-                      <span className="text-white">precision.</span>
-                    </h2>
-                  </MaskReveal>
+                  <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-lg mt-2 flex flex-wrap gap-[0.25em]">
+                    <WordReveal delay={0.1}>Delivered with</WordReveal>
+                    <WordReveal delay={0.3} className="text-white">precision.</WordReveal>
+                  </h2>
                   <motion.p
                     variants={fadeRight} custom={2}
                     className="mt-3 text-steel text-sm max-w-md leading-relaxed"
@@ -388,7 +381,7 @@ export default function Home() {
         <div ref={processWrapperRef} className="relative z-20 bg-graphite shadow-[0_-30px_60px_rgba(0,0,0,0.5)]">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, margin: '-40px' }} variants={fadeRight}>
             <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-16">
-              <Cutline label="Fig. 03 — Process" />
+              <Cutline label="Process" />
             </div>
           </motion.div>
 
@@ -398,13 +391,11 @@ export default function Home() {
                 initial="hidden" whileInView="visible" viewport={{ once: false, margin: '-80px' }}
                 custom={0} variants={fadeLeft}
               >
-                <SectionLabel index="§ 03">From Drawing to Delivery</SectionLabel>
-                <MaskReveal delay={0.1}>
-                  <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-xl mt-2">
-                    A fabrication line,{' '}
-                    <span className="text-white">not a black box.</span>
+                <SectionLabel>From Drawing to Delivery</SectionLabel>
+                  <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-xl mt-2 flex flex-wrap gap-[0.25em]">
+                    <WordReveal delay={0.1}>A fabrication line,</WordReveal>
+                    <WordReveal delay={0.4} className="text-white">not a black box.</WordReveal>
                   </h2>
-                </MaskReveal>
               </motion.div>
 
               <div className="relative mt-20">
