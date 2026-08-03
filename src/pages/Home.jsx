@@ -215,6 +215,7 @@ export default function Home() {
             sliderRows.sort((a, b) => (a.page_key || '').localeCompare(b.page_key || ''))
             setSlides(sliderRows.map(h => ({
               src: h.asset_url,
+              type: h.asset_type,
               caption: h.title && h.title !== 'EMPTY' ? h.title : '',
               sub: h.subtitle || '',
               tag: h.tag || ''

@@ -3,8 +3,36 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronsDown } from 'lucide-react'
 
+const HeroVideo = ({ src, isActive, isAdjacent, animate, transition, style }) => {
+  const videoRef = useRef(null)
 
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isActive) {
+        videoRef.current.play().catch(() => {})
+      } else {
+        videoRef.current.pause()
+      }
+    }
+  }, [isActive])
 
+  if (!isActive && !isAdjacent) return null
+
+  return (
+    <motion.video
+      ref={videoRef}
+      src={src}
+      className="w-full h-full object-cover"
+      muted
+      loop
+      playsInline
+      preload={isActive ? "auto" : "metadata"}
+      animate={animate}
+      transition={transition}
+      style={style}
+    />
+  )
+}
 
 export default function SlidingHero({ slides }) {
   const allSlides = slides || []
@@ -96,17 +124,28 @@ export default function SlidingHero({ slides }) {
           style={{ scale: i === index ? bgScale : 1 }}
         >
           {/* Ken Burns zoom on active slide */}
-          <motion.img
-            src={s.src}
-            alt={s.caption}
-            className="w-full h-full object-cover"
-            loading={i === 0 ? 'eager' : 'lazy'}
-            decoding="async"
-            fetchPriority={i === 0 ? 'high' : 'auto'}
-            animate={i === index ? { scale: [1, 1.06] } : { scale: 1 }}
-            transition={{ duration: 6.5, ease: 'easeOut' }}
-            style={{ y: i === index ? bgY : 0 }}
-          />
+          {(s.type === 'video' || s.src?.match(/\.(mp4|webm)$/i)) ? (
+            <HeroVideo
+              src={s.src}
+              isActive={i === index}
+              isAdjacent={Math.abs(i - index) === 1 || (index === 0 && i === allSlides.length - 1) || (index === allSlides.length - 1 && i === 0)}
+              animate={i === index ? { scale: [1, 1.06] } : { scale: 1 }}
+              transition={{ duration: 6.5, ease: 'easeOut' }}
+              style={{ y: i === index ? bgY : 0 }}
+            />
+          ) : (
+            <motion.img
+              src={s.src}
+              alt={s.caption}
+              className="w-full h-full object-cover"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              fetchPriority={i === 0 ? 'high' : 'auto'}
+              animate={i === index ? { scale: [1, 1.06] } : { scale: 1 }}
+              transition={{ duration: 6.5, ease: 'easeOut' }}
+              style={{ y: i === index ? bgY : 0 }}
+            />
+          )}
         </motion.div>
       ))}
 
@@ -281,47 +320,6 @@ export default function SlidingHero({ slides }) {
           </div>
         </div>
       </motion.div>
-
-      {/* ═══════════════════════════════════════════
-          LAYER 4 — HUD chrome
-      ═══════════════════════════════════════════ */}
-
-      {/* slide counter — top right */}
-      <div className="absolute top-6 right-8 z-40 flex items-center gap-2 font-mono text-xs text-white/50 tracking-widest">
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={index}
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
-            transition={{ duration: 0.3 }}
-            className="text-white font-bold text-sm"
-          >
-            {String(index + 1).padStart(2, '0')}
-          </motion.span>
-        </AnimatePresence>
-        <span>/</span>
-        <span>{String(allSlides.length).padStart(2, '0')}</span>
-      </div>
-
-
-
-      {/* dot pagination */}
-      <motion.div style={{ opacity: overlayOpacity }} className="absolute bottom-14 left-0 right-0 z-40 flex justify-center gap-3">
-        {allSlides.map((_, i) => (
-          <motion.button
-            key={i}
-            onClick={() => { go(i); setIsPaused(true); setTimeout(() => setIsPaused(false), 1200) }}
-            aria-label={`Go to slide ${i + 1}`}
-            className="relative"
-            whileHover={{ scale: 1.4 }}
-          >
-            <span className={`block h-2 rounded-full transition-all duration-300 ${i === index ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'}`} />
-          </motion.button>
-        ))}
-      </motion.div>
-
-
 
       {/* scroll cue — bottom center */}
       <motion.div style={{ opacity: overlayOpacity }} className="absolute bottom-[6.5rem] left-0 right-0 z-40 flex flex-col items-center gap-1 text-white/50 text-[10px] uppercase tracking-[0.35em]">
